@@ -14,6 +14,8 @@ Access our website at this link: examplelink.com
 
 ## Usage
 
+Our website displays a map of the US, with pin points on major cities. Click on the cities to display a dashboard of graphs displaying the pollution data. Toggle the individual pollutants and adjust the time scale using the task bar on the right. 
+
 Provide instructions and examples for use. Include screenshots as needed.
 
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
