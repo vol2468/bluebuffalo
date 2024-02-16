@@ -7,7 +7,7 @@ This website will display historical air quality information for US cities from 
 - The stack that we used:
   - Flask and Django → web frameworks
   - SQLite → database
-  - leaflet.js → maps 
+  - leaflet.js → maps
   - Twilio (free credits),
   - Contextual menu bar (account, map, contact us, analysis, pages)
 
