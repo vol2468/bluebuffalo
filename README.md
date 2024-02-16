@@ -10,8 +10,6 @@ This website will display historical air quality information for US cities from 
   - leaflet.js → maps
   - Twilio (free credits),
   - Contextual menu bar (account, map, contact us, analysis, pages)
-  - Python
-  - HTML
 
 - Programming Language
   - Python
