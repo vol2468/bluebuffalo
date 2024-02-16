@@ -11,6 +11,11 @@ This website will display historical air quality information for US cities from 
   - Twilio (free credits),
   - Contextual menu bar (account, map, contact us, analysis, pages)
 
+- Programming Language
+  - Python
+  - HTML, CSS
+  - JavaScript
+
 ## Usage
 
 Our website displays a map of the US, with pinpoints on major cities. Click on the cities to display a dashboard of graphs displaying the pollution data. Toggle the individual pollutants and adjust the time scale using the taskbar on the right.
