@@ -1,0 +1,41 @@
+footer {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 122px;
+    background: #6bdbd2;
+}
+footer{
+    background-color: #CBF5E6;
+}
+#policy{
+    color: black;
+    padding-right: 10px;
+}
+#cookies, #use{
+    color: black;
+    padding: 10px;
+}
+#copy{
+    position: absolute;
+    left: 50px;
+    top: 30px;
+}
+#navigate{
+    position: absolute;
+    left: 50px;
+}
+#info{
+    position: absolute;
+    right: 250px;
+    top: 15px;
+}
+#contact{
+    position: absolute;
+    right: 50px;
+    top: 15px;
+}
+#address,#email{
+    padding-top: 8px;
+}
