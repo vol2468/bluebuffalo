@@ -1,3 +1,4 @@
+"""
 # This is a sample Python script.
 
 # Press ⌃R to execute it or replace it with your code.
@@ -14,3 +15,13 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+"""
+from flask import Flask, render_template, Blueprint
+from DashboardProject import create_app
+
+
+app = create_app()
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
