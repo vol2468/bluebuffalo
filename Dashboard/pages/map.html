@@ -12,29 +12,29 @@
     <link rel="stylesheet" href="/styles/reset.css" />
     <style>
         #mapUS {
-            height: 73%;
+            height: 63%;
             width: 64%;
             border: gray solid;
             position: absolute;
             right: 2%;
-            top: 15%;
+            top: 18%;
         }
 
         #mapHI,
         #mapAK {
-            height: 35%;
+            height: 30%;
             width: 30%;
             border: gray solid;
             position: absolute;
             left: 2%;
-            top: 15%;
+            top: 18%;
         }
 
         #mapHI {
-            top: 53%;
+            top: 51%;
         }
 
-        #popup {
+        #pin_content {
             text-align: center;
         }
     </style>
@@ -83,16 +83,16 @@
     </div>
     <script>
         // Sample pins
-        var greenPin = L.icon({
-            iconUrl: '../images/pin_green.png',
+        var highPin = L.icon({
+            iconUrl: '../images/pin_high.png',
             iconSize: [25, 40]
         });
-        var yellowPin = L.icon({
-            iconUrl: '../images/pin_yellow.png',
+        var medPin = L.icon({
+            iconUrl: '../images/pin_medium.png',
             iconSize: [25, 40]
         });
-        var redPin = L.icon({
-            iconUrl: '../images/pin_red.png',
+        var lowPin = L.icon({
+            iconUrl: '../images/pin_low.png',
             iconSize: [25, 40]
         });
 
@@ -103,47 +103,29 @@
         });
         mapUS.setMaxBounds(mapUS.getBounds());
 
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             minZoom: 4,
             maxZoom: 9
         }).addTo(mapUS);
-        var markerUS = L.marker([41, -111], { icon: greenPin }).addTo(mapUS);
+        var markerUS = L.marker([41, -111], { icon: highPin }).addTo(mapUS);
 
-        var toComparePagePopUS = L.popup();
-        function onMapClickUS(e) {
-            toComparePagePopUS
-                .setLatLng(e.latlng)
-                .setContent(
-                    "<div id='popup'><b>You clicked <br>" + e.latlng.toString().substring(6,) + "</b>"
-                )
-                .openOn(mapUS);
-        }
-        mapUS.on('click', onMapClickUS);
+        var moreInfoPagePopUS = L.marker([33.649874, -112.183847], { icon: highPin }).addTo(mapUS) 
+            .bindPopup('<div id="pin_content">Phoenix<br>(Lat, Long)</div>');
+
 
         // AK 
 
         var mapAK = L.map('mapAK', {
-            center: [65.7137224263526, -152.4239477132202],
+            center: [64, -154],
             zoom: 3
         });
         mapAK.setMaxBounds(mapAK.getBounds());
-        var marker2 = L.marker([62, -155], { icon: yellowPin }).addTo(mapAK);
+        var marker2 = L.marker([62, -152], { icon: medPin }).addTo(mapAK);
 
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             minZoom: 3,
             maxZoom: 9
         }).addTo(mapAK);
-
-        var toComparePagePopAK = L.popup();
-        function onMapClickAK(e) {
-            toComparePagePopAK
-                .setLatLng(e.latlng)
-                .setContent(
-                    "<div id='popup'><b>You clicked <br>" + e.latlng.toString().substring(6,) + "</b>"
-                )
-                .openOn(mapAK);
-        }
-        mapAK.on('click', onMapClickAK);
 
         // HI 
         var mapHI = L.map('mapHI', {
@@ -151,23 +133,13 @@
             zoom: 6
         });
         mapHI.setMaxBounds(mapHI.getBounds());
-        var marker3 = L.marker([22, -159], { icon: redPin }).addTo(mapHI);
+        var marker3 = L.marker([22, -159], { icon: lowPin }).addTo(mapHI);
 
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             minZoom: 6,
             maxZoom: 9
         }).addTo(mapHI);
 
-        var toComparePagePopHI = L.popup();
-        function onMapClickHI(e) {
-            toComparePagePopHI
-                .setLatLng(e.latlng)
-                .setContent(
-                    "<div id='popup'><b>You clicked <br>" + e.latlng.toString().substring(6,) + "</b>"
-                )
-                .openOn(mapHI);
-        }
-        mapHI.on('click', onMapClickHI);
     </script>
 </body>
 
