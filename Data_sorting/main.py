@@ -4,7 +4,7 @@ def extractByDate(targetDate):
     with open('Data_sorting/simplified.csv', 'r') as readData:
         readCsv = csv.reader(readData)
         data = list(readCsv)
-        
+         
     string = "Data_sorting/targetDate" + ".csv"
     with open(string, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
@@ -31,7 +31,7 @@ def extractByPlace(targetPlaceID):
     print("Extracted")
 
 # Create file with only rows of specified date
-extractByDate('1/1/2020')
+extractByDate('1/10/2020')
 
 # Create file with only rows of specified place (by ID of 0 ~ 215)
-#extractByPlace(47)
+extractByPlace(50)

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Log in</title>
+      <link rel="stylesheet" href="../../static/css/login.css" />
+      <link rel="stylesheet" href="../../static/css/reset.css" />
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+      $(function(){
+         $("#header").load("header.html");
+      });
+      $(function(){
+         $("#footer").load("footer.html");
+      });
+      </script>
+   </head>
+   <body>
+      <div class="wrapper">
+         <div id="header"></div>
+         
+         <h1>Log into your BlueBuffalo Account</h1>
+         <div class="fields">
+            <form id="login-form" action="#" method="POST">
+               <input type="email" id="logEmail" name="email" placeholder="Email Address" required><br>
+               <input type="password" id="logPassword" name="password" placeholder="Password" required><br>
+               <button type="submit" class="login">Login</button>
+            </form>
+         </div>
+         <nav id="reset">
+            <p>Forgot password? <a class="forgot" href="accountSetting.html">Reset Password</a><br>
+            <!-- <a class="sign-up-link" href="register.html">Or Register Here</a></p> -->
+         </nav>
+      </div>
+      <div id="footer"></div>
+   </body>
+   
+</html>
