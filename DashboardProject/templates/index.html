@@ -5,9 +5,36 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+        <link rel="stylesheet" href="../../static/css/reset.css" />
+        <link rel="stylesheet" href="../../static/css/main.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(function(){
+            $("#header").load("header.html");
+        });
+        $(function(){
+            $("#footer").load("footer.html");
+        });
+        </script>
 </head>
 <body>
-<h1>This is the page of Dashboard</h1>
+        <div id="header"></div>
+        <div class="dashboard">
+            <h1 style="font-size: large;">Dashboard</h1>
+            <img src="https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/bar-graph-1638348680.png" alt="Graph" height="400px">
+        </div>
+        <div class="comment">
+            <h1 style="font-size: large;">Comment</h1>
+        </div>
+        <div class="post-comment">
+            <h1 style="font-size: large;">Post Comment</h1>
+            <form id="comment" action="#" method="POST">
+            <input type="text" id="comment" name="comment" placeholder="Write a comment.."><br>
+            <button type="submit" class="login">Post</button>
+            </form>
+        </div>
+        <div id="footer"></div>
 </body>
 </html>
