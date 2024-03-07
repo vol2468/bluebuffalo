@@ -5,3 +5,45 @@ table, th, td{
 table{
     align-items: center;
 }
+
+#title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1pt solid black;
+    width: 70%;
+    margin-left: 13em;
+    margin-top: 3em;
+}
+h1{
+    font-size: 3em;
+}
+#greeting{
+    text-align: center;
+    margin-top: 0.5em;
+}
+#email{
+    float: left;
+}
+img{
+    clear: left;
+}
+input{
+    border: 1pt solid black;
+    border-radius: 1em;
+    /* border-top: 5px; */
+}
+#save{
+    border: 1px solid black;
+    padding: 1em;
+    margin: 1em;
+    margin-top: 3em;
+    border-radius: 1em;
+    align-items: center;
+    width: 150px;
+    margin-left: 180px;
+    background-color: #6BDBD2;
+    text-align: center;
+    font-size: 20px;
+
+}

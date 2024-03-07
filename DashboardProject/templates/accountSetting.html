@@ -3,45 +3,70 @@
     <head>
         <meta charset="utf-8">
         <title>Account Setting</title>
-        <link rel="stylesheet" href="../styles/reset.css" />
-        <link rel="stylesheet" href="../styles/accountSetting.css" />
+        <link rel="stylesheet" href="../static/css/reset.css" />
+        <link rel="stylesheet" href="../static/css/accountSetting.css" />
+        <link rel="stylesheet" href="../static/css/header.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-            $(function(){
-            $("#header").load("header.html");
-            });
-            $(function(){
-            $("#footer").load("footer.html");
-            });
-            </script>
     </head>
     <body>
         <div id="header">
-            <h1>Account Setting</h1>
+            <header>
+               <a href="index.html" id="logo">
+               <img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
+               <a href="" id="dash">Dashboard</a>
+               <a href="" id="map">Map</a>
+               <a href="analysis.html" id="analysis">Analysis</a>
+               <a id='user' href="login.html"><img alt='Profile' src = '../../static/images/defaultPic.png' height="50px"></a>
+           </header>
         </div>
-        <div>
-            <table>
-                <tr>
-                    <th> UserId </th>
-                    <td> Josh</td>
-                </tr>
-                <tr>
-                    <th> User Name </th>
-                    <td> Josh</td>
-                </tr>
-                <tr>
-                    <th> Email </th>
-                    <td> Josh@gmail.com </td>
-                </tr>
-                <tr>
-                    <th> Password </th>
-                    <td> ******* </td>
-                </tr>
-                <tr>
-                    <th> City </th>
-                    <td> Las Vegas </td>
-                </tr>
-            </table>
+        <div id="title">
+            <h1>Account</h1>
+            <a href="#">Logout</a>
+        </div>
+        <p><h1 id="greeting">Hi _________</h1></p>
+
+        <div id="name">
+            <input type="text" name="firstname" placeholder="First Name">
+            <input type="text" name="firstname" placeholder="Last Name">
+        </div>
+        <div id="email">
+            <input type="email" name="firstname" placeholder="Email Address"><br>
+            <input type="password" name="firstname" placeholder="Password">
+        </div>
+        
+        <img src="../static/images/userPic.png" height="50px">
+        
+        <div id="newPassword">
+            <input type="password" name="firstname" placeholder="New Password">
+            <input type="password" name="firstname" placeholder="Confirm Password">
+        </div>
+
+        <p id="save"><strong>Save Changes</strong></p>
+        
+
+        <div id="footer">
+            <footer>
+                   <div>
+                   <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
+                   <nav id="navigate">
+                       <a href="#" id="policy">Privacy Policy</a> |
+                       <a href="#" id="cookies">Use of Cookies</a> |
+                       <a href="#" id="use">Term of Use</a> |
+                   </nav>
+                   <div id="info">
+                       <p><strong>Blue Buffalo Office</strong></p>
+                       <div id="address">
+                           <p>3333 University Way</p>
+                           <p>Kelowna, BC</p>
+                           <p>V1V 1V7</p>
+                       </div>
+                   </div>
+                   <div id="contact">
+                       <p><strong>Contact Us</strong></p>
+                       <p id="email">bluebuffalo@ubc.ca</p>
+                   </div>
+                   </div>
+               </footer>
         </div>
    </body>
   
