@@ -1,0 +1,27 @@
+.comment h1 {
+    border-bottom: 1px black solid;
+}
+
+#comment {
+    padding: 20px;
+
+}
+
+.comment .post-comment {
+    clear: left;
+    margin-left: 250px;
+}
+
+.dashboard {
+    float: left;
+    margin-left: 250px;
+}
+
+.comment{
+    
+}
+
+.post-comment{
+    position: relative;
+    top: 250px;
+}
