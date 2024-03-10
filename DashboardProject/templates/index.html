@@ -8,6 +8,27 @@
     <title>Document</title>
 </head>
 <body>
-<h1>This is the page of Dashboard</h1>
+        <div id="header"></div>
+        <div class="dashboard">
+            <h1 style="font-size: large;">Dashboard</h1>
+            <img src="https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/bar-graph-1638348680.png" alt="Graph" height="400px">
+        </div>
+
+        <div id='popAQI'>
+            <script src='../index_scatter.py'>
+            <img src="../static/images/popAQIscatter.png" alt="Scatter Plot">
+        </div>
+
+        <div class="comment">
+            <h1 style="font-size: large;">Comment</h1>
+        </div>
+        <div class="post-comment">
+            <h1 style="font-size: large;">Post Comment</h1>
+            <form id="comment" action="#" method="POST">
+            <input type="text" id="comment" name="comment" placeholder="Write a comment.."><br>
+            <button type="submit" class="login">Post</button>
+            </form>
+        </div>
+        <div id="footer"></div>
 </body>
 </html>
