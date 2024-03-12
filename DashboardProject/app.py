@@ -1,5 +1,4 @@
 from flask import Flask, redirect, render_template, request, flash, url_for
-# from models import User
 
 app = Flask(__name__)
 
@@ -18,17 +17,6 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        username = request.form.get('username')
-
-        user = User.query.filter_by(username=username).first()
-        if user:
-            flash('Logged in successfully!', category='success')
-            login_user(user, remember=True)
-            return redirect(url_for('views.home'))
-        else:
-            flash('Username does not exist.', category='error')
-
     return render_template("login.html")
 
 @app.route('/newAccount')
