@@ -1,41 +1,37 @@
-from flask import Flask, redirect, render_template, request, flash, url_for
+from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
 
-app = Flask(__name__)
+auth = Blueprint('auth', __name__)
 
 
-@app.route('/')
+@auth.route('/')
 def hello_world():  # put application's code here
     return 'Hello World!'
 
-@app.route('/header')
+@auth.route('/header')
 def header():
     return render_template("header.html")
 
-@app.route('/index')
+@auth.route('/index')
 def index():
     return render_template("index.html")
 
-@app.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     return render_template("login.html")
 
-@app.route('/newAccount')
+@auth.route('/newAccount')
 def newAccount():
     return render_template("newAccount.html")
 
-@app.route('/accountSetting')
+@auth.route('/accountSetting')
 def accountSetting():
     return render_template("accountSetting.html")
 
-@app.route('/map')
+@auth.route('/map')
 def map():
     return render_template("map.html")
 
-@app.route('/analysis')
+@auth.route('/analysis')
 def analysis():
     return render_template('analysis.html')
 
-
-
-if __name__ == '__main__':
-    app.run()
