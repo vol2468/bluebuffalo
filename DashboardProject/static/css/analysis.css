@@ -12,37 +12,74 @@ h1{
 #cityMap{
     display: inline-block;
     border: 1pt solid black;
-    height: 350px;
-    width: 300px;
+    height: 500px;
+    width: 350px;
     margin-left: 100px;
-    margin-bottom: 135px;
+    margin-bottom: 50px;
     position: relative;
 }
 #left{
     position: absolute;
-    right: 150px;
+    right: 100px;
     display: inline-block;
     border: 1pt solid black;
     height: 300px;
     width: 800px;
+    bottom: 450px;
 }
 #average{
-    font-size: 30px;
+    font-size: 20px;
+    margin-left: 50px;
 }
 #chart{
+    height: 300px;
+    width: 300px;
+    margin-left: 30px;
+}
+#time{
+    position: absolute;
     display: inline-block;
     border: 1pt solid black;
     height: 250px;
-    width: 250px;
-    margin-top: 5px;
-    margin-left: 40px;
+    width: 400px;
+    top: 25px;
+    right: 20px;
 }
 #comment{
     position: absolute;
     display: inline-block;
     border: 1pt solid black;
-    height: 140px;
+    height: 250px;
     width: 800px;
     top: 330px;
+    right: 0;
     font-size: 30px;
+    overflow-y: auto;
+}
+
+#mapUS {
+    height: 500px;
+    width: 350px;
+    border: gray solid;
+    position: absolute;
+    left: 100px;
+    top: 207px;
+}
+
+#mapHI,
+#mapAK {
+    height: 30%;
+    width: 30%;
+    border: gray solid;
+    position: absolute;
+    left: 2%;
+    top: 18%;
+}
+
+#mapHI {
+    top: 51%;
+}
+
+#pin_content {
+    text-align: center;
 }

@@ -3,30 +3,133 @@
     <head>
         <meta charset="utf-8">
         <title>Analysis</title>
-        <link rel="stylesheet" href="/styles/analysis.css" />
-        <link rel="stylesheet" href="/styles/reset.css" />
+        <link rel="stylesheet" href="../static/css/analysis.css" />
+        <link rel="stylesheet" href="../static/css/header.css" />
+        <link rel="stylesheet" href="../static/css/reset.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-            $(function(){
-            $("#header").load("header.html");
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+        <script>
+            var currentLat = 40.7128;
+            var currentLong = 74.0060;
+            var currentCity = "New York";
+    
+            var map = L.map('map', {
+                center: [currentLat, currentLong],
+                zoom: 10
             });
-            $(function(){
-            $("#footer").load("footer.html");
-            });
-            </script>
+            map.setMaxBounds(map.getBounds());
+    
+            L.tileLayer = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}', {
+                minZoom: 2,
+                maxZoom: 5,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            }).addTo(map);
+            var marker = L.marker([currentLat, currentLong]).addTo(map);
+            marker.bindPopup("<b>" + currentCity + "</b><br>Your Location").openPopup();
+        </script>
+
     </head>
+    
     <body>
         <div class="wrapper">
-            <div id="header"></div>
-            <h1>Analysis of _______ city</h1>
-            <p id="cityMap"></p>
+            <header>
+                <div>
+                    <a href="index" id="logo">
+                        <img src="../../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
+                   <a href="" id="dash">Dashboard</a>
+                   <a href="" id="map">Map</a>
+                   <a href="analysis.html" id="analysis">Analysis</a>
+                   <a id='user' href="login.html"><img alt='Profile' src = '../../static/images/defaultPic.png' height="50px"></a>
+                </div>
+            </header>
+            <h1>Analysis of {{city}}</h1>
+            <p id="cityMap">
+                <div class="map" id="mapUS"></div>
+                <script src="../static/js/map.js"></script>
+            </p>
             <div id="left">
-                <p id="average">Average amount of each polutant<br>
-                    <p id="chart"></p></p>
+                    <p id="chart">
+                        <canvas id="pie" width="300px" height="250px">
+                            <script>
+                                var ctx = document.getElementById('pie');
+                                var myChart = new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: ['CO', 'NO2', 'O3', 'SO2'],
+                                    datasets: [{
+                                        data: [50, 60, 70, 30],
+                                        backgroundColor: [
+                                            'red',
+                                            'orange',
+                                            'yellow',
+                                            'green',
+                                            'blue'
+                                        ]
+                                    }]
+                                }
+                            });
+                            </script>
+                        </canvas>
+                    </p>
+                    <p id="time">
+                    <canvas id="graph" width="400px" height="250px">
+                        <script>
+                            let lineCtx = document.getElementById("graph");
+                            let lineConfig = {
+                              type: 'line',
+                              data: {
+                                labels: ['2000', '2004', '2008', '2010','2014'], // x-axis
+                                datasets: [{
+                                  label: 'Green',
+                                  data: [20, 15, 30, 25, 30, 40, 35],
+                                  borderColor: '#484',
+                                },],
+                              },
+                              options: {
+                                scales: {
+                                y: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 120,
+                                    ticks: {
+                                      stepSize: 20,
+                                    }
+                                }
+                                },
+                              },
+                            };
+                            let lineChart = new Chart(lineCtx, lineConfig);
+                        </script>
+                    </canvas></p>
 
                 <p id="comment">User Comments</p>
             </div>
-            <div id="footer"></div>
+            <footer>
+                <div>
+                    <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
+                    <nav id="navigate">
+                        <a href="#" id="policy">Privacy Policy</a> |
+                        <a href="#" id="cookies">Use of Cookies</a> |
+                        <a href="#" id="use">Term of Use</a> |
+                    </nav>
+                    <div id="info">
+                        <p><strong>Blue Buffalo Office</strong></p>
+                        <div id="address">
+                            <p>3333 University Way</p>
+                            <p>Kelowna, BC</p>
+                            <p>V1V 1V7</p>
+                        </div>
+                        
+                    </div>
+                    <div id="contact">
+                        <p><strong>Contact Us</strong></p>
+                        <p id="email">bluebuffalo@ubc.ca</p>
+                    </div>
+                </div>
+            </footer>
         </div>
    </body>
   
