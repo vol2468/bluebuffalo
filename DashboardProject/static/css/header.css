@@ -1,7 +1,7 @@
-body{
+body {
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
-header, footer{
+header, footer {
     display: inline-flex;
     justify-content: space-around;
     align-items: center;
@@ -9,7 +9,7 @@ header, footer{
     height: 80px;
     background: #6bdbd2;
 }
-footer{
+footer {
     position: relative;
     margin-bottom: 0;
     height: 122px;
@@ -20,66 +20,59 @@ header a {
     text-decoration: none;
     color: black;
 }
-#policy{
+#policy {
     color: black;
     padding-right: 10px;
 }
-#cookies, #use{
+#cookies, #use {
     color: black;
     padding: 10px;
 }
-#logo{
+#logo {
     position: absolute;
     left: 20px;
     top: 0px;
 }
-#header{
-    height: 70px;
-}
-#dash{
+#dash {
     position: absolute;
     right: 350px;
     top: 30px;
 }
-#map{
+#map {
     position: absolute;
     right: 260px;
     top: 30px;
 }
-#analysis{
+#analysis {
     position: absolute;
     right: 150px;
     top: 30px;
 }
-#user{
+#user {
     position: absolute;
     right: 50px;
     top: 15px;
 }
-#copy{
+#copy {
     position: absolute;
     left: 50px;
     top: 30px;
 }
-#navigate{
+#navigate {
     position: absolute;
     left: 50px;
     bottom: 30px;
 }
-#info{
+#info {
     position: absolute;
     right: 250px;
     top: 15px;
 }
-#contact{
+#contact {
     position: absolute;
     right: 50px;
     top: 15px;
 }
-#address,#email{
+#address, #email {
     padding-top: 8px;
-}
-#reset a{
-    color: #6bdbd2;
-    text-decoration: none;
 }
