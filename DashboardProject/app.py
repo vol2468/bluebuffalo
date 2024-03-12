@@ -45,7 +45,7 @@ def map():
 
 @app.route('/analysis')
 def analysis():
-    return render_template("analysis.html")
+    return render_template('analysis.html')
 
 
 
