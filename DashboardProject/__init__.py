@@ -20,14 +20,14 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    # from .models import User
+    from .models import User
 
     create_database(app)
 
     return app
 
 def create_database(app):
-    if not path.exists('Dashboard/scripts/' + DB_NAME):
+    if not path.exists('bluebuffalo/DashboardProject/' + DB_NAME):
         with app.app_context():
             db.create_all()
         print("Created Database!")
