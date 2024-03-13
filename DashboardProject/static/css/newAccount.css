@@ -1,0 +1,66 @@
+.wrapper{
+    flex-direction: column;
+    min-height: 85vh;
+    position: relative;
+}
+h1{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+#fname{
+    margin-top: 3em;
+    border: 1px solid black;
+    padding: 1em;
+    margin: 3em 0.5em 1em 1em;
+    border-radius: 1em;
+    align-items: center;
+    width: 197px;
+}
+
+#lname {
+    margin-top: 3em;
+    border: 1px solid black;
+    padding: 1em;
+    margin: 1em 1em 1em 0.5em;
+    border-radius: 1em;
+    align-items: center;
+    width: 197px;
+}
+
+#regEmail, #pass1, #pass2 {
+    border: 1px solid black;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 1em;
+    align-items: center;
+    width: 450px;
+}
+
+.sign-up {
+    border: 1px solid black;
+    padding: 1em;
+    margin: 1em;
+    margin-top: 3em;
+    border-radius: 1em;
+    align-items: center;
+    width: 150px;
+    margin-left: 180px;
+    background-color: #6BDBD2;
+}
+.fields, #login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+#login {
+    margin-bottom: 3em;
+}
+
+#login a{
+    color: #6BDBD2;
+    text-decoration: none;
+}

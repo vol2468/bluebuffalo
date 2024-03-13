@@ -33,10 +33,10 @@ h1{
 #firstname,#newpass{
     margin-right: 10px;
 }
-#email{
+#email-password{
     float: left;
-    margin-left: 367px;
-    padding-top: 100px;
+    margin-left: 382px;
+    padding-top: 3px;
     margin-top: 30px;
 }
 #curremail{
