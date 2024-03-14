@@ -26,6 +26,7 @@ def create_app():
 
     return app
 
+
 def create_database(app):
     if not path.exists('bluebuffalo/DashboardProject/' + DB_NAME):
         with app.app_context():
