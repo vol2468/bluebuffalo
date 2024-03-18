@@ -57,14 +57,13 @@
                     <p id="chart">
                         <canvas id="pie" width="300px" height="250px"></canvas>
                             <script>
-                                var mean = JSON.parse('{{ meanData | safe }}');
                                 var ctx = document.getElementById('pie');
                                 var myChart = new Chart(ctx, {
                                 type: 'pie',
                                 data: {
                                     labels: ['O3', 'CO', 'SO2', 'NO2'],
                                     datasets: [{
-                                        data: mean,
+                                        data: dummy,
                                         backgroundColor: [
                                             'red',
                                             'orange',
@@ -79,16 +78,17 @@
                     <p>{{meanData}}</p>
                     </p>
                     <p id="time">
-                    <canvas id="graph" width="400px" height="250px">
+                    <canvas id="graph" width="400px" height="250px"></canvas>
                         <script>
+                            var total = JSON.parse('{{ total | safe }}');
                             let lineCtx = document.getElementById("graph");
                             let lineConfig = {
                               type: 'line',
                               data: {
-                                labels: ['2000', '2004', '2008', '2010','2014'], // x-axis
+                                labels: ['2000', '2004', '2008', '2012','2016','2020','2021'], // x-axis
                                 datasets: [{
                                   label: 'Green',
-                                  data: [20, 15, 30, 25, 30, 40, 35],
+                                  data: total,
                                   borderColor: '#484',
                                 },],
                               },
@@ -106,9 +106,10 @@
                             };
                             let lineChart = new Chart(lineCtx, lineConfig);
                         </script>
-                    </canvas></p>
+                    <p>{{total}}</p>
+                    </p>
 
-                <p id="comment">User Comments</p>
+                <p id="comment"></p>
             </div>
             <footer>
                 <div>
