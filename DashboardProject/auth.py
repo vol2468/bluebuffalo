@@ -41,17 +41,6 @@ def call_compare():
     result = perform_analysis()
     return result
 
-# @auth.route('/analysis')
-# def analysis():
-#     # Test1
-#     # city = 'Tucson'
-#     # Test2
-#     # city = 'Phoenix'
-#     # Test3
-#     city = 'Bethel Island'
-#     return perform_analysis(city)
-#     # return render_template('analysis.html')
-
 @auth.route('/test')
 def test():
     return render_template('test.html')
