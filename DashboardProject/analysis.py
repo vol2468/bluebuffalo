@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request
-# import pandas as pd
-# import seaborn as sns
-# import matplotlib.pyplot as plt
 import pandas as pd
+import sqlite3
 
-analysis = Flask(__name__) 
-@analysis.route('/analysis.py', methods=['POST']) 
-
+# Connection to database
+conn = sqlite3.connect('instance/database.db')
+cursor = conn.cursor()
 
 def perform_analysis():
     
@@ -42,4 +40,15 @@ def perform_analysis():
         filtered_df_2020[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
         filtered_df_2021[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum()
     ]
-    return render_template("analysis.html", meanData=mean_values, city=city, total=total_values_list)
+
+    latitude = request.form.get('latitude')
+    longitude = request.form.get('longitude')
+    return render_template("analysis.html", meanData=mean_values, city=city, total=total_values_list, lat=latitude, long=longitude)
+
+def get_coordinates(city_name):
+    cursor.execute("SELECT latitude, longitude FROM cities WHERE name=?", (city_name,))
+    row = cursor.fetchone()
+    if row:
+        latitude, longitude = row
+        return latitude, longitude
+    return None, None

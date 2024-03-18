@@ -12,26 +12,6 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-        <script>
-            var currentLat = 40.7128;
-            var currentLong = 74.0060;
-            var currentCity = "New York";
-    
-            var map = L.map('map', {
-                center: [currentLat, currentLong],
-                zoom: 10
-            });
-            // map.setMaxBounds(map.getBounds());
-    
-            L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}', {
-                minZoom: 2,
-                maxZoom: 5,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            }).addTo(map);
-            var marker = L.marker([currentLat, currentLong]).addTo(map);
-            marker.bindPopup("<b>" + currentCity + "</b><br>Your Location").openPopup();
-        </script>
-
     </head>
     
     <body>
@@ -47,11 +27,26 @@
                 </div>
             </header>
             <h1>Analysis of {{city}}</h1>
+            <div class="map" id="cityMap"></div>
+            <script >
+                document.addEventListener('DOMContentLoaded', function() {
+                var currentCity = "{{ city }}";
+                var currentLat = "{{ lat }}";
+                var currentLong = "{{ long }}";
 
-            <p id="cityMap">
-                <div class="map" id="mapUS"></div>
-                <script src="../static/js/map.js"></script>
-            </p>
+                var map = L.map('cityMap', {
+                    center: [currentLat, currentLong],
+                    zoom: 10
+                });
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                }).addTo(map);
+
+                L.marker([currentLat, currentLong]).addTo(map)
+                .openPopup();
+            });
+            </script>
             <div id="left">
                 
                     <p id="chart">
