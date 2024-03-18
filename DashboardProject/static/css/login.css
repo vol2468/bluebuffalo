@@ -1,9 +1,9 @@
-.wrapper{
+.wrapper {
     display: flex;
-  flex-direction: column;
-  min-height: 85vh;
+    flex-direction: column;
+    min-height: 85vh;
 }
-#logEmail,#logPassword{
+#logEmail, #logPassword {
     border: 1px solid black;
     padding: 1em;
     margin: 1em;
@@ -11,10 +11,10 @@
     align-items: center;
     width: 450px;
 }
-#logEmail{
+#logEmail {
     margin-top: 3em;
 }
-.login{
+.login {
     border: 1px solid black;
     padding: 1em;
     margin: 1em;
@@ -25,14 +25,18 @@
     margin-left: 180px;
     background-color: #6BDBD2;
 }
-h1{
+h1 {
     text-align: center;
     font-size: 50px;
     margin-top: 50px;
 }
-.fields,#reset{
+.fields, #reset {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 1em;
+}
+#reset a{
+    color: #6BDBD2;
+    text-decoration: none;
 }

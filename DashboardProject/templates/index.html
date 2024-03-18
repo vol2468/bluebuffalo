@@ -2,43 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
     <meta charset="utf-8">
         <link rel="stylesheet" href="../../static/css/reset.css" />
+        <link rel="stylesheet" href="../../static/css/header.css" />
         <link rel="stylesheet" href="../../static/css/main.css" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-        $(function(){
-            $("#header").load("header.html");
-        });
-        $(function(){
-            $("#footer").load("footer.html");
-        });
-        </script>
+
 </head>
+
 <body>
-        <div id="header"></div>
-        <div class="dashboard">
-            <h1 style="font-size: large;">Dashboard</h1>
-            <img src="https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/bar-graph-1638348680.png" alt="Graph" height="400px">
+    <div id="header">
+        <header>
+        <div>
+            <a href="index" id="logo">
+                <img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
+           <a href="" id="dash">Dashboard</a>
+           <a href="" id="map">Map</a>
+           <a href="analysis" id="analysis">Analysis</a>
+           <a id='user' href="login"><img alt='Profile' src = '../static/images/defaultPic.png' height="50px"></a>
         </div>
-        <div id='popAQI'>
-            <script src='../index_scatter.py'>
-            <img src="../static/images/popAQIscatter.png" alt="Scatter Plot">
-        </div>
-        <div class="comment">
-            <h1 style="font-size: large;">Comment</h1>
-        </div>
-        <div class="post-comment">
-            <h1 style="font-size: large;">Post Comment</h1>
-            <form id="comment" action="#" method="POST">
-            <input type="text" id="comment" name="comment" placeholder="Write a comment.."><br>
-            <button type="submit" class="login">Post</button>
+        </header>
+    </div>
+     <div id="dashboard">
+        <h1 style="font-size: 30px; border-bottom: 1pt solid black;">Dashboard
+            <form id="calendar" style="font-size: 10px;">
+                <label  for="start">Start date:</label>
+                <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2023-12-31" />
             </form>
+        </h1>
+         <figure class="top10city">
+             <img src="https://bookdown.org/ndphillips/YaRrr/YaRrr_files/figure-html/unnamed-chunk-285-1.png" id="top10" alt="Top 10 Graph" height="200px">
+            <figcaption>Figure 1: Top 10 Cleanest City </figcaption>
+         </figure>
+         <figure class="polutantRatio">
+            <img src="https://www.mathworks.com/help/examples/graphics/win64/PiechartLabelExample_03.png" id="pie" alt="Pie Chart" height="200px">
+            <figcaption>Figure 2: Pollutant Ratio</figcaption>
+         </figure>
+    </div>
+    <div id="comment">
+        <h1 style="font-size: 20px;">Comment</h1>
+        <div class="comment-section">
+            <p>That is a good graph</p>
+            <p>That is a good graph</p>
         </div>
-        <div id="footer"></div>
+    </div>
+    <div id="post-comment">
+        <h1 style="font-size: 20px;">Post Comment</h1>
+        <form class="comment-form" action="#" method="POST">
+        <input type="text" name="comment" placeholder="Write a comment.."><br>
+        <button type="submit" class="login">Post</button>
+        </form>
+    </div>
+    <div id="footer">
+        <div id="wrapping">
+        <footer>
+            <div>
+                <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
+                <nav id="navigate">
+                    <a href="#" id="policy">Privacy Policy</a> |
+                    <a href="#" id="cookies">Use of Cookies</a> |
+                    <a href="#" id="use">Term of Use</a> |
+                </nav>
+                <div id="info">
+                    <p><strong>Blue Buffalo Office</strong></p>
+                    <div id="address">
+                        <p>3333 University Way</p>
+                        <p>Kelowna, BC</p>
+                        <p>V1V 1V7</p>
+                    </div>
+
+                </div>
+                <div id="contact">
+                    <p><strong>Contact Us</strong></p>
+                    <p id="email">bluebuffalo@ubc.ca</p>
+                </div>
+            </div>
+        </footer>
+        </div>
+    </div>
 </body>
 </html>

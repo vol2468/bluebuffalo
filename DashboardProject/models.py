@@ -22,3 +22,9 @@ class Comment(db.Model):
     email = db.Column(db.String(100))
     commentText = db.Column(db.String(10000))
     commentDate = db.Column(db.Date)
+
+
+
+
+
+

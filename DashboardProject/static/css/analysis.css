@@ -1,7 +1,7 @@
 .wrapper{
-  flex-direction: column;
-  min-height: 85vh;
-  position: relative;
+    flex-direction: column;
+    min-height: 85vh;
+    position: relative;
 }
 h1{
     font-size: 50px;
