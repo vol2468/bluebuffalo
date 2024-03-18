@@ -1,27 +1,46 @@
-.comment h1 {
-    border-bottom: 1px black solid;
+#comment #post-comment #dashboard h1{
+    border: solid 1px black;
 }
 
-#comment {
-    padding: 20px;
-
-}
-
-.comment .post-comment {
-    clear: left;
-    margin-left: 250px;
-}
-
-.dashboard {
+#dashboard {
     float: left;
-    margin-left: 250px;
+    margin-left: 150px;
+    padding-top: 40px;
+    padding-right: 400px;
 }
 
-.comment{
-    
+#comment{
+    margin-top: 30px;
+    margin-left: 550px;
+    padding-bottom: 200px;
 }
 
 .post-comment{
-    position: relative;
     top: 250px;
+    padding-bottom: 100px;
+}
+
+.comment-section p{
+    padding: 10px;
+}
+
+.comment-section {
+    padding: 10px;
+}
+
+.comment {
+    padding: 10px;
+}
+
+.top10city {
+    float: left;
+}
+
+.polutantRatio {
+    clear: left;
+    margin-left: 20px;
+}
+
+#calendar {
+    clear:left;
 }
