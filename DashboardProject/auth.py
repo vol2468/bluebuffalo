@@ -32,10 +32,6 @@ def accountSetting():
 def map():
     return render_template("map.html")
 
-# @auth.route('/analysis')
-# def analysis():
-#     return render_template('analysis.html')
-
 @auth.route('/analysis.py', methods=['GET', 'POST'])
 def call_compare():
     result = perform_analysis()
