@@ -41,8 +41,13 @@ def perform_analysis():
         filtered_df_2021[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum()
     ]
 
+    # MAP FOR TEST
     latitude = request.form.get('latitude')
     longitude = request.form.get('longitude')
+    
+    # ACTUAL CODE
+    # latitude, longitude = get_coordinates(city)
+
     return render_template("analysis.html", meanData=mean_values, city=city, total=total_values_list, lat=latitude, long=longitude)
 
 def get_coordinates(city_name):
