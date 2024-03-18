@@ -20,7 +20,7 @@ h1{
 }
 #left{
     position: absolute;
-    right: 100px;
+    right: 60px;
     display: inline-block;
     border: 1pt solid black;
     height: 300px;

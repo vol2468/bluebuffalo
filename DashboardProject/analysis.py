@@ -1,10 +1,39 @@
-# from flask import Flask, render_template, request
+from flask import Flask, render_template, request
+import json
 # import pandas as pd
 # import seaborn as sns
 # import matplotlib.pyplot as plt
+from markupsafe import Markup
+import pandas as pd
 
-# analysis = Flask(__name__) 
-# @analysis.route('/') 
+analysis = Flask(__name__) 
+@analysis.route('/analysis.py', methods=['POST']) 
+
+
+def perform_analysis():
+    
+    city = request.form.get('city')
+    
+    # Read the CSV file
+    df = pd.read_csv('/Users/joy/Desktop/COSC310/Project/Data/processed/pollution.csv')
+
+    # Convert the date column to datetime format
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    # # Filter the data based on the date
+    # start_date = '2022-01-01'
+    # end_date = '2022-12-31'
+    # filtered_df = df[(df['Date'] >= start_date) & (df['Date'] <= end_date)]
+
+    # city = "Phoenix"
+    # date = '2000-01-01'
+    filtered_df = df[df['City'] == city]
+    # Extract the required columns
+    # data = [item for sublist in filtered_df[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.tolist() for item in sublist]
+    mean_values = filtered_df[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].mean().values.tolist()
+
+    return render_template("analysis.html", meanData=mean_values, city=city)
+
 
 # def analysis():
 #     sns.set_theme(style="whitegrid",

@@ -1,4 +1,5 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
+from DashboardProject.analysis import perform_analysis
 
 auth = Blueprint('auth', __name__)
 

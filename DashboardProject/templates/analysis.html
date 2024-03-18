@@ -21,9 +21,9 @@
                 center: [currentLat, currentLong],
                 zoom: 10
             });
-            map.setMaxBounds(map.getBounds());
+            // map.setMaxBounds(map.getBounds());
     
-            L.tileLayer = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}', {
+            L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}', {
                 minZoom: 2,
                 maxZoom: 5,
                 subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
@@ -47,21 +47,24 @@
                 </div>
             </header>
             <h1>Analysis of {{city}}</h1>
+
             <p id="cityMap">
                 <div class="map" id="mapUS"></div>
                 <script src="../static/js/map.js"></script>
             </p>
             <div id="left">
+                
                     <p id="chart">
-                        <canvas id="pie" width="300px" height="250px">
+                        <canvas id="pie" width="300px" height="250px"></canvas>
                             <script>
+                                var mean = JSON.parse('{{ meanData | safe }}');
                                 var ctx = document.getElementById('pie');
                                 var myChart = new Chart(ctx, {
                                 type: 'pie',
                                 data: {
-                                    labels: ['CO', 'NO2', 'O3', 'SO2'],
+                                    labels: ['O3', 'CO', 'SO2', 'NO2'],
                                     datasets: [{
-                                        data: [50, 60, 70, 30],
+                                        data: mean,
                                         backgroundColor: [
                                             'red',
                                             'orange',
@@ -69,10 +72,11 @@
                                             'green',
                                         ]
                                     }]
-                                }
+                                },
                             });
                             </script>
-                        </canvas>
+                    <p>(ppm)</p>
+                    <p>{{meanData}}</p>
                     </p>
                     <p id="time">
                     <canvas id="graph" width="400px" height="250px">
