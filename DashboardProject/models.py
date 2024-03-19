@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100))
     city = db.Column(db.String(100))
 
+
 class City(db.Model):
     name = db.Column(db.String(100), primary_key=True, unique=True)
     population = db.Column(db.Integer())
@@ -17,14 +18,9 @@ class City(db.Model):
     graphId = db.Column(db.Integer)
     graphDescription = db.Column(db.String(10000))
 
+
 class Comment(db.Model):
     commentId = db.Column(db.String(100), primary_key=True, unique=True)
     email = db.Column(db.String(100))
     commentText = db.Column(db.String(10000))
     commentDate = db.Column(db.Date)
-
-
-
-
-
-
