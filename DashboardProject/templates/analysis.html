@@ -12,26 +12,6 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-        <script>
-            var currentLat = 40.7128;
-            var currentLong = 74.0060;
-            var currentCity = "New York";
-    
-            var map = L.map('map', {
-                center: [currentLat, currentLong],
-                zoom: 10
-            });
-            map.setMaxBounds(map.getBounds());
-    
-            L.tileLayer = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}', {
-                minZoom: 2,
-                maxZoom: 5,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            }).addTo(map);
-            var marker = L.marker([currentLat, currentLong]).addTo(map);
-            marker.bindPopup("<b>" + currentCity + "</b><br>Your Location").openPopup();
-        </script>
-
     </head>
     
     <body>
@@ -47,21 +27,39 @@
                 </div>
             </header>
             <h1>Analysis of {{city}}</h1>
-            <p id="cityMap">
-                <div class="map" id="mapUS"></div>
-                <script src="../static/js/map.js"></script>
-            </p>
+            <div class="map" id="cityMap"></div>
+            <script >
+                document.addEventListener('DOMContentLoaded', function() {
+                var currentCity = "{{ city }}";
+                var currentLat = "{{ lat }}";
+                var currentLong = "{{ long }}";
+
+                var map = L.map('cityMap', {
+                    center: [currentLat, currentLong],
+                    zoom: 10
+                });
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                }).addTo(map);
+
+                L.marker([currentLat, currentLong]).addTo(map)
+                .openPopup();
+            });
+            </script>
             <div id="left">
+                
                     <p id="chart">
-                        <canvas id="pie" width="300px" height="250px">
+                        <canvas id="pie" width="300px" height="250px"></canvas>
                             <script>
+                                var mean = JSON.parse('{{ meanData | safe }}');
                                 var ctx = document.getElementById('pie');
                                 var myChart = new Chart(ctx, {
                                 type: 'pie',
                                 data: {
-                                    labels: ['CO', 'NO2', 'O3', 'SO2'],
+                                    labels: ['O3', 'CO', 'SO2', 'NO2'],
                                     datasets: [{
-                                        data: [50, 60, 70, 30],
+                                        data: mean,
                                         backgroundColor: [
                                             'red',
                                             'orange',
@@ -69,22 +67,24 @@
                                             'green',
                                         ]
                                     }]
-                                }
+                                },
                             });
                             </script>
-                        </canvas>
+                    <p>(ppm)</p>
+                    <p>{{meanData}}</p>
                     </p>
                     <p id="time">
-                    <canvas id="graph" width="400px" height="250px">
+                    <canvas id="graph" width="400px" height="250px"></canvas>
                         <script>
+                            var total = JSON.parse('{{ total | safe }}');
                             let lineCtx = document.getElementById("graph");
                             let lineConfig = {
                               type: 'line',
                               data: {
-                                labels: ['2000', '2004', '2008', '2010','2014'], // x-axis
+                                labels: ['2000', '2004', '2008', '2012','2016','2020','2021'], // x-axis
                                 datasets: [{
                                   label: 'Green',
-                                  data: [20, 15, 30, 25, 30, 40, 35],
+                                  data: total,
                                   borderColor: '#484',
                                 },],
                               },
@@ -92,9 +92,9 @@
                                 scales: {
                                 y: {
                                     suggestedMin: 0,
-                                    suggestedMax: 120,
+                                    suggestedMax: 80,
                                     ticks: {
-                                      stepSize: 20,
+                                      stepSize: 5,
                                     }
                                 }
                                 },
@@ -102,9 +102,10 @@
                             };
                             let lineChart = new Chart(lineCtx, lineConfig);
                         </script>
-                    </canvas></p>
+                    <p>{{total}}</p>
+                    </p>
 
-                <p id="comment">User Comments</p>
+                <p id="comment"></p>
             </div>
             <footer>
                 <div>
