@@ -33,6 +33,11 @@ h1 {
     margin: 1em;
 }
 
+#polutantRatio {
+    width: 500px;
+    margin: 1em;
+}
+
 #right {
     float: right;
     width: 200px;
