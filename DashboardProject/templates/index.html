@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="../../static/css/header.css" />
         <link rel="stylesheet" href="../../static/css/main.css" />
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 
 <body>
@@ -16,28 +18,63 @@
         <div>
             <a href="index" id="logo">
                 <img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-           <a href="" id="dash">Dashboard</a>
-           <a href="" id="map">Map</a>
-           <a href="analysis" id="analysis">Analysis</a>
-           <a id='user' href="login"><img alt='Profile' src = '../static/images/defaultPic.png' height="50px"></a>
+            <a href="" id="dash">Dashboard</a>
+            <a href="" id="map">Map</a>
+            <a href="analysis" id="analysis">Analysis</a>
+            <a id='user' href="login"><img alt='Profile' src = '../static/images/defaultPic.png' height="50px"></a>
         </div>
         </header>
     </div>
-     <div id="dashboard">
+        <div id="dashboard">
         <h1 style="font-size: 30px; border-bottom: 1pt solid black;">Dashboard
             <form id="calendar" style="font-size: 10px;">
                 <label  for="start">Start date:</label>
                 <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2023-12-31" />
             </form>
         </h1>
-         <figure class="top10city">
-             <img src="https://bookdown.org/ndphillips/YaRrr/YaRrr_files/figure-html/unnamed-chunk-285-1.png" id="top10" alt="Top 10 Graph" height="200px">
+            <figure class="top10city">
+                <img src="https://bookdown.org/ndphillips/YaRrr/YaRrr_files/figure-html/unnamed-chunk-285-1.png" id="top10" alt="Top 10 Graph" height="200px">
+
+        <!--  FIGURE ONE -->
+        <figure class="top10city">
+            <img src="https://bookdown.org/ndphillips/YaRrr/YaRrr_files/figure-html/unnamed-chunk-285-1.png" id="top10" alt="Top 10 Graph" height="200px">
             <figcaption>Figure 1: Top 10 Cleanest City </figcaption>
-         </figure>
-         <figure class="polutantRatio">
-            <img src="https://www.mathworks.com/help/examples/graphics/win64/PiechartLabelExample_03.png" id="pie" alt="Pie Chart" height="200px">
-            <figcaption>Figure 2: Pollutant Ratio</figcaption>
-         </figure>
+        </figure>
+
+        <!--  FIGURE TWO -->
+        <figure>
+            <canvas id="pie_pollutant_ratio">
+                <script>
+                    var ctx = document.getElementById('pie_pollutant_ratio');
+                    var CO_amount = 10000;
+                    var NO2_amount = 30000;
+                    var O3_amount = 14000;
+                    var SO2_amount = 1000;
+                    var myChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['CO', 'NO2', 'O3', 'SO2'],
+                            datasets: [{
+                                data: [CO_amount, NO2_amount, O3_amount, SO2_amount],
+                                backgroundColor: [
+                                    'red',
+                                    'orange',
+                                    'yellow',
+                                    'green',
+                                ]
+                            }]
+                            }
+                    });
+                </script>
+                </canvas>
+                <figcaption>Figure 2: Ratio of Top Pollutants </figcaption>
+        </figure>
+
+        <!--  FIGURE THREE -->
+        <figure>
+           
+        </figure>
+
     </div>
     <div id="comment">
         <h1 style="font-size: 20px;">Comment</h1>
@@ -70,7 +107,6 @@
                         <p>Kelowna, BC</p>
                         <p>V1V 1V7</p>
                     </div>
-
                 </div>
                 <div id="contact">
                     <p><strong>Contact Us</strong></p>
