@@ -1,40 +1,39 @@
-# from flask import Flask, render_template, request
+from flask import Flask, render_template, request
 # import pandas as pd
 # import seaborn as sns
 # import matplotlib.pyplot as plt
+import pandas as pd
 
-# analysis = Flask(__name__) 
-# @analysis.route('/') 
-
-# def analysis():
-#     sns.set_theme(style="whitegrid",
-#                 font_scale=1.2, # This scales the fonts slightly higher
-#                 )
-#     # And we're going to remove the top and right axis lines
-#     plt.rc("axes.spines", top=False, right=False)
-
-#     df = pd.read_csv('../data/processed/pollution.csv')
-
-#     df['Total AQI'] = df['O3 AQI'] + df['CO AQI'] + df['SO2 AQI'] + df['NO2 AQI']
-#     # df.head()
-
-#     city = "Phoenix" #input from user
-
-#     df_filtered = df[df['City'] == city]
-#     # df_filtered.head()
-
-#     # Convert the 'date' column to datetime format
-#     df_filtered['Date'] = pd.to_datetime(df_filtered['Date'])
-
-#     # Filter the DataFrame to keep only rows where the date is '01-01'
-#     newdf_filtered = df_filtered.query("Date.dt.month == 1 and Date.dt.day == 1 and (Year==2000 or Year==2004 or Year==208 or Year==2012 or Year==2016 or Year==2020 or Year==2021)" )
-
-#     date=newdf_filtered['Date']
-
-#     total=newdf_filtered['Total AQI']
-
-#     return render_template('analysis.html', Date=date, Total=total)
+analysis = Flask(__name__) 
+@analysis.route('/analysis.py', methods=['POST']) 
 
 
-# if __name__ == '__main__': 
-#     analysis() 
+def perform_analysis():
+    
+    city = request.form.get('city')
+    
+    # TO FIX
+    df = pd.read_csv('/Users/joy/Desktop/COSC310/Project/Data/processed/pollution.csv')
+
+    # Convert the date column to datetime format
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    filtered_df_2000 = df[(df['City'] == city) & (df['Date'] == '2000-01-01')]
+    filtered_df_2004 = df[(df['City'] == city) & (df['Date'] == '2004-01-01')]
+    filtered_df_2008 = df[(df['City'] == city) & (df['Date'] == '2008-01-01')]
+    filtered_df_2012 = df[(df['City'] == city) & (df['Date'] == '2010-01-01')]
+    filtered_df_2016 = df[(df['City'] == city) & (df['Date'] == '2014-01-01')]
+    filtered_df_2020 = df[(df['City'] == city) & (df['Date'] == '2018-01-01')]
+    filtered_df_2021 = df[(df['City'] == city) & (df['Date'] == '2021-01-01')]
+
+    # Time-series
+    total_values_list = [
+        filtered_df_2000[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
+        filtered_df_2004[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
+        filtered_df_2008[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
+        filtered_df_2012[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
+        filtered_df_2016[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
+        filtered_df_2020[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
+        filtered_df_2021[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum()
+    ]
+    return render_template("analysis.html", city=city, total=total_values_list)
