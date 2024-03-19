@@ -17,14 +17,14 @@
         <div>
             <a href="index" id="logo">
                 <img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-           <a href="" id="dash">Dashboard</a>
-           <a href="" id="map">Map</a>
-           <a href="analysis" id="analysis">Analysis</a>
-           <a id='user' href="login"><img alt='Profile' src = '../static/images/defaultPic.png' height="50px"></a>
+            <a href="" id="dash">Dashboard</a>
+            <a href="" id="map">Map</a>
+            <a href="analysis" id="analysis">Analysis</a>
+            <a id='user' href="login"><img alt='Profile' src = '../static/images/defaultPic.png' height="50px"></a>
         </div>
         </header>
     </div>
-     <div id="dashboard">
+        <div id="dashboard">
         <h1 style="font-size: 30px; border-bottom: 1pt solid black;">Dashboard
             <form id="calendar" style="font-size: 10px;">
                 <label  for="start">Start date:</label>
@@ -40,7 +40,31 @@
 
         <!--  FIGURE TWO -->
         <figure>
-            
+         <canvas id="pie_pollutant_ratio">
+                <script>
+                    var ctx = document.getElementById('pie_pollutant_ratio');
+                    var CO_amount = 10000;
+                    var NO2_amount = 30000;
+                    var O3_amount = 14000;
+                    var SO2_amount = 1000;
+                    var myChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['CO', 'NO2', 'O3', 'SO2'],
+                            datasets: [{
+                                data: [CO_amount, NO2_amount, O3_amount, SO2_amount],
+                                backgroundColor: [
+                                    'red',
+                                    'orange',
+                                    'yellow',
+                                    'green',
+                                ]
+                            }]
+                            }
+                    });
+                </script>
+                </canvas>
+                <figcaption>Figure 2: Ratio of Top Pollutants </figcaption>
         </figure>
 
         <!--  FIGURE THREE -->
@@ -97,7 +121,6 @@
                         <p>Kelowna, BC</p>
                         <p>V1V 1V7</p>
                     </div>
-
                 </div>
                 <div id="contact">
                     <p><strong>Contact Us</strong></p>
