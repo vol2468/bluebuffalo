@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="../../static/css/reset.css" />
         <link rel="stylesheet" href="../../static/css/header.css" />
         <link rel="stylesheet" href="../../static/css/main.css" />
-
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
@@ -32,8 +31,6 @@
                 <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2023-12-31" />
             </form>
         </h1>
-            <figure class="top10city">
-                <img src="https://bookdown.org/ndphillips/YaRrr/YaRrr_files/figure-html/unnamed-chunk-285-1.png" id="top10" alt="Top 10 Graph" height="200px">
 
         <!--  FIGURE ONE -->
         <figure class="top10city">
@@ -43,7 +40,7 @@
 
         <!--  FIGURE TWO -->
         <figure>
-            <canvas id="pie_pollutant_ratio">
+         <canvas id="pie_pollutant_ratio">
                 <script>
                     var ctx = document.getElementById('pie_pollutant_ratio');
                     var CO_amount = 10000;
@@ -72,7 +69,24 @@
 
         <!--  FIGURE THREE -->
         <figure>
-           
+            <canvas id="scatter_AQI_pop">
+                <script>
+                    var ctx2 = document.getElementById('scatter_AQI_pop');
+                    var aqi = [70, 60, 70, 50, 40, 90, 60];
+                    var pop = [7000, 55000, 2500, 53000, 6000, 30000, 120000];
+                    var myChart = new Chart(ctx2, {
+                        type: 'scatter',
+                        data: {
+                            datasets: [{
+                                data: aqi,
+                                pointBorderColor: 'black'
+                            }],
+                            labels: pop
+                        }
+                    });
+                </script>
+                </canvas>
+            <figcaption>Figure 3: AQI vs Population </figcaption>
         </figure>
 
     </div>
