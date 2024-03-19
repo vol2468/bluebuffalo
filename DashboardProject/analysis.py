@@ -18,6 +18,12 @@ def perform_analysis():
     # Convert the date column to datetime format
     df['Date'] = pd.to_datetime(df['Date'])
 
+    # PIE CHART
+    filtered_df = df[df['City'] == city]
+    
+    mean_values = filtered_df[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].mean().values.tolist()
+
+
     filtered_df_2000 = df[(df['City'] == city) & (df['Date'] == '2000-01-01')]
     filtered_df_2004 = df[(df['City'] == city) & (df['Date'] == '2004-01-01')]
     filtered_df_2008 = df[(df['City'] == city) & (df['Date'] == '2008-01-01')]
@@ -36,4 +42,4 @@ def perform_analysis():
         filtered_df_2020[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
         filtered_df_2021[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum()
     ]
-    return render_template("analysis.html", city=city, total=total_values_list)
+    return render_template("analysis.html", meanData=mean_values, city=city, total=total_values_list)

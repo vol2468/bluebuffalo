@@ -57,13 +57,14 @@
                     <p id="chart">
                         <canvas id="pie" width="300px" height="250px"></canvas>
                             <script>
+                                var mean = JSON.parse('{{ meanData | safe }}');
                                 var ctx = document.getElementById('pie');
                                 var myChart = new Chart(ctx, {
                                 type: 'pie',
                                 data: {
                                     labels: ['O3', 'CO', 'SO2', 'NO2'],
                                     datasets: [{
-                                        data: dummy,
+                                        data: mean,
                                         backgroundColor: [
                                             'red',
                                             'orange',
@@ -96,9 +97,9 @@
                                 scales: {
                                 y: {
                                     suggestedMin: 0,
-                                    suggestedMax: 120,
+                                    suggestedMax: 80,
                                     ticks: {
-                                      stepSize: 20,
+                                      stepSize: 5,
                                     }
                                 }
                                 },
