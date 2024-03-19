@@ -1,46 +1,49 @@
+main {
+    margin: 2em;
+    height: 600px;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+#calendar {
+    position: absolute;
+    top: 170px;
+    left: 800px;
+    font-size: 20px;
+}
+#dbd {
+    border-bottom: solid 3px black;
+}
+
 #comment #post-comment #dashboard h1{
     border: solid 1px black;
 }
 
 #dashboard {
     float: left;
-    margin-left: 150px;
-    padding-top: 40px;
-    padding-right: 400px;
+    width: 950px;
+    padding-left: 70px;
+    padding-top: 2em;
 }
 
-#comment{
-    margin-top: 30px;
-    margin-left: 550px;
-    padding-bottom: 200px;
+#top10city {
+    width: 500px;
+    margin: 1em;
 }
 
-.post-comment{
-    top: 250px;
-    padding-bottom: 100px;
+#right {
+    float: right;
+    width: 200px;
+    padding-right: 70px;
 }
 
-.comment-section p{
-    padding: 10px;
+#comment {
+    margin-top: 2em;
 }
 
-.comment-section {
-    padding: 10px;
-}
-
-.comment {
-    padding: 10px;
-}
-
-.top10city {
-    float: left;
-}
-
-.polutantRatio {
-    clear: left;
-    margin-left: 20px;
-}
-
-#calendar {
-    clear:left;
+#post-comment {
+    padding-top: 3em;
+    padding-bottom: 3em;
 }
