@@ -15,29 +15,23 @@
     <div id="header">
         <header>
         <div>
-            <a href="index" id="logo">
-                <img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-            <a href="" id="dash">Dashboard</a>
-            <a href="" id="map">Map</a>
-            <a href="analysis" id="analysis">Analysis</a>
-            <a id='user' href="login"><img alt='Profile' src = '../static/images/defaultPic.png' height="50px"></a>
-            <a href="" id="dash">Dashboard</a>
-            <a href="" id="map">Map</a>
-            <a href="analysis" id="analysis">Analysis</a>
-            <a id='user' href="login"><img alt='Profile' src = '../static/images/defaultPic.png' height="50px"></a>
+            <a href="index" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
+            <a href="index" id="dash">Dashboard</a>
+            <a href="map" id="map">Map</a>
+            <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
         </div>
         </header>
     </div>
     <main>
-    <main>
         <div id="dashboard">
             <h1 id="dbd">Dashboard</h1>
-                <form id="calendar">
-                    <label  for="cal">Start date:</label>
-                    <input type="date" id="cal" name="cal" value="2024-01-20" min="2018-01-01" max="2024-12-31" />
-                </form>
-                <div id="top10city">
-                    <canvas id="top10bar" width="300px" height="250px"></canvas>
+            <form id="calendar">
+                <label  for="cal">Start date:</label>
+                <input type="date" id="cal" name="cal" value="2024-01-20" min="2000-01-01" max="2021-06-30" />
+            </form>
+            <div id="top10city">
+                <figure>
+                    <canvas id="top10bar" width="400px" height="300px"></canvas>
                     <script>
                         const top10bar = document.getElementById("top10bar");
 
@@ -66,11 +60,92 @@
                             }
                         });
                     </script>
-                </div>
-                <figure class="polutantRatio">
-                    <img src="https://www.mathworks.com/help/examples/graphics/win64/PiechartLabelExample_03.png" id="pie" alt="Pie Chart" height="200px">
-                    <figcaption>Figure 2: Pollutant Ratio</figcaption>
+                    <figcaption>Figure 1: Top 10 Cleanest Cities</figcaption>
                 </figure>
+            </div>
+            <div id="least10city">
+                <figure>
+                    <canvas id="least10bar" width="400px" height="300px"></canvas>
+                    <script>
+                        const least10bar = document.getElementById("least10bar");
+
+                        // Obtain data from database
+                        var least10cities = ["Pittsburg", "San Francisco", "Los Angeles", "Oakland", "New York", "San Diego", "Philadelphia", "Washington", "Chicago", "Boston"];
+                        var least10values = [22, 20, 19, 12, 10, 9, 8, 7, 5, 3]
+
+                        var chart = new Chart(least10bar, {
+                            type: "bar",
+                            data: {
+                                labels: least10cities,
+                                datasets: [{
+                                    label: "Least 10 Cleanest Cities",
+                                    data: least10values,
+                                    borderWidth: 1,
+                                    backgroundColor: "#F4B947",
+                                    borderColor: "#F6B73D"
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                    beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                    <figcaption>Figure 1: Least 10 Cleanest Cities</figcaption>
+                </figure>
+            </div>
+            <div id="aqi-population">
+                <figure>
+                    <canvas id="scatter_AQI_pop" width="400px" height="300px"></canvas>
+                    <script>
+                        var ctx2 = document.getElementById('scatter_AQI_pop');
+                        var aqi = [70, 60, 70, 50, 40, 90, 60];
+                        var pop = [7000, 55000, 2500, 53000, 6000, 30000, 120000];
+                        var myChart = new Chart(ctx2, {
+                            type: 'scatter',
+                            data: {
+                                datasets: [{
+                                    data: aqi,
+                                    pointBorderColor: 'black'
+                                }],
+                                labels: pop
+                            }
+                        });
+                    </script>
+                    <figcaption>Figure 3: AQI vs Population </figcaption>
+                </figure>
+            </div>
+            <div id="polutantRatio">
+                <figure>
+                    <canvas id="pie_pollutant_ratio" height="300px"></canvas>
+                    <script>
+                        var ctx = document.getElementById('pie_pollutant_ratio');
+                        var CO_amount = 10000;
+                        var NO2_amount = 30000;
+                        var O3_amount = 14000;
+                        var SO2_amount = 1000;
+                        var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['O3', 'CO', 'SO2', 'NO2'],
+                                datasets: [{
+                                    data: [CO_amount, NO2_amount, O3_amount, SO2_amount],
+                                    backgroundColor: [
+                                        'red',
+                                        'orange',
+                                        'yellow',
+                                        'green',
+                                    ]
+                                }]
+                                }
+                        });
+                    </script>
+                    <figcaption>Figure 2: Ratio Pollutants </figcaption>
+                </figure>
+            </div>
         </div>
         <div id="right">
             <div id="comment">
@@ -106,8 +181,6 @@
                         <p>Kelowna, BC</p>
                         <p>V1V 1V7</p>
                     </div>
-
-
                 </div>
                 <div id="contact">
                     <p><strong>Contact Us</strong></p>
@@ -117,13 +190,6 @@
         </footer>
         </div>
     </div>
-    <script>
-        // TESTING
-        var meta = chart.getDatasetMeta(0);
-        console.log("meta:", meta)
-        var data = meta.data[0];
-        console.log("first meta data:", data);
-    </script>
     <script>
         // TESTING
         var meta = chart.getDatasetMeta(0);
