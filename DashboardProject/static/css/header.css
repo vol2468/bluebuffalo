@@ -35,17 +35,12 @@ header a {
 }
 #dash {
     position: absolute;
-    right: 350px;
+    right: 260px;
     top: 30px;
 }
 #map {
     position: absolute;
-    right: 260px;
-    top: 30px;
-}
-#analysis {
-    position: absolute;
-    right: 150px;
+    right: 160px;
     top: 30px;
 }
 #user {

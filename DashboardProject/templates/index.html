@@ -4,55 +4,166 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <meta charset="utf-8">
-        <link rel="stylesheet" href="../../static/css/reset.css" />
-        <link rel="stylesheet" href="../../static/css/header.css" />
-        <link rel="stylesheet" href="../../static/css/main.css" />
-
+    <link rel="stylesheet" href="../../static/css/reset.css" />
+    <link rel="stylesheet" href="../../static/css/header.css" />
+    <link rel="stylesheet" href="../../static/css/main.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 
 <body>
     <div id="header">
         <header>
         <div>
-            <a href="index" id="logo">
-                <img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-           <a href="" id="dash">Dashboard</a>
-           <a href="" id="map">Map</a>
-           <a href="analysis" id="analysis">Analysis</a>
-           <a id='user' href="login"><img alt='Profile' src = '../static/images/defaultPic.png' height="50px"></a>
+            <a href="index" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
+            <a href="index" id="dash">Dashboard</a>
+            <a href="map" id="map">Map</a>
+            <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
         </div>
         </header>
     </div>
-     <div id="dashboard">
-        <h1 style="font-size: 30px; border-bottom: 1pt solid black;">Dashboard
-            <form id="calendar" style="font-size: 10px;">
-                <label  for="start">Start date:</label>
-                <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2023-12-31" />
+    <main>
+        <div id="dashboard">
+            <h1 id="dbd">Dashboard</h1>
+            <form id="calendar">
+                <label  for="cal">Start date:</label>
+                <input type="date" id="cal" name="cal" value="2024-01-20" min="2000-01-01" max="2021-06-30" />
             </form>
-        </h1>
-         <figure class="top10city">
-             <img src="https://bookdown.org/ndphillips/YaRrr/YaRrr_files/figure-html/unnamed-chunk-285-1.png" id="top10" alt="Top 10 Graph" height="200px">
-            <figcaption>Figure 1: Top 10 Cleanest City </figcaption>
-         </figure>
-         <figure class="polutantRatio">
-            <img src="https://www.mathworks.com/help/examples/graphics/win64/PiechartLabelExample_03.png" id="pie" alt="Pie Chart" height="200px">
-            <figcaption>Figure 2: Pollutant Ratio</figcaption>
-         </figure>
-    </div>
-    <div id="comment">
-        <h1 style="font-size: 20px;">Comment</h1>
-        <div class="comment-section">
-            <p>That is a good graph</p>
-            <p>That is a good graph</p>
+            <div id="top10city">
+                <figure>
+                    <canvas id="top10bar" width="400px" height="300px"></canvas>
+                    <script>
+                        const top10bar = document.getElementById("top10bar");
+
+                        // Obtain data from database
+                        var top10cities = ["Pittsburg", "San Francisco", "Los Angeles", "Oakland", "New York", "San Diego", "Philadelphia", "Washington", "Chicago", "Boston"];
+                        var top10values = [22, 20, 19, 12, 10, 9, 8, 7, 5, 3]
+
+                        var chart = new Chart(top10bar, {
+                            type: "bar",
+                            data: {
+                                labels: top10cities,
+                                datasets: [{
+                                    label: "Top 10 Cleanest Cities",
+                                    data: top10values,
+                                    borderWidth: 1,
+                                    backgroundColor: "#F4B947",
+                                    borderColor: "#F6B73D"
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                    beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                    <figcaption>Figure 1: Top 10 Cleanest Cities</figcaption>
+                </figure>
+            </div>
+            <div id="least10city">
+                <figure>
+                    <canvas id="least10bar" width="400px" height="300px"></canvas>
+                    <script>
+                        const least10bar = document.getElementById("least10bar");
+
+                        // Obtain data from database
+                        var least10cities = ["Pittsburg", "San Francisco", "Los Angeles", "Oakland", "New York", "San Diego", "Philadelphia", "Washington", "Chicago", "Boston"];
+                        var least10values = [22, 20, 19, 12, 10, 9, 8, 7, 5, 3]
+
+                        var chart = new Chart(least10bar, {
+                            type: "bar",
+                            data: {
+                                labels: least10cities,
+                                datasets: [{
+                                    label: "Least 10 Cleanest Cities",
+                                    data: least10values,
+                                    borderWidth: 1,
+                                    backgroundColor: "#F4B947",
+                                    borderColor: "#F6B73D"
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                    beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                    <figcaption>Figure 1: Least 10 Cleanest Cities</figcaption>
+                </figure>
+            </div>
+            <div id="aqi-population">
+                <figure>
+                    <canvas id="scatter_AQI_pop" width="400px" height="300px"></canvas>
+                    <script>
+                        var ctx2 = document.getElementById('scatter_AQI_pop');
+                        var aqi = [70, 60, 70, 50, 40, 90, 60];
+                        var pop = [7000, 55000, 2500, 53000, 6000, 30000, 120000];
+                        var myChart = new Chart(ctx2, {
+                            type: 'scatter',
+                            data: {
+                                datasets: [{
+                                    data: aqi,
+                                    pointBorderColor: 'black'
+                                }],
+                                labels: pop
+                            }
+                        });
+                    </script>
+                    <figcaption>Figure 3: AQI vs Population </figcaption>
+                </figure>
+            </div>
+            <div id="polutantRatio">
+                <figure>
+                    <canvas id="pie_pollutant_ratio" height="300px"></canvas>
+                    <script>
+                        var ctx = document.getElementById('pie_pollutant_ratio');
+                        var CO_amount = 10000;
+                        var NO2_amount = 30000;
+                        var O3_amount = 14000;
+                        var SO2_amount = 1000;
+                        var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['O3', 'CO', 'SO2', 'NO2'],
+                                datasets: [{
+                                    data: [CO_amount, NO2_amount, O3_amount, SO2_amount],
+                                    backgroundColor: [
+                                        'red',
+                                        'orange',
+                                        'yellow',
+                                        'green',
+                                    ]
+                                }]
+                                }
+                        });
+                    </script>
+                    <figcaption>Figure 2: Ratio Pollutants </figcaption>
+                </figure>
+            </div>
         </div>
-    </div>
-    <div id="post-comment">
-        <h1 style="font-size: 20px;">Post Comment</h1>
-        <form class="comment-form" action="#" method="POST">
-        <input type="text" name="comment" placeholder="Write a comment.."><br>
-        <button type="submit" class="login">Post</button>
-        </form>
-    </div>
+        <div id="right">
+            <div id="comment">
+                <h1 style="font-size: 20px;">Comment</h1>
+                <div class="comment-section">
+                    <p>That is a good graph</p>
+                    <p>That is a good graph</p>
+                </div>
+            </div>
+            <div id="post-comment">
+                <h1 style="font-size: 20px;">Post Comment</h1>
+                <form class="comment-form" action="#" method="POST">
+                <input type="text" name="comment" placeholder="Write a comment.."><br>
+                <button type="submit" class="login">Post</button>
+                </form>
+            </div>
+        </div>
+    </main>
     <div id="footer">
         <div id="wrapping">
         <footer>
@@ -70,7 +181,6 @@
                         <p>Kelowna, BC</p>
                         <p>V1V 1V7</p>
                     </div>
-
                 </div>
                 <div id="contact">
                     <p><strong>Contact Us</strong></p>
@@ -80,5 +190,12 @@
         </footer>
         </div>
     </div>
+    <script>
+        // TESTING
+        var meta = chart.getDatasetMeta(0);
+        console.log("meta:", meta)
+        var data = meta.data[0];
+        console.log("first meta data:", data);
+    </script>
 </body>
 </html>
