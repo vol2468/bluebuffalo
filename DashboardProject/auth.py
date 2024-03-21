@@ -1,8 +1,5 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
-from .models import User
-from . import db
-from werkzeug.security import generate_password_hash, check_password_hash
-
+from DashboardProject.analysis import perform_analysis
 
 auth = Blueprint('auth', __name__)
 
@@ -27,7 +24,8 @@ def login():
     return render_template("login.html")
 
 
-@auth.route('/newAccount', methods=['GET', 'POST'])
+
+@auth.route('/newAccount')
 def newAccount():
     return render_template("newAccount.html")
 
@@ -42,6 +40,12 @@ def map():
     return render_template("map.html")
 
 
-@auth.route('/analysis')
-def analysis():
-    return render_template('analysis.html')
+@auth.route('/analysis', methods=['GET', 'POST'])
+def call_compare():
+    result = perform_analysis()
+    return result
+
+@auth.route('/test')
+def test():
+    return render_template('test.html')
+
