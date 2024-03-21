@@ -24,8 +24,8 @@ class Pollutant(db.Model):
     __tablename__ = 'pollutant'
     cityId = db.Column(db.Integer, db.ForeignKey('city.cityId'), primary_key=True)
     date = db.Column(db.Date, primary_key=True)
-    _03Mean = db.Column(db.Float)
-    _03AQI = db.Column(db.Integer)
+    O3Mean = db.Column(db.Float)
+    O3AQI = db.Column(db.Integer)
     COMean = db.Column(db.Float)
     COAQI = db.Column(db.Integer)
     SO2Mean = db.Column(db.Float)
