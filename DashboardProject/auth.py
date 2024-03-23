@@ -21,8 +21,8 @@ def index():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template("login.html")
-
+    result = check_login()
+    return result
 
 
 @auth.route('/newAccount')
