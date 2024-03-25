@@ -1,3 +1,4 @@
+Analysis.css
 .wrapper{
     flex-direction: column;
     min-height: 85vh;
@@ -25,7 +26,7 @@ h1{
     border: 1pt solid black;
     height: 300px;
     width: 800px;
-    bottom: 450px;
+    bottom: 400px;
 }
 #average{
     font-size: 20px;
@@ -50,13 +51,30 @@ h1{
     display: inline-block;
     border: 1pt solid black;
     height: 250px;
-    width: 800px;
+    width: 500px;
     top: 330px;
     right: 0;
     font-size: 30px;
     overflow-y: auto;
 }
-
+#postComment{
+    position: absolute;
+    top: -70px;
+    height: 70px;
+    font-size: 50px;
+}
+#postButton{
+    background-color: pink;
+    border-radius: 5px;
+    padding: 7px;
+    margin-left: 200px;
+}
+#commentText{
+    border: 1pt solid black;
+    border-radius: 5px;
+    height: 100px;
+    width: 250px;
+}
 #mapUS {
     height: 500px;
     width: 350px;
