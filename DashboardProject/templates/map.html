@@ -9,55 +9,32 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
     </script>
-    <link rel="stylesheet" href="../static/css/header.css" />
-    <link rel="stylesheet" href="../static/footer.css" />
-    <link rel="stylesheet" href="../static/reset.css" />
-    <style>
-        #mapUS {
-            height: 63%;
-            width: 64%;
-            border: gray solid;
-            position: absolute;
-            right: 2%;
-            top: 18%;
-        }
-
-        #mapHI,
-        #mapAK {
-            height: 30%;
-            width: 30%;
-            border: gray solid;
-            position: absolute;
-            left: 2%;
-            top: 18%;
-        }
-
-        #mapHI {
-            top: 51%;
-        }
-
-        #pin_content {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="../../static/css/reset.css" />
+    <link rel="stylesheet" href="../../static/css/header.css" />
+    <link rel="stylesheet" href="../../static/css/main.css" />
+    <link rel="stylesheet" href="../../static/css/footer.css" />
+    <link rel="stylesheet" href="../../static/css/map.css" />
 </head>
 
 <body>
-    <header>
+    <div id="header">
+        <header>
         <div>
             <a href="index" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
             <a href="index" id="dash">Dashboard</a>
             <a href="map" id="map">Map</a>
             <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
         </div>
-    </header>
-    <h1>US Map & Air Quality</h1>
+        </header>
+    </div>
+    <h1 id="dbd">Air Quality on US Map</h1>
     <div class="map" id="mapAK"></div>
     <div class="map" id="mapHI"></div>
     <div class="map" id="mapUS"></div>
     <script src="../static/js/map.js"></script>
 
-    <div id="wrapping">
+    <div id="footer">
+        <div id="wrapping">
         <footer>
             <div>
                 <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
@@ -73,7 +50,6 @@
                         <p>Kelowna, BC</p>
                         <p>V1V 1V7</p>
                     </div>
-
                 </div>
                 <div id="contact">
                     <p><strong>Contact Us</strong></p>
@@ -81,6 +57,7 @@
                 </div>
             </div>
         </footer>
+        </div>
     </div>
 </body>
 

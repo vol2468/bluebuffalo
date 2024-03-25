@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
 from DashboardProject.analysis import perform_analysis
+
 auth = Blueprint('auth', __name__)
 
 
@@ -23,6 +24,7 @@ def login():
     return render_template("login.html")
 
 
+
 @auth.route('/newAccount')
 def newAccount():
     return render_template("newAccount.html")
@@ -37,11 +39,8 @@ def accountSetting():
 def map():
     return render_template("map.html")
 
-# @auth.route('/analysis')
-# def analysis():
-#     return render_template('analysis.html')
 
-@auth.route('/analysis.py', methods=['GET', 'POST'])
+@auth.route('/analysis', methods=['GET', 'POST'])
 def call_compare():
     result = perform_analysis()
     return result
@@ -49,3 +48,4 @@ def call_compare():
 @auth.route('/test')
 def test():
     return render_template('test.html')
+
