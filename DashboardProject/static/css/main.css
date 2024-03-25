@@ -62,3 +62,23 @@ h1 {
     padding-top: 3em;
     padding-bottom: 3em;
 }
+
+#aqi-population {
+    float: left;
+    margin: 1em;
+}
+
+#right {
+    float: right;
+    width: 200px;
+    padding-right: 70px;
+}
+
+#comment {
+    margin-top: 2em;
+}
+
+#post-comment {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
