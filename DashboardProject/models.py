@@ -1,5 +1,6 @@
-from . import db
+from DashboardProject import db
 from flask_login import UserMixin
+from datetime import datetime
 
 
 class City(db.Model):
@@ -40,7 +41,7 @@ class Comment(db.Model):
     pageType = db.Column(db.String(10))
     commentText = db.Column(db.String(2000))
     graphDate = db.Column(db.Date)
-    commentDate = db.Column(db.Date)
+    commentDate = db.Column(db.Date, default=datetime.now().date)
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'))
     cityId = db.Column(db.Integer, db.ForeignKey('city.cityId'))
 

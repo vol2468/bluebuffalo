@@ -23,15 +23,6 @@
                     <a href="map" id="map">Map</a>
                     <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
                 </div>
-            
-                __tablename__ = 'comment'
-    commentId = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    pageType = db.Column(db.String(10))
-    commentText = db.Column(db.String(2000))
-    graphDate = db.Column(db.Date)
-    commentDate = db.Column(db.Date)
-    userId = db.Column(db.Integer, db.ForeignKey('user.userId'))
-    cityId
             </header>
             <h1>Analysis of {{city}}</h1>
             <div class="map" id="cityMap"></div>
@@ -78,7 +69,7 @@
                             });
                             </script>
                     <p>(ppm)</p>
-                    <!-- <p>{{meanData}}</p> -->
+                    <p>{{meanData}}</p>
                     </p>
                     <p id="time">
                     <canvas id="graph" width="400px" height="250px"></canvas>
@@ -109,7 +100,7 @@
                             };
                             let lineChart = new Chart(lineCtx, lineConfig);
                         </script>
-                    <!-- <p>{{total}}</p> -->
+                    <p>{{total}}</p>
                     </p>
 
                 <p id="comment"></p>
