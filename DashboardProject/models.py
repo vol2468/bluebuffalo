@@ -1,7 +1,7 @@
-from DashboardProject import db
-from flask_login import UserMixin
-from datetime import datetime
+from sqlalchemy.orm import relationship
 
+from . import db  # Make sure you have this import
+from flask_login import UserMixin
 
 class City(db.Model):
     __tablename__ = 'city'
@@ -10,15 +10,7 @@ class City(db.Model):
     population = db.Column(db.Integer)
     latitude = db.Column(db.String(30))
     longitude = db.Column(db.String(30))
-
-
-class User(db.Model, UserMixin):
-    __tablename__ = 'user'
-    userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    firstName = db.Column(db.String(50))
-    lastName = db.Column(db.String(50))
-    email = db.Column(db.String(200), unique=True)
-    password = db.Column(db.String(200))
+    pollutants = relationship('Pollutant', back_populates='city')
 
 
 class Pollutant(db.Model):
@@ -33,6 +25,16 @@ class Pollutant(db.Model):
     SO2AQI = db.Column(db.Integer)
     NO2Mean = db.Column(db.Float)
     NO2AQI = db.Column(db.Integer)
+    city = relationship('City', back_populates='pollutants')
+
+class User(db.Model, UserMixin):
+    __tablename__ = 'user'
+    userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    firstName = db.Column(db.String(50))
+    lastName = db.Column(db.String(50))
+    email = db.Column(db.String(200), unique=True)
+    password = db.Column(db.String(200))
+
 
 
 class Comment(db.Model):
@@ -41,7 +43,7 @@ class Comment(db.Model):
     pageType = db.Column(db.String(10))
     commentText = db.Column(db.String(2000))
     graphDate = db.Column(db.Date)
-    commentDate = db.Column(db.Date, default=datetime.now().date)
+    commentDate = db.Column(db.Date)
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'))
     cityId = db.Column(db.Integer, db.ForeignKey('city.cityId'))
 

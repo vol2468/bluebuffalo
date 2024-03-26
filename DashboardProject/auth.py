@@ -1,6 +1,5 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
 from DashboardProject.analysis import perform_analysis
-from DashboardProject.insertComment import insert_comment
 
 auth = Blueprint('auth', __name__)
 
@@ -44,11 +43,6 @@ def map():
 @auth.route('/analysis', methods=['GET', 'POST'])
 def call_compare():
     result = perform_analysis()
-    return result
-
-@auth.route('/insertComment', methods=['GET', 'POST'])
-def insertComment():
-    result = insert_comment()
     return result
 
 @auth.route('/test')
