@@ -7,7 +7,7 @@ def perform_analysis():
     city = request.form.get('city')
     
     # TO FIX
-    df = pd.read_csv('/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv')
+    df = pd.read_csv('/Users/joy/Desktop/COSC310/Project/Data/processed/pollution.csv')
 
     # Convert the date column to datetime format
     df['Date'] = pd.to_datetime(df['Date'])
