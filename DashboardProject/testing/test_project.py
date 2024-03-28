@@ -28,8 +28,8 @@ def test_dashboard(client):
 #     #     )
 
 def test_analysiscomment(client, app):
-    response = client.post("/insertComment", data={"comment": "It is good."})
+    response = client.post("/insertComment", data={"comment": "It iiiis good.", "city":"Phoenix"})
 
     with app.app_context():
-        assert Comment.query.count() == 1
-        assert Comment.query.first().commentText == "It is good."
+        assert Comment.query.count() == 4
+        assert Comment.query.first().commentText == "It was good."
