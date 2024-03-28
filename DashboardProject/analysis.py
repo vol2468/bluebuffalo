@@ -2,10 +2,6 @@ from flask import Flask, render_template, request
 import pandas as pd
 import sqlite3
 
-# Connection to database
-conn = sqlite3.connect('instance/database.db')
-cursor = conn.cursor()
-
 def perform_analysis():
     
     city = request.form.get('city')
