@@ -46,10 +46,3 @@ def perform_analysis():
 
     return render_template("analysis.html", meanData=mean_values, city=city, total=total_values_list, lat=latitude, long=longitude)
 
-def get_coordinates(city_name):
-    cursor.execute("SELECT latitude, longitude FROM cities WHERE name=?", (city_name,))
-    row = cursor.fetchone()
-    if row:
-        latitude, longitude = row
-        return latitude, longitude
-    return None, None
