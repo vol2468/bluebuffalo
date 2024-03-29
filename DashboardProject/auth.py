@@ -1,6 +1,8 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
 from DashboardProject.analysis import perform_analysis
 from DashboardProject.insertComment import insert_comment
+from DashboardProject.login import check_login
+
 
 auth = Blueprint('auth', __name__)
 
@@ -22,8 +24,8 @@ def index():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template("login.html")
-
+    result = check_login()
+    return result
 
 
 @auth.route('/newAccount')
