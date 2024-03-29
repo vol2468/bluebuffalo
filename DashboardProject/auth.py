@@ -1,6 +1,8 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
 from DashboardProject.analysis import perform_analysis
+from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
+
 
 auth = Blueprint('auth', __name__)
 
@@ -50,3 +52,7 @@ def call_compare():
 def test():
     return render_template('test.html')
 
+@auth.route('/insertComment', methods=['GET', 'POST'])
+def insertComment():
+    result = insert_comment()
+    return render_template('index.html')
