@@ -32,7 +32,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    # create_database(app)
+    #create_database(app)
 
     return app
 
@@ -52,6 +52,7 @@ def insert_data_from_csv():
     from .models import City, Pollutant
     # Read data from your CSV file (adjust the filename as needed)
     csv_filename = r'/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv'
+
     df = pd.read_csv(csv_filename)
 
     # Create SQLAlchemy session
@@ -134,3 +135,4 @@ def delete_duplicates_and_reset_ids():
         # Close cursor and connection
         cursor.close()
         conn.close()
+
