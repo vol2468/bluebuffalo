@@ -32,7 +32,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    create_database(app)
+    #create_database(app)
 
     return app
 
@@ -51,7 +51,8 @@ def create_database(app):
 def insert_data_from_csv():
     from .models import City, Pollutant
     # Read data from your CSV file (adjust the filename as needed)
-    csv_filename = r'C:\Users\leosc\Documents\GitHub\bluebuffalo\Data\processed\pollution.csv'
+    csv_filename = r'/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv'
+
     df = pd.read_csv(csv_filename)
 
     # Create SQLAlchemy session
@@ -60,27 +61,34 @@ def insert_data_from_csv():
 
     try:
         for index, row in df.iterrows():
-            date_obj = datetime.strptime(row['Date'], '%Y-%m-%d')
-            # Create City record
-            city_record = City(cityName=row['City'],
-                               population=row['Population (at 2000)'],
-                               latitude=row['Latitude'],
-                               longitude=row['Longitude'])
-            session.add(city_record)
+            # Create City record if it doesn't exist
+            city = City.query.filter_by(cityName=row['City']).first()
+            if not city:
+                city = City(cityName=row['City'],
+                            population=row['Population (at 2000)'],
+                            latitude=row['Latitude'],
+                            longitude=row['Longitude'])
+                session.add(city)
+                session.commit()
+            city_id = city.cityId
 
+            date_obj = datetime.strptime(row['Date'], '%Y-%m-%d')
             # Create Pollutant record
-            pollutant_record = Pollutant(city=city_record,
-                                         date=date_obj,
-                                         O3Mean=row['O3 Mean'],
-                                         O3AQI=row['O3 AQI'],
-                                         COMean=row['CO Mean'],
-                                         COAQI=row['CO AQI'],
-                                         SO2Mean=row['SO2 Mean'],
-                                         SO2AQI=row['SO2 AQI'],
-                                         NO2Mean=row['NO2 Mean'],
-                                         NO2AQI=row['NO2 AQI'])
+            pollutant_record = Pollutant(
+                cityId=city_id,
+                date=date_obj,
+                O3Mean=row['O3 Mean'],
+                O3AQI=row['O3 AQI'],
+                COMean=row['CO Mean'],
+                COAQI=row['CO AQI'],
+                SO2Mean=row['SO2 Mean'],
+                SO2AQI=row['SO2 AQI'],
+                NO2Mean=row['NO2 Mean'],
+                NO2AQI=row['NO2 AQI']
+            )
             session.add(pollutant_record)
 
+    
         session.commit()
         print("Data inserted successfully!")
     except Exception as e:
@@ -127,3 +135,4 @@ def delete_duplicates_and_reset_ids():
         # Close cursor and connection
         cursor.close()
         conn.close()
+
