@@ -68,7 +68,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 9
 }).addTo(mapHI);
 
-window.alert(display_pins.length)
 for (var i = 0; i < display_pins.length; i++) {
     var cityName = display_pins[i][0];
     lat = Number(display_pins[i][1]);
