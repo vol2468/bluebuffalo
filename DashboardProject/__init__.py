@@ -6,6 +6,7 @@ from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 import pandas as pd
+import sqlite3
 from sqlalchemy.orm import sessionmaker, relationship
 
 db = SQLAlchemy()
@@ -31,7 +32,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    create_database(app)
+    #create_database(app)
 
     return app
 
@@ -43,12 +44,14 @@ def create_database(app):
             # Read data from CSV and insert into tables
             insert_data_from_csv()
         print("Created Database!")
+        # Call the method to execute the script
+        delete_duplicates_and_reset_ids()
 
 
 def insert_data_from_csv():
     from .models import City, Pollutant
     # Read data from your CSV file (adjust the filename as needed)
-    csv_filename = r'C:\Users\leosc\Documents\GitHub\bluebuffalo\Data\processed\pollution.csv'
+    csv_filename = r'C:\Users\karen\Documents\GitHub\bluebuffalo\Data\processed\pollution.csv'
     df = pd.read_csv(csv_filename)
 
     # Create SQLAlchemy session
@@ -85,3 +88,42 @@ def insert_data_from_csv():
         print(f"Error inserting data: {str(e)}")
     finally:
         session.close()
+        
+
+def delete_duplicates_and_reset_ids():
+    # Establish connection to the database
+    conn = sqlite3.connect('instance/database.db')
+    cursor = conn.cursor()
+
+    try:
+        # Create a temporary table to store distinct cities
+        cursor.execute("""
+        CREATE TEMP TABLE temp_city AS
+        SELECT DISTINCT cityName, population, latitude, longitude
+        FROM city
+        """)
+
+        # Delete all rows from the original city table
+        cursor.execute("DELETE FROM city")
+
+        # Copy distinct city records from the temporary table back into the original table
+        cursor.execute("""
+        INSERT INTO city (cityName, population, latitude, longitude)
+        SELECT cityName, population, latitude, longitude
+        FROM temp_city
+        """)
+
+        # Drop the temporary table
+        cursor.execute("DROP TABLE temp_city")
+
+        # Commit changes
+        conn.commit()
+        print("Duplicate cities deleted and cityId reset successfully.")
+    except sqlite3.Error as e:
+        # Rollback changes if there's an error
+        conn.rollback()
+        print("Error:", e)
+    finally:
+        # Close cursor and connection
+        cursor.close()
+        conn.close()
