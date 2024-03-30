@@ -15,8 +15,10 @@ class City(db.Model):
 
 class Pollutant(db.Model):
     __tablename__ = 'pollutant'
-    cityId = db.Column(db.Integer, db.ForeignKey('city.cityId'), primary_key=True)
-    date = db.Column(db.Date, primary_key=True)
+    pollutantId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    # cityName = db.Column(db.String(50),db.ForeignKey('city.cityName'))
+    cityId = db.Column(db.Integer, db.ForeignKey('city.cityId'))
+    date = db.Column(db.Date)
     O3Mean = db.Column(db.Float)
     O3AQI = db.Column(db.Integer)
     COMean = db.Column(db.Float)
