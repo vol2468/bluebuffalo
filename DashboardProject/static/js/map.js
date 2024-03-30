@@ -35,26 +35,26 @@ for (var i = 0; i < cityCoord.length / 5; i++) {
 }
 
 var display_pins = [];
-const cityAQI = [];
 
-for (var i = 0; i < cityCoord.length / 4; i++) {
-    var cityId = cityCoord[i * 4];
-    var cityName = cityCoord[i * 4 + 1];
-    var lat = cityCoord[i * 4 + 2];
-    var long = cityCoord[i * 4 + 3];
+for (var i = 0; i < cityCoord.length / 5; i++) {
+    var cityId = cityCoord[i * 5];
+    var cityName = cityCoord[i * 5 + 1];
+    var lat = cityCoord[i * 5 + 2];
+    var long = cityCoord[i * 5 + 3];
+    var AQI = cityCoord[i * 5 + 4];
 
     var icon = highPin;
-    // if (AQI > 70) {
-    //     icon = highPin;
-    // }
-    // else if (AQI > 40) {
-    //     icon = medPin;
-    // }
-    // else {
-    //     icon = lowPin;
-    // }
+    if (AQI > 100) {
+        icon = lowPin;
+    }
+    else if (AQI > 50) {
+        icon = medPin;
+    }
+    else {
+        icon = highPin;
+    }
 
-    row = [cityName, lat, long, icon];
+    row = [cityName, lat, long, icon, AQI];
     display_pins.push(row);
 }
 
