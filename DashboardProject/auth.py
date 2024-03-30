@@ -4,7 +4,6 @@ from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
 
-
 auth = Blueprint('auth', __name__)
 
 
@@ -44,6 +43,9 @@ def map():
     result = perform_map()
     return result
 
+@auth.route('/map_test')
+def map_test():
+    return render_template('map_test.html')
 
 @auth.route('/analysis', methods=['GET', 'POST'])
 def call_compare():

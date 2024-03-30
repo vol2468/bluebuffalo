@@ -7,10 +7,8 @@ import sqlite3
 conn = sqlite3.connect('instance/database.db', check_same_thread=False)
 cursor = conn.cursor()
 map = Flask(__name__)
-
 @map.route('/')
 def perform_map():
-    address = ""
     cityList = get_coordinate()
     return render_template('map.html', cityList=json.dumps(cityList))
 
