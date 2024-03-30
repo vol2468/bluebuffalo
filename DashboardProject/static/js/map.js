@@ -11,6 +11,29 @@ var lowPin = L.icon({
     iconUrl: '../static/images/pin_low.png',
     iconSize: [25, 40]
 });
+var display_pins = [];
+
+for (var i = 0; i < cityCoord.length / 5; i++) {
+    var cityId = cityCoord[i * 5];
+    var cityName = cityCoord[i * 5 + 1];
+    var lat = cityCoord[i * 5 + 2];
+    var long = cityCoord[i * 5 + 3];
+    var AQI = cityCoord[i * 5 + 4];
+
+    var icon = highPin;
+    if (AQI > 100) {
+        icon = lowPin;
+    }
+    else if (AQI > 50) {
+        icon = medPin;
+    }
+    else {
+        icon = highPin;
+    }
+
+    row = [cityName, lat, long, icon, AQI];
+    display_pins.push(row);
+}
 
 // US
 var mapUS = L.map('mapUS', {
@@ -18,26 +41,17 @@ var mapUS = L.map('mapUS', {
     zoom: 4
 });
 mapUS.setMaxBounds(mapUS.getBounds());
-
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 4,
     maxZoom: 9
 }).addTo(mapUS);
-var markerUS = L.marker([41, -111], { icon: highPin }).addTo(mapUS);
-
-var moreInfoPagePopUS = L.marker([33.649874, -112.183847], { icon: highPin }).addTo(mapUS)
-    .bindPopup('<div id="pin_content">Phoenix<br>(Lat, Long)</div>');
-
 
 // AK 
-
 var mapAK = L.map('mapAK', {
     center: [64, -154],
     zoom: 3
 });
 mapAK.setMaxBounds(mapAK.getBounds());
-var marker2 = L.marker([62, -152], { icon: medPin }).addTo(mapAK);
-
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 3,
     maxZoom: 9
@@ -49,9 +63,49 @@ var mapHI = L.map('mapHI', {
     zoom: 6
 });
 mapHI.setMaxBounds(mapHI.getBounds());
-var marker3 = L.marker([22, -159], { icon: lowPin }).addTo(mapHI);
-
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 6,
     maxZoom: 9
 }).addTo(mapHI);
+
+for (var i = 0; i < display_pins.length; i++) {
+    var cityName = display_pins[i][0];
+    var lat = Number(display_pins[i][1]);
+    var long = Number(display_pins[i][2]);
+    var icon = display_pins[i][3]
+    var aqi = display_pins[i][4]
+
+    var marker = L.marker([lat, long], { icon: icon }).addTo(mapUS)
+        .bindPopup(
+            '<div id="pin_content">' + cityName + ' [' + aqi + ']<br>('
+            + lat + ', ' + long + ')</div>'
+            + '<form action="analysis" method="post">'
+            + '<input type="hidden" value="' + cityName + '" name="city">'
+            + '<input type="hidden" value="' + lat + '" name="latitude">'
+            + '<input type="hidden" value="' + long + '" name="longitude">'
+            + '<input type="submit" value="Go to Analysis">'
+            + '</form></div>'
+        );
+    var marker2 = L.marker([lat, long], { icon: icon }).addTo(mapAK)
+        .bindPopup(
+            '<div id="pin_content">' + cityName + '<br>('
+            + lat + ', ' + long + ')</div>'
+            + '<form action="analysis" method="post">'
+            + '<input type="hidden" value="' + cityName + '" name="city">'
+            + '<input type="hidden" value="' + lat + '" name="latitude">'
+            + '<input type="hidden" value="' + long + '" name="longitude">'
+            + '<input type="submit" value="Go to Analysis">'
+            + '</form></div>'
+        );
+    var marker3 = L.marker([lat, long], { icon: icon }).addTo(mapHI)
+        .bindPopup(
+            '<div id="pin_content">' + cityName + '<br>('
+            + lat + ', ' + long + ')</div>'
+            + '<form action="analysis" method="post">'
+            + '<input type="hidden" value="' + cityName + '" name="city">'
+            + '<input type="hidden" value="' + lat + '" name="latitude">'
+            + '<input type="hidden" value="' + long + '" name="longitude">'
+            + '<input type="submit" value="Go to Analysis">'
+            + '</form></div>'
+        );
+}

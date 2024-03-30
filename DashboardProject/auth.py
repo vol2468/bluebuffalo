@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
 from DashboardProject.analysis import perform_analysis
+from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
 
@@ -38,9 +39,10 @@ def accountSetting():
     return render_template("accountSetting.html")
 
 
-@auth.route('/map')
+@auth.route('/map', methods=['GET', 'POST'])
 def map():
-    return render_template("map.html")
+    result = perform_map()
+    return result
 
 
 @auth.route('/analysis', methods=['GET', 'POST'])
