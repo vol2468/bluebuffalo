@@ -32,7 +32,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    # create_database(app)
+    #create_database(app)
 
     return app
 
@@ -127,3 +127,4 @@ def delete_duplicates_and_reset_ids():
         # Close cursor and connection
         cursor.close()
         conn.close()
+
