@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
-from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values
+from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
 
@@ -58,6 +58,11 @@ def analysis_mean():
     city = request.form.get('city')
     mean = get_mean_values(city)
     return mean
+@auth.route('/analysisTotal', methods=['GET', 'POST'])
+def analysis_total():
+    city = request.form.get('city')
+    total = get_total_mean(city)
+    return total
 
 @auth.route('/analysis', methods=['GET', 'POST'])
 def analysis():
