@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
-from DashboardProject.analysis import perform_analysis
+from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values
 from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
