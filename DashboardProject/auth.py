@@ -1,8 +1,8 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
-from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values
+from DashboardProject.analysis import perform_analysis
+from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
-
 
 auth = Blueprint('auth', __name__)
 
@@ -38,10 +38,14 @@ def accountSetting():
     return render_template("accountSetting.html")
 
 
-@auth.route('/map')
+@auth.route('/map', methods=['GET', 'POST'])
 def map():
-    return render_template("map.html")
+    result = perform_map()
+    return result
 
+@auth.route('/map_test')
+def map_test():
+    return render_template('map_test.html')
 
 @auth.route('/latitude', methods=['GET', 'POST'])
 def latitude():
