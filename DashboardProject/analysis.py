@@ -15,40 +15,14 @@ def perform_analysis():
     
     # TO FIX
     df = pd.read_csv('/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv')
-
-    # Convert the date column to datetime format
-    df['Date'] = pd.to_datetime(df['Date'])
-
-    # PIE CHART
-    # filtered_df = df[df['City'] == city]
-    
-    # mean_values = filtered_df[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].mean().values.tolist()
-
-    # # Time-series
-    filtered_df_2000 = df[(df['City'] == city) & (df['Date'] == '2000-01-01')]
-    filtered_df_2004 = df[(df['City'] == city) & (df['Date'] == '2004-01-01')]
-    filtered_df_2008 = df[(df['City'] == city) & (df['Date'] == '2008-01-01')]
-    filtered_df_2012 = df[(df['City'] == city) & (df['Date'] == '2012-01-01')]
-    filtered_df_2016 = df[(df['City'] == city) & (df['Date'] == '2016-01-01')]
-    filtered_df_2020 = df[(df['City'] == city) & (df['Date'] == '2020-01-01')]
-    filtered_df_2021 = df[(df['City'] == city) & (df['Date'] == '2021-01-01')]
-
-    total_values_list = [
-        filtered_df_2000[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
-        filtered_df_2004[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
-        filtered_df_2008[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
-        filtered_df_2012[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
-        filtered_df_2016[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
-        filtered_df_2020[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum(),
-        filtered_df_2021[['O3 Mean', 'CO Mean', 'SO2 Mean', 'NO2 Mean']].values.sum()
-    ]
-
     
     # ACTUAL CODE
     latitude = get_latitude(city)
     longitude = get_longitude(city)
+    # PIE CHART
     mean_values = get_mean_values(city)
-    # total_values_list = get_total_mean(city)
+    # Time-series
+    total_values_list = get_total_mean(city)
 
     return render_template("analysis.html", meanData=mean_values, city=city, total=total_values_list, lat=latitude, long=longitude)
 
@@ -78,3 +52,14 @@ def get_mean_values(city_name):
     mean_values_list = [float(value) for value in mean_values]
 
     return mean_values_list
+
+# Getting total values of pollutant in each year from database
+def get_total_mean(city_name):
+    total_values_list = []
+    city = City.query.filter_by(cityName=city_name).first()
+    for year in ['2000', '2004', '2008', '2012', '2016', '2020', '2021']:
+        total_sum = db.session.query(Pollutant.O3Mean, Pollutant.COMean, Pollutant.SO2Mean, Pollutant.NO2Mean) \
+                        .filter_by(cityId=city.cityId, date=f'{year}-01-01').first()
+        total_sum = tuple(map(lambda x: x or 0, total_sum))
+        total_values_list.append(sum(total_sum))
+    return total_values_list

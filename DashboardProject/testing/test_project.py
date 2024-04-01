@@ -30,5 +30,10 @@ def test_mean_value(client):
     expected_values = [0.02884219191154162, 0.5274592119054846, 1.4354918684489446, 19.722046015828575]
     assert actual_values == expected_values
 
-# def test_total_value(client):
-
+def test_total_value(client):
+    response = client.post("/analysisTotal", data={"city": "Phoenix"})
+    decoded_data = response.data.decode("utf-8")
+    print(decoded_data)
+    actual_values = [float(value) for value in decoded_data[1:-2].split(',')]
+    expected_values = [22.940379, 29.932123, 26.614376, 23.838592, 33.484865, 19.880699, 27.002043999999998]
+    assert actual_values == expected_values
