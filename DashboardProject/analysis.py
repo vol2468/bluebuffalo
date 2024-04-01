@@ -60,6 +60,10 @@ def get_total_mean(city_name):
     for year in ['2000', '2004', '2008', '2012', '2016', '2020', '2021']:
         total_sum = db.session.query(Pollutant.O3Mean, Pollutant.COMean, Pollutant.SO2Mean, Pollutant.NO2Mean) \
                         .filter_by(cityId=city.cityId, date=f'{year}-01-01').first()
+        if total_sum is None:
+            # Set total_sum to a tuple of zeros
+            total_sum = (0, 0, 0, 0)
+
         total_sum = tuple(map(lambda x: x or 0, total_sum))
         total_values_list.append(sum(total_sum))
     return total_values_list
