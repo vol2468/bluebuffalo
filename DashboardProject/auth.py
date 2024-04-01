@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
-from DashboardProject.analysis import perform_analysis
+from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean
 from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
@@ -47,8 +47,29 @@ def map():
 def map_test():
     return render_template('map_test.html')
 
+@auth.route('/latitude', methods=['GET', 'POST'])
+def latitude():
+    city = request.form.get('city')
+    latitude = get_latitude(city)
+    return latitude
+@auth.route('/longitude', methods=['GET', 'POST'])
+def longitude():
+    city = request.form.get('city')
+    longitude = get_longitude(city)
+    return longitude
+@auth.route('/analysisMean', methods=['GET', 'POST'])
+def analysis_mean():
+    city = request.form.get('city')
+    mean = get_mean_values(city)
+    return mean
+@auth.route('/analysisTotal', methods=['GET', 'POST'])
+def analysis_total():
+    city = request.form.get('city')
+    total = get_total_mean(city)
+    return total
+
 @auth.route('/analysis', methods=['GET', 'POST'])
-def call_compare():
+def analysis():
     result = perform_analysis()
     return result
 
