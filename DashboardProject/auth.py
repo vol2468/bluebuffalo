@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
-from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean
+from DashboardProject.analysis import perform_analysis
+from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
 from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
@@ -47,35 +48,34 @@ def map():
 def map_test():
     return render_template('map_test.html')
 
-@auth.route('/latitude', methods=['GET', 'POST'])
-def latitude():
-    city = request.form.get('city')
-    latitude = get_latitude(city)
-    return latitude
-@auth.route('/longitude', methods=['GET', 'POST'])
-def longitude():
-    city = request.form.get('city')
-    longitude = get_longitude(city)
-    return longitude
-@auth.route('/analysisMean', methods=['GET', 'POST'])
-def analysis_mean():
-    city = request.form.get('city')
-    mean = get_mean_values(city)
-    return mean
-@auth.route('/analysisTotal', methods=['GET', 'POST'])
-def analysis_total():
-    city = request.form.get('city')
-    total = get_total_mean(city)
-    return total
-
 @auth.route('/analysis', methods=['GET', 'POST'])
-def analysis():
+def call_compare():
     result = perform_analysis()
     return result
+
 
 @auth.route('/test')
 def test():
     return render_template('test.html')
+
+
+@auth.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    if request.method == 'POST':
+        user_date = request.form['date']
+        top_cities = get_top10_data(user_date)
+        least_cities = get_least10_data(user_date)
+        pollutant = get_pollutant_data(user_date)
+        aqi_population = get_aqi_population(user_date)
+        return render_template('index.html', top_cities=top_cities, least_cities=least_cities, aqi_population=aqi_population, pollutant=pollutant, user_date=user_date)
+    else:
+        user_date = "2020-01-01"
+        top_cities = get_top10_data(user_date)
+        least_cities = get_least10_data(user_date)
+        pollutant = get_pollutant_data(user_date)
+        aqi_population = get_aqi_population(user_date)
+        return render_template('index.html', top_cities=top_cities, least_cities=least_cities, aqi_population=aqi_population, pollutant=pollutant, user_date=user_date)
+
 
 @auth.route('/insertComment', methods=['GET', 'POST'])
 def insertComment():
