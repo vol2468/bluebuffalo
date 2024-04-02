@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from . import db  # Make sure you have this import
 from flask_login import UserMixin
 
+
 class City(db.Model):
     __tablename__ = 'city'
     cityId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -29,6 +30,7 @@ class Pollutant(db.Model):
     NO2AQI = db.Column(db.Integer)
     city = relationship('City', back_populates='pollutants')
 
+
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -36,7 +38,6 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(50))
     email = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200))
-
 
 
 class Comment(db.Model):
@@ -48,4 +49,3 @@ class Comment(db.Model):
     commentDate = db.Column(db.Date)
     userId = db.Column(db.Integer, db.ForeignKey('user.userId'))
     cityId = db.Column(db.Integer, db.ForeignKey('city.cityId'))
-
