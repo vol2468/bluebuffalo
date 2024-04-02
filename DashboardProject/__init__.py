@@ -1,9 +1,11 @@
 from datetime import datetime
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from os import path
 import pandas as pd
 import sqlite3
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
@@ -16,12 +18,14 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
+    from .models import City, Pollutant, User, Comment
     db.init_app(app)
     if not path.exists('bluebuffalo/DashboardProject/' + DB_NAME):
         with app.app_context():
             db.create_all()
 
-    
+    from .views import views
+    from .auth import auth
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
@@ -42,14 +46,15 @@ def create_database(app):
 
 def insert_data_from_csv():
     """"""
+    from .models import City, Pollutant
     # Read data from your CSV file (adjust the filename as needed)
     csv_filename = r'/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv'
 
     df = pd.read_csv(csv_filename)
 
     # Create SQLAlchemy session
-    session_maker = sessionmaker(bind=db.engine)
-    session = session_maker()
+    Session = sessionmaker(bind=db.engine)
+    session = Session()
 
     try:
         for row in df.iterrows():
@@ -81,7 +86,7 @@ def insert_data_from_csv():
             session.add(pollutant_record)
         session.commit()
         print("Data inserted successfully!")
-    except SQLAlchemyError as e:
+    except Exception as e:
         session.rollback()
         print(f"Error inserting data: {str(e)}")
     finally:

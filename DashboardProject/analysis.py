@@ -1,5 +1,4 @@
 from flask import render_template
-import pandas as pd
 import sqlite3
 from DashboardProject.models import Pollutant, City, Comment
 from DashboardProject import db

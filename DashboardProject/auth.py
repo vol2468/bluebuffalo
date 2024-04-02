@@ -1,9 +1,8 @@
 from flask import render_template, request, Blueprint
-from DashboardProject.analysis import perform_analysis
-from DashboardProject.dashboard import get_top10_data, get_least10_data,\
-                                        get_pollutant_data, get_aqi_population
+from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean
+from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
 from DashboardProject.map import perform_map
-from DashboardProject.insert_comment import insert_comment
+from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
 
 auth = Blueprint('auth', __name__)
@@ -68,8 +67,6 @@ def analysis_total():
 @auth.route('/insertComment', methods=['GET', 'POST'])
 def insertComment():
     result = insert_comment()
-    # return render_template('index.')
-    # return redirect(url_for('auth.analysis', city=result))
     return render_template('index.html')
 
 @auth.route('/analysis', methods=['GET', 'POST'])
@@ -104,8 +101,3 @@ def dashboard():
         return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
                                 aqi_population=aqi_population, pollutant=pollutant,\
                                   user_date=user_date)
-@auth.route('/insertComment', methods=['GET', 'POST'])
-def insertComment():
-    """"""
-    result = insert_comment()
-    return render_template('index.html')
