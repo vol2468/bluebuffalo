@@ -7,8 +7,8 @@ from DashboardProject import db
 # Connection to database
 conn = sqlite3.connect('instance/database.db')
 cursor = conn.cursor()
-""""""
 def perform_analysis():
+    """"""
     city = request.form.get('city')
     # ACTUAL CODE
     latitude = get_latitude(city)
@@ -22,22 +22,22 @@ def perform_analysis():
                             city=city, total=total_values_list, \
                                 lat=latitude, long=longitude)
 
-""""""
 # Getting corrdinate of specific city from database
 def get_latitude(city_name):
+    """"""
     city = City.query.filter_by(cityName=city_name).first()
     if city:
         return city.latitude
     return None
-""""""
 def get_longitude(city_name):
+    """"""
     city = City.query.filter_by(cityName=city_name).first()
     if city:
         return city.longitude
     return None
-""""""
 # Getting mean value from database
 def get_mean_values(city_name):
+    """"""
     city = City.query.filter_by(cityName=city_name).first()
     mean_values = db.session.query(
         db.func.avg(Pollutant.O3Mean),
@@ -48,9 +48,9 @@ def get_mean_values(city_name):
     mean_values_list = [float(value) for value in mean_values]
 
     return mean_values_list
-""""""
 # Getting total values of pollutant in each year from database
 def get_total_mean(city_name):
+    """"""
     total_values_list = []
     city = City.query.filter_by(cityName=city_name).first()
     for year in ['2000', '2004', '2008', '2012', '2016', '2020', '2021']:

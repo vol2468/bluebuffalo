@@ -1,4 +1,3 @@
-""""""
 from datetime import datetime
 from os import path
 import sqlite3
@@ -15,14 +14,13 @@ from sqlalchemy.exc import SQLAlchemyError
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 
-""""""
 def create_app():
+    """"""  
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'r'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    
 
     db.init_app(app)
     if not path.exists('bluebuffalo/DashboardProject/' + DB_NAME):
@@ -37,8 +35,8 @@ def create_app():
 
     return app
 
-""""""
 def create_database(app):
+    """"""
     if not path.exists('bluebuffalo/DashboardProject/' + DB_NAME):
         with app.app_context():
             db.create_all()
@@ -48,8 +46,8 @@ def create_database(app):
         # Call the method to execute the script
         delete_duplicates_and_reset_ids()
 
-""""""
 def insert_data_from_csv():
+    """"""
     # Read data from your CSV file (adjust the filename as needed)
     csv_filename = r'/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv'
 
@@ -94,8 +92,8 @@ def insert_data_from_csv():
         print(f"Error inserting data: {str(e)}")
     finally:
         session.close()
-""""""
 def delete_duplicates_and_reset_ids():
+    """"""
     # Establish connection to the database
     conn = sqlite3.connect('instance/database.db')
     cursor = conn.cursor()

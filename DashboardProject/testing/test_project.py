@@ -1,12 +1,12 @@
 from DashboardProject.models import Comment
 
-""""""
 def test_dashboard(client):
+    """"""
     response = client.get("/")
     assert b"<title>Dashboard</title>" in response.data
 
-""""""
 def test_analysiscomment(client, app):
+    """"""
     response = client.post("/insertComment", data={"comment": "It is good.",\
                                                     "city":"Phoenix"})
 
