@@ -1,11 +1,10 @@
 from datetime import datetime
-from flask import Flask, request, jsonify
-from flask_login import UserMixin
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 import pandas as pd
 import sqlite3
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.orm import sessionmaker
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
@@ -85,8 +84,6 @@ def insert_data_from_csv():
                 NO2AQI=row['NO2 AQI']
             )
             session.add(pollutant_record)
-
-    
         session.commit()
         print("Data inserted successfully!")
     except Exception as e:
@@ -94,7 +91,6 @@ def insert_data_from_csv():
         print(f"Error inserting data: {str(e)}")
     finally:
         session.close()
-        
 
 def delete_duplicates_and_reset_ids():
     # Establish connection to the database
@@ -133,4 +129,3 @@ def delete_duplicates_and_reset_ids():
         # Close cursor and connection
         cursor.close()
         conn.close()
-

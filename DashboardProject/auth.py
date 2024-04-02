@@ -1,6 +1,7 @@
-from flask import Flask, redirect, render_template, request, flash, url_for, Blueprint
+from flask import render_template, request, Blueprint
 from DashboardProject.analysis import perform_analysis
-from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
+from DashboardProject.dashboard import get_top10_data, get_least10_data,\
+                                        get_pollutant_data, get_aqi_population
 from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
@@ -67,14 +68,18 @@ def dashboard():
         least_cities = get_least10_data(user_date)
         pollutant = get_pollutant_data(user_date)
         aqi_population = get_aqi_population(user_date)
-        return render_template('index.html', top_cities=top_cities, least_cities=least_cities, aqi_population=aqi_population, pollutant=pollutant, user_date=user_date)
+        return render_template('index.html', top_cities=top_cities, \
+                               least_cities=least_cities, aqi_population=aqi_population,\
+                                  pollutant=pollutant, user_date=user_date)
     else:
         user_date = "2020-01-01"
         top_cities = get_top10_data(user_date)
         least_cities = get_least10_data(user_date)
         pollutant = get_pollutant_data(user_date)
         aqi_population = get_aqi_population(user_date)
-        return render_template('index.html', top_cities=top_cities, least_cities=least_cities, aqi_population=aqi_population, pollutant=pollutant, user_date=user_date)
+        return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
+                                aqi_population=aqi_population, pollutant=pollutant,\
+                                  user_date=user_date)
 
 
 @auth.route('/insertComment', methods=['GET', 'POST'])

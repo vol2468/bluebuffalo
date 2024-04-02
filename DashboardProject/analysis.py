@@ -1,21 +1,15 @@
-from flask import Flask, render_template, request
-import pandas as pd
+from flask import render_template, request
 import sqlite3
 from DashboardProject.models import Pollutant, City
 from DashboardProject import db
-from sqlalchemy import func
+
 
 # Connection to database
 conn = sqlite3.connect('instance/database.db')
 cursor = conn.cursor()
 
 def perform_analysis():
-    
     city = request.form.get('city')
-    
-    # TO FIX
-    df = pd.read_csv('/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv')
-    
     # ACTUAL CODE
     latitude = get_latitude(city)
     longitude = get_longitude(city)
@@ -24,7 +18,9 @@ def perform_analysis():
     # Time-series
     total_values_list = get_total_mean(city)
 
-    return render_template("analysis.html", meanData=mean_values, city=city, total=total_values_list, lat=latitude, long=longitude)
+    return render_template("analysis.html", meanData=mean_values,\
+                            city=city, total=total_values_list, \
+                                lat=latitude, long=longitude)
 
 
 # Getting corrdinate of specific city from database
@@ -58,7 +54,8 @@ def get_total_mean(city_name):
     total_values_list = []
     city = City.query.filter_by(cityName=city_name).first()
     for year in ['2000', '2004', '2008', '2012', '2016', '2020', '2021']:
-        total_sum = db.session.query(Pollutant.O3Mean, Pollutant.COMean, Pollutant.SO2Mean, Pollutant.NO2Mean) \
+        total_sum = db.session.query(Pollutant.O3Mean, Pollutant.COMean,\
+                                      Pollutant.SO2Mean, Pollutant.NO2Mean) \
                         .filter_by(cityId=city.cityId, date=f'{year}-01-01').first()
         if total_sum is None:
             # Set total_sum to a tuple of zeros
