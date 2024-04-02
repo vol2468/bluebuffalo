@@ -1,7 +1,6 @@
 from datetime import datetime
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 import pandas as pd
 import sqlite3
 from sqlalchemy.orm import sessionmaker
@@ -9,23 +8,20 @@ from sqlalchemy.orm import sessionmaker
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 
-
 def create_app():
+    """"""  
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'r'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    from .models import City, Pollutant, User, Comment
 
     db.init_app(app)
     if not path.exists('bluebuffalo/DashboardProject/' + DB_NAME):
         with app.app_context():
             db.create_all()
 
-    from .views import views
-    from .auth import auth
-
+    
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
@@ -33,8 +29,8 @@ def create_app():
 
     return app
 
-
 def create_database(app):
+    """"""
     if not path.exists('bluebuffalo/DashboardProject/' + DB_NAME):
         with app.app_context():
             db.create_all()
@@ -44,50 +40,54 @@ def create_database(app):
         # Call the method to execute the script
         delete_duplicates_and_reset_ids()
 
-
 def insert_data_from_csv():
-    from .models import City, Pollutant
+    """"""
     # Read data from your CSV file (adjust the filename as needed)
-    csv_filename = r'C:\Users\leosc\Documents\GitHub\bluebuffalo\Data\processed\pollution.csv'
+    csv_filename = r'/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv'
+
     df = pd.read_csv(csv_filename)
 
     # Create SQLAlchemy session
-    Session = sessionmaker(bind=db.engine)
-    session = Session()
+    session_maker = sessionmaker(bind=db.engine)
+    session = session_maker()
 
     try:
-        for index, row in df.iterrows():
+        for row in df.iterrows():
+            # Create City record if it doesn't exist
+            city = City.query.filter_by(cityName=row['City']).first()
+            if not city:
+                city = City(cityName=row['City'],
+                            population=row['Population (at 2000)'],
+                            latitude=row['Latitude'],
+                            longitude=row['Longitude'])
+                session.add(city)
+                session.commit()
+            city_id = city.cityId
+
             date_obj = datetime.strptime(row['Date'], '%Y-%m-%d')
-            # Create City record
-            city_record = City(cityName=row['City'],
-                               population=row['Population (at 2000)'],
-                               latitude=row['Latitude'],
-                               longitude=row['Longitude'])
-            session.add(city_record)
-
             # Create Pollutant record
-            pollutant_record = Pollutant(city=city_record,
-                                         date=date_obj,
-                                         O3Mean=row['O3 Mean'],
-                                         O3AQI=row['O3 AQI'],
-                                         COMean=row['CO Mean'],
-                                         COAQI=row['CO AQI'],
-                                         SO2Mean=row['SO2 Mean'],
-                                         SO2AQI=row['SO2 AQI'],
-                                         NO2Mean=row['NO2 Mean'],
-                                         NO2AQI=row['NO2 AQI'])
+            pollutant_record = Pollutant(
+                cityId=city_id,
+                date=date_obj,
+                O3Mean=row['O3 Mean'],
+                O3AQI=row['O3 AQI'],
+                COMean=row['CO Mean'],
+                COAQI=row['CO AQI'],
+                SO2Mean=row['SO2 Mean'],
+                SO2AQI=row['SO2 AQI'],
+                NO2Mean=row['NO2 Mean'],
+                NO2AQI=row['NO2 AQI']
+            )
             session.add(pollutant_record)
-
         session.commit()
         print("Data inserted successfully!")
-    except Exception as e:
+    except SQLAlchemyError as e:
         session.rollback()
         print(f"Error inserting data: {str(e)}")
     finally:
         session.close()
-        
-
 def delete_duplicates_and_reset_ids():
+    """"""
     # Establish connection to the database
     conn = sqlite3.connect('instance/database.db')
     cursor = conn.cursor()
@@ -124,4 +124,3 @@ def delete_duplicates_and_reset_ids():
         # Close cursor and connection
         cursor.close()
         conn.close()
-

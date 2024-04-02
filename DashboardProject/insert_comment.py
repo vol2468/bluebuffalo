@@ -1,9 +1,9 @@
-from flask import request, render_template
+from flask import request
 from DashboardProject.models import Comment, City
 from DashboardProject import db
 from datetime import datetime
 
-
+""""""
 def insert_comment():
     city_name = request.form.get('city')
     comment = request.form.get('comment')

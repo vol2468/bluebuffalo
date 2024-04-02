@@ -25,19 +25,20 @@ def perform_analysis(city):
 
 # Getting corrdinate of specific city from database
 def get_latitude(city_name):
+    """"""
     city = City.query.filter_by(cityName=city_name).first()
     if city:
         return city.latitude
     return None
-
 def get_longitude(city_name):
+    """"""
     city = City.query.filter_by(cityName=city_name).first()
     if city:
         return city.longitude
     return None
-
 # Getting mean value from database
 def get_mean_values(city_name):
+    """"""
     city = City.query.filter_by(cityName=city_name).first()
     mean_values = db.session.query(
         db.func.avg(Pollutant.O3Mean),
