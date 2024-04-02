@@ -68,16 +68,25 @@ def analysis_total():
     total = get_total_mean(city)
     return total
 
+@auth.route('/insertComment', methods=['GET', 'POST'])
+def insertComment():
+    result = insert_comment()
+    # return render_template('index.')
+    # return redirect(url_for('auth.analysis', city=result))
+    return render_template('index.html')
+
 @auth.route('/analysis', methods=['GET', 'POST'])
 def analysis():
-    result = perform_analysis()
+    cityName = request.form.get('city')
+    result = perform_analysis(cityName)
     return result
 
 @auth.route('/test')
 def test():
     return render_template('test.html')
 
-@auth.route('/insertComment', methods=['GET', 'POST'])
-def insertComment():
-    result = insert_comment()
-    return render_template('index.html')
+
+# @auth.route('/analysis', methods=['GET', 'POST'])
+# def displayComment():
+#     result = display_comment()
+#     return render_template('/analysis.html', comments=result)
