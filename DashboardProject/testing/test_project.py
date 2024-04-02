@@ -1,6 +1,4 @@
 from DashboardProject.models import Comment
-from flask import app, render_template
-import json
 
 def test_dashboard(client):
     response = client.get("/")

@@ -1,19 +1,15 @@
-from flask import Flask, render_template, request
+from flask import render_template
 import pandas as pd
 import sqlite3
 from DashboardProject.models import Pollutant, City, Comment
 from DashboardProject import db
-from sqlalchemy import func
 
 # Connection to database
 conn = sqlite3.connect('instance/database.db')
 cursor = conn.cursor()
 
 def perform_analysis(city):
-    
-    # TO FIX
-    df = pd.read_csv('/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv')
-    
+
     # ACTUAL CODE
     latitude = get_latitude(city)
     longitude = get_longitude(city)

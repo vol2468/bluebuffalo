@@ -1,13 +1,10 @@
-import csv
 from datetime import datetime
-
-from flask import Flask, request, jsonify
-from flask_login import UserMixin
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 import pandas as pd
 import sqlite3
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.orm import sessionmaker
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
