@@ -25,164 +25,209 @@
     <main>
       <div id="dashboard">
         <h1 id="dbd">Dashboard</h1>
-        <form id="calendar">
-          <label for="cal">Start date:</label>
-          <input type="date" id="cal" name="cal" value="2024-01-20" min="2000-01-01" max="2021-06-30" />
+        <form id="calendar" action="dashboard" method="post">
+			<label for="cal">Start date:</label>
+			<input type="date" id="date" name="date" 
+				value=	{% if user_date %} 
+							{{ user_date }}
+						{% else %} "2021-10-31" 
+						{% endif %} 
+				min="2000-01-01" max="2021-06-30" />
+			<input type="submit" value="select">
         </form>
         <div id="top10city">
-          <figure>
-            <canvas id="top10bar" width="400px" height="300px"></canvas>
-            <script>
-              const top10bar = document.getElementById('top10bar')
-              
-              // Obtain data from database
-              var top10cities = ['Pittsburg', 'San Francisco', 'Los Angeles', 'Oakland', 'New York', 'San Diego', 'Philadelphia', 'Washington', 'Chicago', 'Boston']
-              var top10values = [22, 20, 19, 12, 10, 9, 8, 7, 5, 3]
-              
-              var chart = new Chart(top10bar, {
-                type: 'bar',
-                data: {
-                  labels: top10cities,
-                  datasets: [
-                    {
-                      label: 'Top 10 Cleanest Cities',
-                      data: top10values,
-                      borderWidth: 1,
-                      backgroundColor: '#F4B947',
-                      borderColor: '#F6B73D'
-                    }
-                  ]
-                },
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  }
-                }
-              })
-            </script>
-            <figcaption>Figure 1: Top 10 Cleanest Cities</figcaption>
-          </figure>
+			<figure>
+				<canvas id="top10bar" width="400px" height="300px"></canvas>
+				<script>
+					const top10bar = document.getElementById('top10bar')
+				
+					// Obtain data from database
+					// var top10cities = ['Pittsburg', 'San Francisco', 'Los Angeles', 'Oakland', 'New York', 'San Diego', 'Philadelphia', 'Washington', 'Chicago', 'Boston']
+					// var top10values = [22, 20, 19, 12, 10, 9, 8, 7, 5, 3]
+    				var cityNames = [];
+					var totalAQIs = [];
+
+					// Iterate over top_cities
+					{% for city_id, city_name, total_aqi in top_cities %}
+						// Push city_name and total_aqi to their respective arrays
+						cityNames.push("{{ city_name }}");
+						totalAQIs.push({{ total_aqi }});
+					{% endfor %}
+					
+					var chart = new Chart(top10bar, {
+						type: 'bar',
+						data: {
+						labels: cityNames,
+						datasets: [{
+							label: 'Top 10 Cleanest Cities',
+							data: totalAQIs,
+							borderWidth: 1,
+							backgroundColor: '#F4B947',
+							borderColor: '#F4B947'
+						}]
+						},
+						options: {
+						scales: {
+							y: {
+							beginAtZero: true
+							}
+						}
+						}
+					})
+				</script>
+				<figcaption>Figure 1: Top 10 Cleanest Cities</figcaption>
+			</figure>
         </div>
         <div id="least10city">
-          <figure>
-            <canvas id="least10bar" width="400px" height="300px"></canvas>
-            <script>
-              const least10bar = document.getElementById('least10bar')
-              
-              // Obtain data from database
-              var least10cities = ['Pittsburg', 'San Francisco', 'Los Angeles', 'Oakland', 'New York', 'San Diego', 'Philadelphia', 'Washington', 'Chicago', 'Boston']
-              var least10values = [22, 20, 19, 12, 10, 9, 8, 7, 5, 3]
-              
-              var chart = new Chart(least10bar, {
-                type: 'bar',
-                data: {
-                  labels: least10cities,
-                  datasets: [
-                    {
-                      label: 'Least 10 Cleanest Cities',
-                      data: least10values,
-                      borderWidth: 1,
-                      backgroundColor: '#F4B947',
-                      borderColor: '#F6B73D'
-                    }
-                  ]
-                },
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  }
-                }
-              })
-            </script>
-            <figcaption>Figure 1: Least 10 Cleanest Cities</figcaption>
-          </figure>
+			<figure>
+				<canvas id="least10bar" width="400px" height="300px"></canvas>
+				<script>
+					const least10bar = document.getElementById('least10bar')
+				
+					// Obtain data from database
+					// var least10cities = ['Pittsburg', 'San Francisco', 'Los Angeles', 'Oakland', 'New York', 'San Diego', 'Philadelphia', 'Washington', 'Chicago', 'Boston']
+					// var least10values = [22, 20, 19, 12, 10, 9, 8, 7, 5, 3]
+
+					var cityNames = [];
+					var totalAQIs = [];
+
+					// Iterate over top_cities
+					{% for city_id, city_name, total_aqi in least_cities %}
+						// Push city_name and total_aqi to their respective arrays
+						cityNames.push("{{ city_name }}");
+						totalAQIs.push({{ total_aqi }});
+					{% endfor %}
+				
+					var chart = new Chart(least10bar, {
+						type: 'bar',
+						data: {
+						labels: cityNames,
+						datasets: [
+							{
+							label: 'Least 10 Cleanest Cities',
+							data: totalAQIs,
+							borderWidth: 1,
+							backgroundColor: '#3795AE',
+							borderColor: '#3795AE'
+							}
+						]
+						},
+						options: {
+						scales: {
+							y: {
+							beginAtZero: true
+							}
+						}
+						}
+					})
+				</script>
+				<figcaption>Figure 2: Least 10 Cleanest Cities</figcaption>
+			</figure>
         </div>
         <div id="aqi-population">
-          <figure>
-            <canvas id="scatter_AQI_pop" width="400px" height="300px"></canvas>
-            <script>
-              var ctx2 = document.getElementById('scatter_AQI_pop')
-              var aqi = [35, 60, 55, 50, 40, 40, 60]
-              var pop = [7000, 55000, 2500, 53000, 6000, 30000, 120000]
-              var city = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-              var myChart = new Chart(ctx2, {
-                type: 'scatter',
-                data: {
-                  labels: pop,
-                  datasets: [
-                    {
-                      label: 'Locations',
-                      data: aqi,
-                      backgroundColor: 'blue',
-                      pointBorderColor: 'black',
-                      radius: 5
-                    }
-                  ]
-                },
-                options: {
-                  scales: {
-                    x: {
-                      title: {
-                        display: true,
-                        text: 'Population at Location'
-                      }
-                    },
-                    y: {
-                      title: {
-                        display: true,
-                        text: 'Air Quality Index'
-                      }
-                    }
-                  }
-                }
-              })
-            </script>
-            <figcaption>Figure 3: AQI vs Population</figcaption>
-          </figure>
+			<figure>
+				<canvas id="scatter_AQI_pop" width="400px" height="300px"></canvas>
+				<script>
+					const ctx2 = document.getElementById('scatter_AQI_pop')
+					
+					// var aqi = [35, 60, 55, 50, 40, 40, 60]
+					// var pop = [7000, 55000, 2500, 53000, 6000, 30000, 120000]
+					// var city = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+					
+					var cityNames = [];
+					var cityPopulation = [];
+					var meanAQIs = [];
+
+					// Iterate over top_cities
+					{% for city_name, city_population, mean_aqi in aqi_population %}
+						// Push city_name, population and mean_aqi to their respective arrays
+						cityNames.push("{{ city_name }}");
+						cityPopulation.push({{ city_population }});
+						meanAQIs.push({{ mean_aqi }});
+					{% endfor %}
+
+					var myChart = new Chart(ctx2, {
+						type: 'scatter',
+						data: {
+						labels: cityPopulation,
+						datasets: [
+							{
+							label: cityNames,
+							data: meanAQIs,
+							backgroundColor: '#F560AB',
+							pointBorderColor: '#F560AB',
+							radius: 5
+							}
+						]
+						},
+						options: {
+						scales: {
+							x: {
+							title: {
+								display: true,
+								text: 'Population at Location'
+							}
+							},
+							y: {
+							title: {
+								display: true,
+								text: 'Air Quality Index'
+							}
+							}
+						}
+						}
+					})
+				</script>
+				<figcaption>Figure 3: AQI vs Population</figcaption>
+			</figure>
         </div>
-        <div id="pollutantRatio">
-          <figure>
-            <canvas id="pie_pollutant_ratio" height="300px"></canvas>
-            <script>
-              var ctx = document.getElementById('pie_pollutant_ratio')
-              var pol_ratio = [10000, 20000, 14000, 8000]
-              var myChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                  labels: ['O3', 'CO', 'SO2', 'NO2'],
-                  datasets: [
-                    {
-                      data: pol_ratio,
-                      backgroundColor: ['red', 'orange', 'yellow', 'green']
-                    }
-                  ]
-                }
-              })
-            </script>
-            <figcaption>Figure 4: Ratio Pollutants</figcaption>
-          </figure>
-        </div>
-      </div>
-      <div id="right">
-        <div id="comment">
-          <h1 style="font-size: 20px;">Comment</h1>
-          <div class="comment-section">
-            <p>That is a good graph</p>
-            <p>That is a good graph</p>
-          </div>
-        </div>
-        <div id="post-comment">
-          <h1 style="font-size: 20px;">Post Comment</h1>
-          <form class="comment-form" action="#" method="POST">
-            <input type="text" name="comment" placeholder="Write a comment.." /><br />
-            <button type="submit" class="login">Post</button>
-          </form>
-        </div>
-      </div>
+		<div id="pollutantRatio">
+			<figure>
+				<canvas id="pie_pollutant_ratio" height="300px"></canvas>
+				<script>
+					var ctx = document.getElementById('pie_pollutant_ratio')
+					// var pollutant_ratio = [10000, 20000, 14000, 8000]
+					var pollutant_ratio = [];
+
+					// Iterate over pollutant
+					{% for ratio in pollutant %}
+						// Push ratio to pollutant ratio
+						pollutant_ratio.push({{ ratio }});
+					{% endfor %}
+
+					var myChart = new Chart(ctx, {
+						type: 'pie',
+						data: {
+						labels: ['O3', 'CO', 'SO2', 'NO2'],
+						datasets: [
+							{
+							data: pollutant_ratio,
+							backgroundColor: ['#FF4C28', '#F39000', '#F0F300', '#27B450']
+							}
+						]
+					}
+				})
+				</script>
+				<figcaption>Figure 4: Ratio Pollutants</figcaption>
+			</figure>
+		</div>
+		</div>
+		<div id="right">
+			<div id="comment">
+			<h1 style="font-size: 20px;">Comment</h1>
+			<div class="comment-section">
+				<p>That is a good graph</p>
+				<p>That is a good graph</p>
+			</div>
+			</div>
+			<div id="post-comment">
+			<h1 style="font-size: 20px;">Post Comment</h1>
+			<form class="comment-form" action="#" method="POST">
+				<input type="text" name="comment" placeholder="Write a comment.." /><br />
+				<button type="submit" class="login">Post</button>
+			</form>
+			</div>
+		</div>
     </main>
     <div id="footer">
       <div id="wrapping">
