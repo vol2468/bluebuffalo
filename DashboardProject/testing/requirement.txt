@@ -1,1 +1,10 @@
-flasksqlite3flask_loginflask_sqlalchemyospandassqlalchemy.ormsqlalchemywerkzeug.securityjinja2unittest.mock
+flask==2.0.2
+sqlite3
+flask_login==0.5.0
+flask_sqlalchemy==2.5.2
+pandas==1.3.4
+sqlalchemy.orm
+sqlalchemy==1.4.27
+werkzeug==2.0.2
+jinja2==3.0.3
+unittest.mock
