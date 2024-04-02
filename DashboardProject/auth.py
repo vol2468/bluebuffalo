@@ -1,9 +1,8 @@
 from flask import render_template, request, Blueprint
-from DashboardProject.analysis import perform_analysis
-from DashboardProject.dashboard import get_top10_data, get_least10_data,\
-                                        get_pollutant_data, get_aqi_population
+from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean
+from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
 from DashboardProject.map import perform_map
-from DashboardProject.insert_comment import insert_comment
+from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
 
 auth = Blueprint('auth', __name__)
@@ -43,10 +42,37 @@ def map():
 def map_test():
     """"""
     return render_template('map_test.html')
+
+@auth.route('/latitude', methods=['GET', 'POST'])
+def latitude():
+    city = request.form.get('city')
+    latitude = get_latitude(city)
+    return latitude
+@auth.route('/longitude', methods=['GET', 'POST'])
+def longitude():
+    city = request.form.get('city')
+    longitude = get_longitude(city)
+    return longitude
+@auth.route('/analysisMean', methods=['GET', 'POST'])
+def analysis_mean():
+    city = request.form.get('city')
+    mean = get_mean_values(city)
+    return mean
+@auth.route('/analysisTotal', methods=['GET', 'POST'])
+def analysis_total():
+    city = request.form.get('city')
+    total = get_total_mean(city)
+    return total
+
+@auth.route('/insertComment', methods=['GET', 'POST'])
+def insertComment():
+    result = insert_comment()
+    return render_template('index.html')
+
 @auth.route('/analysis', methods=['GET', 'POST'])
-def call_compare():
-    """"""
-    result = perform_analysis()
+def analysis():
+    cityName = request.form.get('city')
+    result = perform_analysis(cityName)
     return result
 @auth.route('/test')
 def test():
@@ -75,8 +101,3 @@ def dashboard():
         return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
                                 aqi_population=aqi_population, pollutant=pollutant,\
                                   user_date=user_date)
-@auth.route('/insertComment', methods=['GET', 'POST'])
-def insertComment():
-    """"""
-    result = insert_comment()
-    return render_template('index.html')

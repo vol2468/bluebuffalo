@@ -9,6 +9,18 @@ h1{
     margin-bottom: 50px;
     margin-left: 30px;
 }
+#date{
+    font-size: 20px;
+}
+ul {
+    list-style-type: none;
+}
+#text{
+    margin-left: 20px;
+    padding: 20px;
+    border-bottom: solid 1pt black;
+    
+}
 #cityMap{
     display: inline-block;
     border: 1pt solid black;
@@ -22,7 +34,7 @@ h1{
     position: absolute;
     right: 60px;
     display: inline-block;
-    border: 1pt solid black;
+    /* border: 1pt solid black; */
     height: 300px;
     width: 800px;
     bottom: 450px;
@@ -48,9 +60,9 @@ h1{
 #comment{
     position: absolute;
     display: inline-block;
-    border: 1pt solid black;
+    /* border: 1pt solid black; */
     height: 250px;
-    width: 500px;
+    width: 450px;
     top: 330px;
     right: 0;
     font-size: 30px;
@@ -73,6 +85,7 @@ h1{
     border-radius: 5px;
     height: 100px;
     width: 250px;
+    margin-left: 50px;
 }
 
 #mapUS {
