@@ -10,28 +10,51 @@ var lowPin = L.icon({
     iconUrl: '../static/images/pin_low.png',
     iconSize: [25, 40]
 });
-
 var display_pins = [];
-const cityAQI = [];
 
-for (var i = 0; i < cityCoord.length / 4; i++) {
-    var cityId = cityCoord[i * 4];
-    var cityName = cityCoord[i * 4 + 1];
-    var lat = cityCoord[i * 4 + 2];
-    var long = cityCoord[i * 4 + 3];
+for (var i = 0; i < cityCoord.length / 5; i++) {
+    var cityId = cityCoord[i * 5];
+    var cityName = cityCoord[i * 5 + 1];
+    var lat = cityCoord[i * 5 + 2];
+    var long = cityCoord[i * 5 + 3];
+    var AQI = cityCoord[i * 5 + 4];
 
     var icon = highPin;
-    // if (AQI > 70) {
-    //     icon = highPin;
-    // }
-    // else if (AQI > 40) {
-    //     icon = medPin;
-    // }
-    // else {
-    //     icon = lowPin;
-    // }
+    if (AQI > 100) {
+        icon = lowPin;
+    }
+    else if (AQI > 50) {
+        icon = medPin;
+    }
+    else {
+        icon = highPin;
+    }
 
-    row = [cityName, lat, long, icon];
+    row = [cityName, lat, long, icon, AQI];
+    display_pins.push(row);
+}
+
+var display_pins = [];
+
+for (var i = 0; i < cityCoord.length / 5; i++) {
+    var cityId = cityCoord[i * 5];
+    var cityName = cityCoord[i * 5 + 1];
+    var lat = cityCoord[i * 5 + 2];
+    var long = cityCoord[i * 5 + 3];
+    var AQI = cityCoord[i * 5 + 4];
+
+    var icon = highPin;
+    if (AQI > 100) {
+        icon = lowPin;
+    }
+    else if (AQI > 50) {
+        icon = medPin;
+    }
+    else {
+        icon = highPin;
+    }
+
+    row = [cityName, lat, long, icon, AQI];
     display_pins.push(row);
 }
 
@@ -70,13 +93,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 for (var i = 0; i < display_pins.length; i++) {
     var cityName = display_pins[i][0];
-    lat = Number(display_pins[i][1]);
-    long = Number(display_pins[i][2]);
-    icon = display_pins[i][3]
+    var lat = Number(display_pins[i][1]);
+    var long = Number(display_pins[i][2]);
+    var icon = display_pins[i][3]
+    var aqi = display_pins[i][4]
 
     var marker = L.marker([lat, long], { icon: icon }).addTo(mapUS)
         .bindPopup(
-            '<div id="pin_content">' + cityName + '<br>('
+            '<div id="pin_content">' + cityName + ' [' + aqi + ']<br>('
             + lat + ', ' + long + ')</div>'
             + '<form action="analysis" method="post">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
@@ -87,7 +111,7 @@ for (var i = 0; i < display_pins.length; i++) {
         );
     var marker2 = L.marker([lat, long], { icon: icon }).addTo(mapAK)
         .bindPopup(
-            '<div id="pin_content">' + cityName + '<br>('
+            '<div id="pin_content">' + cityName + ' [' + aqi + ']<br>('
             + lat + ', ' + long + ')</div>'
             + '<form action="analysis" method="post">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
@@ -98,7 +122,7 @@ for (var i = 0; i < display_pins.length; i++) {
         );
     var marker3 = L.marker([lat, long], { icon: icon }).addTo(mapHI)
         .bindPopup(
-            '<div id="pin_content">' + cityName + '<br>('
+            '<div id="pin_content">' + cityName + ' [' + aqi + ']<br>('
             + lat + ', ' + long + ')</div>'
             + '<form action="analysis" method="post">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
