@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import Mock
-from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
+from DashboardProject.dashboard import get_top10_data, get_least10_data, get_aqi_population, get_pollutant_data
 from DashboardProject import create_app
 
 @pytest.fixture
@@ -96,34 +96,6 @@ def test_get_least10_data(mock_db_session):
     assert result[9] == (145, 'Rutland', 78)
 
 
-def test_get_pollutant_data(mock_db_session):
-    # Open an application context
-    app = create_app()
-    with app.app_context():
-        # Mock data for the query result
-        mock_query_result = [
-            (0.024198949367088607),
-            (0.29102832911392407),
-            (0.57803517721519),
-            (10.794540101265829),
-        ]
-
-        # Mock the return value of the query method
-        mock_db_session.query.return_value\
-                    .filter.return_value\
-                    .one.return_value = mock_query_result
-
-        # Call the function with the mock session
-        result = get_pollutant_data('2020-01-01')
-
-    # Assertions
-    assert len(result) == 4  # Check if the result contains 4 items
-    assert result[0] == (0.024198949367088607)
-    assert result[1] == (0.29102832911392407)
-    assert result[2] == (0.57803517721519)
-    assert result[3] == (10.794540101265829)
-
-
 def test_get_aqi_population(mock_db_session):
     # Open an application context
     app = create_app()
@@ -179,3 +151,31 @@ def test_get_aqi_population(mock_db_session):
     assert result[27] == ('St. Louis', '348,189', 14.5)
     assert result[28] == ('San Jose', '894,943', 14.25)
     assert result[29] == ('Tucson', '486,699', 14.0)
+
+
+def test_get_pollutant_data(mock_db_session):
+    # Open an application context
+    app = create_app()
+    with app.app_context():
+        # Mock data for the query result
+        mock_query_result = [
+            (0.024198949367088607),
+            (0.29102832911392407),
+            (0.57803517721519),
+            (10.794540101265829),
+        ]
+
+        # Mock the return value of the query method
+        mock_db_session.query.return_value\
+                    .filter.return_value\
+                    .one.return_value = mock_query_result
+
+        # Call the function with the mock session
+        result = get_pollutant_data('2020-01-01')
+
+    # Assertions
+    assert len(result) == 4  # Check if the result contains 4 items
+    assert result[0] == (0.024198949367088607)
+    assert result[1] == (0.29102832911392407)
+    assert result[2] == (0.57803517721519)
+    assert result[3] == (10.794540101265829)
