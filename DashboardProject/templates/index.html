@@ -33,7 +33,7 @@
 						{% else %} "2021-10-31" 
 						{% endif %} 
 				min="2000-01-01" max="2021-06-30" />
-			<input type="submit" value="select">
+			<input type="submit" value="Select">
         </form>
         <div id="top10city">
 			<figure>
@@ -142,7 +142,7 @@
 					{% for city_name, city_population, mean_aqi in aqi_population %}
 						// Push city_name, population and mean_aqi to their respective arrays
 						cityNames.push("{{ city_name }}");
-						cityPopulation.push({{ city_population }});
+						cityPopulation.push({{ city_population.replace(',', '') }});
 						meanAQIs.push({{ mean_aqi }});
 					{% endfor %}
 
@@ -178,7 +178,7 @@
 						}
 					})
 				</script>
-				<figcaption>Figure 3: AQI vs Population</figcaption>
+				<figcaption>Figure 3: Average AQI vs Population</figcaption>
 			</figure>
         </div>
 		<div id="pollutantRatio">
@@ -208,7 +208,7 @@
 					}
 				})
 				</script>
-				<figcaption>Figure 4: Ratio Pollutants</figcaption>
+				<figcaption>Figure 4: Average Ratio of Pollutants</figcaption>
 			</figure>
 		</div>
 		</div>
