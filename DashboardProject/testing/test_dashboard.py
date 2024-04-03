@@ -14,6 +14,50 @@ def test_get_top10_data(mock_db_session):
     with app.app_context():
         # Mock data for the query result
         mock_query_result = [
+            (5, 'Bethel Island', 62),
+            (96, 'Presque Isle', 64),
+            (82, 'Boston', 68),
+            (139, 'Londonderry', 68),
+            (109, 'Portland', 70),
+            (22, 'Capitan', 72),
+            (49, 'New York', 74),
+            (130, 'East Providence', 78),
+            (138, 'Grantsville', 78),
+            (145, 'Rutland', 78)
+        ]
+
+        # Mock the return value of the query method
+        mock_db_session.query.return_value\
+                        .join.return_value\
+                        .filter.return_value\
+                        .group_by.return_value\
+                        .order_by.return_value\
+                        .limit.return_value\
+                        .all.return_value = mock_query_result
+
+        # Call the function with the mock session
+        result = get_top10_data('2020-01-01')
+
+    # Assertions
+    assert len(result) == 10  # Check if the result contains 10 items
+    assert result[0] == (5, 'Bethel Island', 62)
+    assert result[1] == (96, 'Presque Isle', 64)
+    assert result[2] == (82, 'Boston', 68)
+    assert result[3] == (139, 'Londonderry', 68)
+    assert result[4] == (109, 'Portland', 70)
+    assert result[5] == (22, 'Capitan', 72)
+    assert result[6] == (49, 'New York', 74)
+    assert result[7] == (130, 'East Providence', 78)
+    assert result[8] == (138, 'Grantsville', 78)
+    assert result[9] == (145, 'Rutland', 78)
+
+
+def test_get_least10_data(mock_db_session):
+    # Open an application context
+    app = create_app()
+    with app.app_context():
+        # Mock data for the query result
+        mock_query_result = [
             (11, 'Los Angeles', 670),  # (city_id, city_name, total_aqi)
             (15, 'Rubidoux', 560),
             (132, 'Salt Lake City', 476),
@@ -36,7 +80,7 @@ def test_get_top10_data(mock_db_session):
                         .all.return_value = mock_query_result
 
         # Call the function with the mock session
-        result = get_top10_data('2020-01-01')
+        result = get_least10_data('2020-01-01')
 
     # Assertions
     assert len(result) == 10  # Check if the result contains 10 items
