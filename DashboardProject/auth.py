@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean
+from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean, get_prediction
 from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
 from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
@@ -63,6 +63,14 @@ def analysis_total():
     city = request.form.get('city')
     total = get_total_mean(city)
     return total
+
+@auth.route('/analysisPrediction', methods=['GET', 'POST'])
+def analysis_prediction():
+    city = request.form.get('city')
+    data = get_total_mean(city)
+    prediction = get_prediction(data)
+    prediction_list = prediction.tolist()
+    return prediction_list
 
 @auth.route('/insertComment', methods=['GET', 'POST'])
 def insertComment():
