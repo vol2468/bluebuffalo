@@ -1,4 +1,4 @@
-from flask import render_template, request, Blueprint
+from flask import render_template, request, Blueprint, redirect, url_for
 from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean
 from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
 from DashboardProject.map import perform_map
@@ -7,19 +7,34 @@ from DashboardProject.login import check_login
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/')
-def hello_world():  # put application's code here
+@auth.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
     """"""
-    return 'Hello World!'
+    if request.method == 'POST':
+        user_date = request.form['date']
+        top_cities = get_top10_data(user_date)
+        least_cities = get_least10_data(user_date)
+        pollutant = get_pollutant_data(user_date)
+        aqi_population = get_aqi_population(user_date)
+        return render_template('index.html', top_cities=top_cities, \
+                               least_cities=least_cities, aqi_population=aqi_population,\
+                                  pollutant=pollutant, user_date=user_date)
+    else:
+        user_date = "2020-01-01"
+        top_cities = get_top10_data(user_date)
+        least_cities = get_least10_data(user_date)
+        pollutant = get_pollutant_data(user_date)
+        aqi_population = get_aqi_population(user_date)
+        return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
+                                aqi_population=aqi_population, pollutant=pollutant,\
+                                  user_date=user_date)
+
 
 @auth.route('/header')
 def header():
     """"""
     return render_template("header.html")
-@auth.route('/index')
-def index():
-    """"""
-    return render_template("index.html")
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     """"""
@@ -74,30 +89,5 @@ def analysis():
     cityName = request.form.get('city')
     result = perform_analysis(cityName)
     return result
-@auth.route('/test')
-def test():
-    """"""
-    return render_template('test.html')
 
 
-@auth.route('/dashboard', methods=['GET', 'POST'])
-def dashboard():
-    """"""
-    if request.method == 'POST':
-        user_date = request.form['date']
-        top_cities = get_top10_data(user_date)
-        least_cities = get_least10_data(user_date)
-        pollutant = get_pollutant_data(user_date)
-        aqi_population = get_aqi_population(user_date)
-        return render_template('index.html', top_cities=top_cities, \
-                               least_cities=least_cities, aqi_population=aqi_population,\
-                                  pollutant=pollutant, user_date=user_date)
-    else:
-        user_date = "2020-01-01"
-        top_cities = get_top10_data(user_date)
-        least_cities = get_least10_data(user_date)
-        pollutant = get_pollutant_data(user_date)
-        aqi_population = get_aqi_population(user_date)
-        return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
-                                aqi_population=aqi_population, pollutant=pollutant,\
-                                  user_date=user_date)
