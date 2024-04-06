@@ -5,16 +5,40 @@ from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.login import check_login
 
+from DashboardProject.message import email_alert
+
 auth = Blueprint('auth', __name__)
 
+<<<<<<< Updated upstream
 @auth.route('/')
 def hello_world():  # put application's code here
     """"""
     return 'Hello World!'
+=======
+@auth.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    if request.method == 'POST':
+        user_date = request.form['date']
+        top_cities = get_top10_data(user_date)
+        least_cities = get_least10_data(user_date)
+        pollutant = get_pollutant_data(user_date)
+        aqi_population = get_aqi_population(user_date)
+        return render_template('index.html', top_cities=top_cities, \
+                               least_cities=least_cities, aqi_population=aqi_population,\
+                                  pollutant=pollutant, user_date=user_date)
+    else:
+        user_date = "2020-01-01"
+        top_cities = get_top10_data(user_date)
+        least_cities = get_least10_data(user_date)
+        pollutant = get_pollutant_data(user_date)
+        aqi_population = get_aqi_population(user_date)
+        return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
+                                aqi_population=aqi_population, pollutant=pollutant,\
+                                  user_date=user_date)
+>>>>>>> Stashed changes
 
 @auth.route('/header')
 def header():
-    """"""
     return render_template("header.html")
 @auth.route('/index')
 def index():
@@ -22,25 +46,24 @@ def index():
     return render_template("index.html")
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    """"""
     result = check_login()
     return result
+
 @auth.route('/newAccount')
 def newAccount():
-    """"""
     return render_template("newAccount.html")
+
 @auth.route('/accountSetting')
 def accountSetting():
-    """"""
     return render_template("accountSetting.html")
+
 @auth.route('/map', methods=['GET', 'POST'])
 def map():
-    """"""
     result = perform_map()
     return result
+
 @auth.route('/map_test')
 def map_test():
-    """"""
     return render_template('map_test.html')
 
 @auth.route('/latitude', methods=['GET', 'POST'])
@@ -48,21 +71,34 @@ def latitude():
     city = request.form.get('city')
     latitude = get_latitude(city)
     return latitude
+
 @auth.route('/longitude', methods=['GET', 'POST'])
 def longitude():
     city = request.form.get('city')
     longitude = get_longitude(city)
     return longitude
+
 @auth.route('/analysisMean', methods=['GET', 'POST'])
 def analysis_mean():
     city = request.form.get('city')
     mean = get_mean_values(city)
     return mean
+
 @auth.route('/analysisTotal', methods=['GET', 'POST'])
 def analysis_total():
     city = request.form.get('city')
     total = get_total_mean(city)
     return total
+
+@auth.route('/testMessage', methods=['GET', 'POST'])
+def testMessage():
+    recipient = request.form.get('email')
+    result = email_alert("Account Confirmation", "Thank you for creating an account! We're happy to have you here! Enjoy learning about Air Quality!", recipient)
+    return redirect(url_for('auth.dashboard'))
+
+@auth.route('/test', methods=['GET', 'POST'])
+def test():
+    return render_template('test.html')
 
 @auth.route('/insertComment', methods=['GET', 'POST'])
 def insertComment():
