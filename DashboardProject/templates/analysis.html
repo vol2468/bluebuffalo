@@ -15,15 +15,15 @@
     </head>
     
     <body>
+        <header>
+            <div>
+                <a href="dashboard" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
+                <a href="dashboard" id="dash">Dashboard</a>
+                <a href="map" id="map">Map</a>
+                <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
+            </div>
+        </header>
         <div class="wrapper">
-            <header>
-                <div>
-                    <a href="index" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-                    <a href="index" id="dash">Dashboard</a>
-                    <a href="map" id="map">Map</a>
-                    <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
-                </div>
-            </header>
             <h1>Analysis of {{city}}</h1>
             <div class="map" id="cityMap"></div>
             <script >
@@ -58,17 +58,12 @@
                                     labels: ['O3', 'CO', 'SO2', 'NO2'],
                                     datasets: [{
                                         data: mean,
-                                        backgroundColor: [
-                                            'red',
-                                            'orange',
-                                            'yellow',
-                                            'green',
-                                        ]
+                                        backgroundColor: ['#FF4C28', '#F39000', '#F0F300', '#27B450']
                                     }]
                                 },
                             });
                             </script>
-                    <p>(ppm)</p>
+                    <p id="title">◾️Mean values of major pollutants (ppm)</p>
                     <!-- <p>{{meanData}}</p> -->
                     </p>
                     <p id="time">
@@ -81,7 +76,7 @@
                               data: {
                                 labels: ['2000','2001','2002','2003','2004','2005','2006','2007', '2008','2009', '2010','2011','2012','2013','2014','2015', '2016','2017','2018','2019', '2020', '2021'], // x-axis
                                 datasets: [{
-                                  label: 'Green',
+                                  label: 'Average AQI',
                                   data: total,
                                   borderColor: '#484',
                                 },],
@@ -100,10 +95,11 @@
                             };
                             let lineChart = new Chart(lineCtx, lineConfig);
                         </script>
-                        0 = No Data
+                        ◾️Average AQI in each year<br>0 = No Data
                     </p>
                 <br><br>
-                <div id="posComment">
+                <div>
+                <div id="postComment">
                     <!-- <h1 style="font-size: 20px; margin-left: 0px;">Post Comment</h1> -->
                     <form class="comment-form" action="insertComment" method="POST">
                     <input type="hidden" name="city" value={{city}}>
@@ -117,15 +113,11 @@
                             <p id="date">{{ comments.commentDate }}</p>
                             <li id="text">{{ comments.commentText }}</li>
                         {% endfor %}
-                            <!-- {% for comments in comment %}
-                                <li id="text">{{ comments }}</li>
-                                {% for dates in date %}
-                                    <p id="date">{{dates}}</p>
-                                {% endfor %}
-                            {% endfor %} -->
                     </ul>
                 </div>
             </div>
+            </div>
+        </div>
             <footer>
                 <div>
                     <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
@@ -149,7 +141,6 @@
                     </div>
                 </div>
             </footer>
-        </div>
    </body>
   
 </html>

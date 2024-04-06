@@ -36,10 +36,7 @@ def dashboard():
 @auth.route('/header')
 def header():
     return render_template("header.html")
-@auth.route('/index')
-def index():
-    """"""
-    return render_template("index.html")
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     result = check_login()

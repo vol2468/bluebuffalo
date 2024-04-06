@@ -58,7 +58,7 @@ def get_total_mean(city_name):
                         .filter(Pollutant.date >= f'{year}-01-01', Pollutant.date < f'{year + 1}-01-01') \
                         .filter(Pollutant.cityId == city.cityId) \
                         .all()
-        sums = [row.O3Mean + row.COMean + row.SO2Mean + row.NO2Mean for row in rows]
+        sums = [row.O3AQI + row.COAQI + row.SO2AQI + row.NO2AQI for row in rows]
         mean_of_sums = sum(sums) / len(sums) if len(sums) > 0 else 0
         total_values_list.append(mean_of_sums)
 
@@ -68,5 +68,7 @@ def display_comment(city_name):
     city = City.query.filter_by(cityName=city_name).first()
     if city:
         comments = Comment.query.filter_by(cityId=city.cityId).all()
+        if not comments:
+            comments = [{"commentText":"Post your comments!"}]
         return comments
     return []
