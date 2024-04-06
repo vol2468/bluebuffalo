@@ -83,6 +83,14 @@ def analysis_total():
     total = get_total_mean(city)
     return total
 
+@auth.route('/analysisPrediction', methods=['GET', 'POST'])
+def analysis_prediction():
+    city = request.form.get('city')
+    data = get_total_mean(city)
+    prediction = get_prediction(data)
+    prediction_list = prediction.tolist()
+    return prediction_list
+
 @auth.route('/testMessage', methods=['GET', 'POST'])
 def testMessage():
     recipient = request.form.get('email')

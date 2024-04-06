@@ -70,30 +70,50 @@
                     <canvas id="graph" width="400px" height="250px"></canvas>
                         <script>
                             var total = JSON.parse('{{ total | safe }}');
-                            let lineCtx = document.getElementById("graph");
-                            let lineConfig = {
-                              type: 'line',
-                              data: {
-                                labels: ['2000','2001','2002','2003','2004','2005','2006','2007', '2008','2009', '2010','2011','2012','2013','2014','2015', '2016','2017','2018','2019', '2020', '2021'], // x-axis
-                                datasets: [{
-                                  label: 'Average AQI',
-                                  data: total,
-                                  borderColor: '#484',
-                                },],
-                              },
-                              options: {
-                                scales: {
-                                y: {
-                                    suggestedMin: 0,
-                                    suggestedMax: 30,
-                                    ticks: {
-                                      stepSize: 10,
+                            var futureData = JSON.parse('{{ futureVal | safe }}');
+                            var combined = total.concat(futureData);
+                            var lineCtx = document.getElementById("graph").getContext('2d');;
+                            var gradientStroke = lineCtx.createLinearGradient(500, 0, 230, 0);
+                            gradientStroke.addColorStop(0, "red");
+                            gradientStroke.addColorStop(.4, "red");
+                            gradientStroke.addColorStop(1.0, "#6bdbd2");
+
+                            var datasets = [{
+                                label: 'Actual',
+                                data: combined,
+                                fill: false,
+                                borderColor: gradientStroke,
+                                tension: 0.1
+                            }];
+
+                            var chartData = {
+                                labels: ['2000','2002','2004','2006', '2008', '2010','2012','2014', '2016','2018','2020',"2022","2024","2026","2028","2030"],
+                                datasets: datasets
+                            };
+
+                            var config = {
+                                type: 'line',
+                                data: chartData,
+                                options: {
+                                    scales: {
+                                        x: {
+                                            display: true,
+                                            title: {
+                                                display: true,
+                                                text: 'Year'
+                                            }
+                                        },
+                                        y: {
+                                            display: true,
+                                            title: {
+                                                display: true,
+                                                text: 'Value'
+                                            }
+                                        }
                                     }
                                 }
-                                },
-                              },
                             };
-                            let lineChart = new Chart(lineCtx, lineConfig);
+                            var myChart = new Chart(lineCtx, config);
                         </script>
                         ◾️Average AQI in each year<br>0 = No Data
                     </p>
