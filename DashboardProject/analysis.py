@@ -75,6 +75,8 @@ def display_comment(city_name):
     city = City.query.filter_by(cityName=city_name).first()
     if city:
         comments = Comment.query.filter_by(cityId=city.cityId).all()
+        if not comments:
+            comments = [{"commentText":"Post your comments!"}]
         return comments
     return []
 
