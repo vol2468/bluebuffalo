@@ -8,13 +8,10 @@ from DashboardProject.login import check_login
 from DashboardProject.message import email_alert
 
 auth = Blueprint('auth', __name__)
-
-<<<<<<< Updated upstream
 @auth.route('/')
 def hello_world():  # put application's code here
     """"""
     return 'Hello World!'
-=======
 @auth.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     if request.method == 'POST':
@@ -35,7 +32,6 @@ def dashboard():
         return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
                                 aqi_population=aqi_population, pollutant=pollutant,\
                                   user_date=user_date)
->>>>>>> Stashed changes
 
 @auth.route('/header')
 def header():
