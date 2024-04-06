@@ -71,7 +71,7 @@ def get_total_mean(city_name):
 
     return total_values_list
 
-def display_comment(city_name):
+def display_comment_analysis(city_name):
     city = City.query.filter_by(cityName=city_name).first()
     if city:
         comments = Comment.query.filter_by(cityId=city.cityId).all()

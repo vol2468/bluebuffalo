@@ -1,8 +1,9 @@
 from flask import render_template, request, Blueprint, redirect, url_for
-from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean
+from DashboardProject.analysis import perform_analysis, get_latitude, get_longitude, get_mean_values, get_total_mean, get_prediction
 from DashboardProject.dashboard import get_top10_data, get_least10_data, get_pollutant_data, get_aqi_population
 from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
+from DashboardProject.displayIndexComment import display_comment_index
 from DashboardProject.login import check_login
 
 from DashboardProject.message import email_alert
@@ -20,18 +21,20 @@ def dashboard():
         least_cities = get_least10_data(user_date)
         pollutant = get_pollutant_data(user_date)
         aqi_population = get_aqi_population(user_date)
+        comment = display_comment_index(user_date)
         return render_template('index.html', top_cities=top_cities, \
                                least_cities=least_cities, aqi_population=aqi_population,\
-                                  pollutant=pollutant, user_date=user_date)
+                                  pollutant=pollutant, user_date=user_date, comments=comment)
     else:
         user_date = "2020-01-01"
         top_cities = get_top10_data(user_date)
         least_cities = get_least10_data(user_date)
         pollutant = get_pollutant_data(user_date)
         aqi_population = get_aqi_population(user_date)
+        comment = display_comment_index(user_date)
         return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
                                 aqi_population=aqi_population, pollutant=pollutant,\
-                                  user_date=user_date)
+                                  user_date=user_date, comments=comment)
 
 @auth.route('/header')
 def header():
@@ -104,7 +107,7 @@ def test():
 @auth.route('/insertComment', methods=['GET', 'POST'])
 def insertComment():
     result = insert_comment()
-    return render_template('index.html')
+    return redirect(url_for('auth.dashboard'))
 
 @auth.route('/analysis', methods=['GET', 'POST'])
 def analysis():
