@@ -57,7 +57,7 @@ def insert_data_from_csv():
     session = Session()
 
     try:
-        for row in df.iterrows():
+        for index, row in df.iterrows():
             # Create City record if it doesn't exist
             city = City.query.filter_by(cityName=row['City']).first()
             if not city:
@@ -69,7 +69,7 @@ def insert_data_from_csv():
                 session.commit()
             city_id = city.cityId
 
-            date_obj = datetime.strptime(row['Date'], '%Y-%m-%d')
+            date_obj = datetime.strptime(row['Date'], '%m/%d/%Y')
             # Create Pollutant record
             pollutant_record = Pollutant(
                 cityId=city_id,
