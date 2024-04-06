@@ -10,9 +10,21 @@ h1 {
 #calendar {
     position: absolute;
     top: 170px;
-    left: 800px;
+    left: 770px;
     font-size: 20px;
 }
+
+#calendar input {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#calendar input[type=submit] {
+    border: 2px solid #6DBDB2;
+    border-radius: 0.3em;
+    background-color: white;
+    padding: 0 0.2em 0 0.2em;
+}
+
 #dbd {
     border-bottom: solid 3px black;
 }
