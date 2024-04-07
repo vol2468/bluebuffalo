@@ -1,26 +1,26 @@
-h1 {
+#map-page h1 {
     position: absolute;
     top: 13%;
     font-size: 40px;
     left: 2%;
+    border-bottom: 3px solid black;
 }
 
-footer {
-    position: absolute;
-    bottom: -15%;
+#map-page {
+    min-height: 730px;
 }
 
-#mapUS {
+#map-page #mapUS {
     height: 73%;
     width: 64%;
     border: gray solid;
     position: absolute;
     right: 2%;
     top: 22%;
+    z-index: 1;
 }
 
-#mapHI,
-#mapAK {
+#map-page #mapHI, #map-page #mapAK {
     height: 35%;
     width: 30%;
     border: gray solid;
@@ -29,10 +29,10 @@ footer {
     top: 22%;
 }
 
-#mapHI {
+#map-page #mapHI {
     top: 60%;
 }
 
-#pin_content {
+#map-page #pin_content {
     text-align: center;
 }
