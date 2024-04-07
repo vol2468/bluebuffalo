@@ -100,8 +100,8 @@ for (var i = 0; i < display_pins.length; i++) {
 
     var marker = L.marker([lat, long], { icon: icon }).addTo(mapUS)
         .bindPopup(
-            '<div id="pin_content">' + cityName + ' [' + aqi + ']<br>('
-            + lat + ', ' + long + ')</div>'
+            '<div id="pin_content"><b>' + cityName + '</b><br>AQI: ' + aqi + '<br>('
+            + lat.toFixed(2) + ', ' + long.toFixed(2) + ')</div>'
             + '<form action="analysis" method="post">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
             + '<input type="hidden" value="' + lat + '" name="latitude">'
@@ -111,8 +111,8 @@ for (var i = 0; i < display_pins.length; i++) {
         );
     var marker2 = L.marker([lat, long], { icon: icon }).addTo(mapAK)
         .bindPopup(
-            '<div id="pin_content">' + cityName + ' [' + aqi + ']<br>('
-            + lat + ', ' + long + ')</div>'
+            '<div id="pin_content"><b>' + cityName + '</b><br>AQI: ' + aqi + '<br>('
+            + lat.toFixed(2) + ', ' + long.toFixed(2) + ')</div>'
             + '<form action="analysis" method="post">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
             + '<input type="hidden" value="' + lat + '" name="latitude">'
@@ -122,8 +122,8 @@ for (var i = 0; i < display_pins.length; i++) {
         );
     var marker3 = L.marker([lat, long], { icon: icon }).addTo(mapHI)
         .bindPopup(
-            '<div id="pin_content">' + cityName + ' [' + aqi + ']<br>('
-            + lat + ', ' + long + ')</div>'
+            '<div id="pin_content"><b>' + cityName + '</b><br>AQI: ' + aqi + '<br>('
+            + lat.toFixed(2)+ ', ' + long.toFixed(2) + ')</div>'
             + '<form action="analysis" method="post">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
             + '<input type="hidden" value="' + lat + '" name="latitude">'
