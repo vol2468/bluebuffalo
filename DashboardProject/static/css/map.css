@@ -1,10 +1,13 @@
-h1 {
+#map-page h1 {
     position: absolute;
     top: 13%;
     font-size: 40px;
     left: 2%;
+    border-bottom: 3px solid black;
 }
-
+#map-page {
+    min-height: 730px;
+}
 footer {
     position: absolute;
     bottom: -15%;

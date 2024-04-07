@@ -1,61 +1,22 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Create Account</title>
-        <link rel="stylesheet" href="../static/css/reset.css" />
-        <link rel="stylesheet" href="../static/css/newAccount.css" />
-        <link rel="stylesheet" href="../static/css/header.css" />
-        <script src="../static/js/newAccount.js"></script>
-    </head>
-    <body>
-        <div class="wrapper">
-            <header>
-                <div>
-                    <a href="dashboard" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-                    <a href="dashboard" id="dash">Dashboard</a>
-                    <a href="map" id="map">Map</a>
-                    <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
-                </div>
-            </header>
-            <h1>Create Your BlueBuffalo Account!</h1>
-            <div class="fields">
-                <form action="accountSetting" id='register-form' method="POST">
-                    <input type="text" id="fname" placeholder="First Name">
-                    <input type="text" id="lname" placeholder="Last Name"><br>
-                    <input type="email" id="regEmail" placeholder="Email Address"><br>
-                    <input type="password" id="pass1" placeholder="Password"><br>
-                    <input type="password" id="pass2" placeholder="Confirm Password"><br>
-                    <!-- <input type="button" id="signup" onclick="submitFunction()" value="Sign Up"> -->
-                    <button type="submit" class="sign-up">Sign Up</button>
-                </form>
-            </div>
-            <div id="login">Already have an account?
-                <a id='log' href="login">Login</a>
-            </div>
-            <footer>
-                <div>
-                    <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
-                    <nav id="navigate">
-                        <a href="#" id="policy">Privacy Policy</a> |
-                        <a href="#" id="cookies">Use of Cookies</a> |
-                        <a href="#" id="use">Term of Use</a> |
-                    </nav>
-                    <div id="info">
-                        <p><strong>Blue Buffalo Office</strong></p>
-                        <div id="address">
-                            <p>3333 University Way</p>
-                            <p>Kelowna, BC</p>
-                            <p>V1V 1V7</p>
-                        </div>
-    
-                    </div>
-                    <div id="contact">
-                        <p><strong>Contact Us</strong></p>
-                        <p id="email">bluebuffalo@ubc.ca</p>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Create Account{% endblock %}
+
+{% block content %}
+<main id="new-account">
+    <h1>Create Your BlueBuffalo Account!</h1>
+    <div class="fields">
+        <form action="accountSetting" id='register-form' method="POST">
+            <input type="text" id="fname" placeholder="First Name">
+            <input type="text" id="lname" placeholder="Last Name"><br>
+            <input type="email" id="regEmail" placeholder="Email Address"><br>
+            <input type="password" id="pass1" placeholder="Password"><br>
+            <input type="password" id="pass2" placeholder="Confirm Password"><br>
+            <button type="submit" class="sign-up">Sign Up</button>
+        </form>
+    </div>
+    <div id="login">Already have an account?
+        <a id='log' href="login">Login</a>
+    </div>
+</main>
+{% endblock %}

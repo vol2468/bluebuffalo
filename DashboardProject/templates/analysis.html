@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Analysis</title>
-        <link rel="stylesheet" href="../static/css/analysis.css" />
-        <link rel="stylesheet" href="../static/css/header.css" />
-        <link rel="stylesheet" href="../static/css/reset.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    </head>
-    
-    <body>
-        <header>
-            <div>
-                <a href="dashboard" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-                <a href="dashboard" id="dash">Dashboard</a>
-                <a href="map" id="map">Map</a>
-                <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
-            </div>
-        </header>
+{% extends "base.html" %}
+
+{% block title %}Analysis{% endblock %}
+
+{% block content %}
+    <main id="analysis-page">
         <div class="wrapper">
             <h1>Analysis of {{city}}</h1>
             <div class="map" id="cityMap"></div>
@@ -46,121 +27,95 @@
             });
             </script>
             <div id="left">
-                
-                    <p id="chart">
-                        <canvas id="pie" width="300px" height="250px"></canvas>
-                            <script>
-                                var mean = JSON.parse('{{ meanData | safe }}');
-                                var ctx = document.getElementById('pie');
-                                var myChart = new Chart(ctx, {
-                                type: 'pie',
-                                data: {
-                                    labels: ['O3', 'CO', 'SO2', 'NO2'],
-                                    datasets: [{
-                                        data: mean,
-                                        backgroundColor: ['#FF4C28', '#F39000', '#F0F300', '#27B450']
-                                    }]
-                                },
-                            });
-                            </script>
-                    <p id="title">◾️Mean values of major pollutants (ppm)</p>
-                    <!-- <p>{{meanData}}</p> -->
-                    </p>
-                    <p id="time">
-                    <canvas id="graph" width="400px" height="250px"></canvas>
+                <p id="chart">
+                    <canvas id="pie" width="300px" height="250px"></canvas>
                         <script>
-                            var total = JSON.parse('{{ total | safe }}');
-                            var futureData = JSON.parse('{{ futureVal | safe }}');
-                            var combined = total.concat(futureData);
-                            var lineCtx = document.getElementById("graph").getContext('2d');;
-                            var gradientStroke = lineCtx.createLinearGradient(500, 0, 230, 0);
-                            gradientStroke.addColorStop(0, "red");
-                            gradientStroke.addColorStop(.4, "red");
-                            gradientStroke.addColorStop(1.0, "#6bdbd2");
+                            var mean = JSON.parse('{{ meanData | safe }}');
+                            var ctx = document.getElementById('pie');
+                            var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['O3', 'CO', 'SO2', 'NO2'],
+                                datasets: [{
+                                    data: mean,
+                                    backgroundColor: ['#FF4C28', '#F39000', '#F0F300', '#27B450']
+                                }]
+                            },
+                        });
+                        </script>
+                <p id="title">◾️Mean values of major pollutants (ppm)</p>
+                </p>
+                <p id="time">
+                <canvas id="graph" width="400px" height="250px"></canvas>
+                    <script>
+                        var total = JSON.parse('{{ total | safe }}');
+                        var futureData = JSON.parse('{{ futureVal | safe }}');
+                        var combined = total.concat(futureData);
+                        var lineCtx = document.getElementById("graph").getContext('2d');;
+                        var gradientStroke = lineCtx.createLinearGradient(500, 0, 230, 0);
+                        gradientStroke.addColorStop(0, "red");
+                        gradientStroke.addColorStop(.4, "red");
+                        gradientStroke.addColorStop(1.0, "#6bdbd2");
 
-                            var datasets = [{
-                                label: 'Actual',
-                                data: combined,
-                                fill: false,
-                                borderColor: gradientStroke,
-                                tension: 0.1
-                            }];
+                        var datasets = [{
+                            label: 'Actual',
+                            data: combined,
+                            fill: false,
+                            borderColor: gradientStroke,
+                            tension: 0.1
+                        }];
 
-                            var chartData = {
-                                labels: ['2000','2002','2004','2006', '2008', '2010','2012','2014', '2016','2018','2020',"2022","2024","2026","2028","2030"],
-                                datasets: datasets
-                            };
+                        var chartData = {
+                            labels: ['2000','2002','2004','2006', '2008', '2010','2012','2014', '2016','2018','2020',"2022","2024","2026","2028","2030"],
+                            datasets: datasets
+                        };
 
-                            var config = {
-                                type: 'line',
-                                data: chartData,
-                                options: {
-                                    scales: {
-                                        x: {
+                        var config = {
+                            type: 'line',
+                            data: chartData,
+                            options: {
+                                scales: {
+                                    x: {
+                                        display: true,
+                                        title: {
                                             display: true,
-                                            title: {
-                                                display: true,
-                                                text: 'Year'
-                                            }
-                                        },
-                                        y: {
+                                            text: 'Year'
+                                        }
+                                    },
+                                    y: {
+                                        display: true,
+                                        title: {
                                             display: true,
-                                            title: {
-                                                display: true,
-                                                text: 'Value'
-                                            }
+                                            text: 'Value'
                                         }
                                     }
                                 }
-                            };
-                            var myChart = new Chart(lineCtx, config);
-                        </script>
-                        ◾️Average AQI in each year<br>0 = No Data
-                    </p>
+                            }
+                        };
+                        var myChart = new Chart(lineCtx, config);
+                    </script>
+                    ◾️Average AQI in each year<br>0 = No Data
+                </p>
                 <br><br>
                 <div>
-                <div id="postComment">
-                    <!-- <h1 style="font-size: 20px; margin-left: 0px;">Post Comment</h1> -->
-                    <form class="comment-form" action="insertComment" method="POST">
-                    <input type="hidden" name="city" value={{city}}>
-                    <input type="text" name="comment" id="commentText"placeholder="Write a comment"><br><br>
-                    <button type="submit" id="postButton">Post</button>
-                    </form>
+                    <div id="postComment">
+                        <form class="comment-form" action="insertComment" method="POST">
+                        <input type="hidden" name="city" value={{city}}>
+                        <input type="hidden" name="pageType" value="analysis">
+                        <input type="text" name="comment" id="commentText"placeholder="Write a comment"><br><br>
+                        <button type="submit" id="postButton">Post</button>
+                        </form>
+                    </div>
+                    <div id="comment">
+                        <ul>
+                            {% for comments in comment %}
+                                <p id="date">{{ comments.commentDate }}</p>
+                                <li id="text">{{ comments.commentText }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
-                <div id="comment">
-                    <ul>
-                        {% for comments in comment %}
-                            <p id="date">{{ comments.commentDate }}</p>
-                            <li id="text">{{ comments.commentText }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
             </div>
         </div>
-            <footer>
-                <div>
-                    <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
-                    <nav id="navigate">
-                        <a href="#" id="policy">Privacy Policy</a> |
-                        <a href="#" id="cookies">Use of Cookies</a> |
-                        <a href="#" id="use">Term of Use</a> |
-                    </nav>
-                    <div id="info">
-                        <p><strong>Blue Buffalo Office</strong></p>
-                        <div id="address">
-                            <p>3333 University Way</p>
-                            <p>Kelowna, BC</p>
-                            <p>V1V 1V7</p>
-                        </div>
-                        
-                    </div>
-                    <div id="contact">
-                        <p><strong>Contact Us</strong></p>
-                        <p id="email">bluebuffalo@ubc.ca</p>
-                    </div>
-                </div>
-            </footer>
-   </body>
-  
-</html>
+    </main>
+{% endblock %}
