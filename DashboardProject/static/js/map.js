@@ -72,7 +72,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // AK 
 var mapAK = L.map('mapAK', {
     center: [64, -154],
-    zoom: 3
+    zoom: 4
 });
 mapAK.setMaxBounds(mapAK.getBounds());
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
