@@ -1,70 +1,19 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="utf-8">
-      <title>Log in</title>
-      <link rel="stylesheet" href="../static/css/login.css" />
-      <link rel="stylesheet" href="../static/css/reset.css" />
-      <link rel="stylesheet" href="../static/css/header.css" />
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   </head>
-   <body>
-      <div class="wrapper">
-         <header>
-            <div>
-                <a href="dashboard" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-                <a href="dashboard" id="dash">Dashboard</a>
-                <a href="map" id="map">Map</a>
-                <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
-            </div>
-            <div class="dropdown">
-               <a id="user" href="login">
-                  <img alt="Profile" src="../../static/images/defaultPic.png" height="50px">
-               </a>
-               <div class="dropdown-content">
-                  <a href="login">Login</a>
-                  <a href="newAccount">Create Account</a>
-                  <a href="accountSetting">Account Settings</a>
-                  <a href="#">Logout</a>
-               </div>
-            </div>
-         </header>
-         
-         <h1>Log into your BlueBuffalo Account</h1>
-         <div class="fields">
-            <form id="login-form" action="#" method="POST">
-               <input type="email" id="logEmail" name="email" placeholder="Email Address" required><br>
-               <input type="password" id="logPassword" name="password" placeholder="Password" required><br>
-               <button type="submit" class="login">Login</button>
-            </form>
-         </div>
-         <nav id="reset">
-            <p>Forgot password? <a class="forgot" href="accountSetting">Reset Password</a><br>
-            <!-- <a class="sign-up-link" href="register.html">Or Register Here</a></p> -->
-         </nav>
-      </div>
-      <footer>
-         <div>
-         <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
-         <nav id="navigate">
-            <a href="#" id="policy">Privacy Policy</a> |
-            <a href="#" id="cookies">Use of Cookies</a> |
-            <a href="#" id="use">Term of Use</a> |
-         </nav>
-         <div id="info">
-            <p><strong>Blue Buffalo Office</strong></p>
-            <div id="address">
-               <p>3333 University Way</p>
-               <p>Kelowna, BC</p>
-               <p>V1V 1V7</p>
-            </div>
-         </div>
-         <div id="contact">
-            <p><strong>Contact Us</strong></p>
-            <p id="email">bluebuffalo54321@gmail.com</p>
-         </div>
-         </div>
-      </footer>
-   </body>
-   
-</html>
+{% extends "base.html" %}
+
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+	<main id="login-page">
+			<h1>Log into your BlueBuffalo Account</h1>
+		<div class="fields">
+			<form id="login-form" action="#" method="POST">
+				<input type="email" id="logEmail" name="email" placeholder="Email Address" required><br>
+				<input type="password" id="logPassword" name="password" placeholder="Password" required><br>
+				<button type="submit" class="login">Login</button>
+			</form>
+		</div>
+		<nav id="reset">
+		<p>Forgot password? <a class="forgot" href="accountSetting">Reset Password </a>or <a class="sign-up-link" href="newAccount">Register Here</a></p>
+		</nav>
+	</main>
+{% endblock %}
