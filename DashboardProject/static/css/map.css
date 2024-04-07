@@ -36,7 +36,7 @@ footer {
     width: 30%;
 }
 
-#mapUS {
+#map-page #mapUS {
     height: 73%;
     width: 55%;
     border: gray solid;
@@ -45,8 +45,7 @@ footer {
     top: 22%;
 }
 
-#mapHI,
-#mapAK {
+#map-page #mapHI, #map-page #mapAK {
     height: 35%;
     width: 25%;
     border: gray solid;
@@ -55,10 +54,10 @@ footer {
     top: 22%;
 }
 
-#mapHI {
+#map-page #mapHI {
     top: 60%;
 }
 
-#pin_content {
+#map-page #pin_content {
     text-align: center;
 }

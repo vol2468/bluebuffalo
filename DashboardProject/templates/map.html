@@ -27,6 +27,8 @@
         </div>
         </header>
     </div>
+    {% block content %}
+    <main id="map-page">
     <h1 id="dbd">Air Quality on US Map</h1>
     <div id="legend">
         <h2>Legend</h2><br><br>
@@ -47,7 +49,8 @@
         const cityCoord = {{ cityList|safe }};
     </script>
     <script src="../static/js/map.js"></script>
-
+    <main>
+        {% endblock %}
     <div id="footer">
         <div id="wrapping">
         <footer>
