@@ -1,24 +1,24 @@
-main {
+#index-page {
     margin: 1.5em;
     height: 800px;
 }
 
-h1 {
+#index-page h1 {
     font-size: 50px;
 }
 
-#calendar {
+#index-page #calendar {
     position: absolute;
     top: 160px;
     left: 740px;
     font-size: 20px;
 }
 
-#calendar input {
+#index-page #calendar input {
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#calendar input[type=submit] {
+#index-page #calendar input[type=submit] {
     border: 2px solid #6DBDB2;
     border-radius: 0.3em;
     background-color: white;
@@ -26,13 +26,15 @@ h1 {
 
 }
 
-#dbd {
+#index-page #dbd {
     border-bottom: solid 3px black;
 }
-#commentDate{
+
+#index-page #commentDate{
     font-size: 20px;
 }
-#comment{
+
+#index-page #comment{
     position: absolute;
     display: inline-block;
     height: 250px;
@@ -42,55 +44,55 @@ h1 {
     font-size: 30px;
     overflow-y: auto;
 }
-#postButton{
+#index-page #postButton{
     background-color: pink;
     border-radius: 5px;
     padding: 7px;
     margin-left: 200px;
 }
-#commentText{
+#index-page #commentText{
     border: 1pt solid black;
     border-radius: 5px;
     height: 100px;
     width: 250px;
     margin-top: 450px;
 }
-#text{
+#index-page #text{
     margin-left: 20px;
     padding: 20px;
     border-bottom: solid 1pt black;
 }
-ul {
+#index-page ul {
     list-style-type: none;
 }
-#dashboard {
+#index-page #dashboard {
     float: left;
     width: 950px;
     padding-left: 70px;
     padding-top: 2em;
 }
 
-#top10city {
+#index-page #top10city {
     float: left;
     margin: 1em;
 }
 
-#least10city {
+#index-page #least10city {
     float: left;
     margin: 1em;
 }
 
-#pollutantRatio {
+#index-page #pollutantRatio {
     float: left;
     margin: 1em;
 }
 
-#aqi-population {
+#index-page #aqi-population {
     float: left;
     margin: 1em;
 }
 
-#right {
+#index-page #right {
     float: right;
     width: 200px;
     padding-right: 150px;
