@@ -217,19 +217,23 @@
 		</div>
 		</div>
 		<div id="right">
+			<div id="postComment">
+				<!-- <h1 style="font-size: 20px; margin-left: 0px;">Post Comment</h1> -->
+				<form class="comment-form" action="insertComment" method="POST">
+				<input type="hidden" name="city" value={{city}}>
+				<input type="hidden" name="pageType" value="index">
+				<input type="hidden" name="date" value={{user_date}}>
+				<input type="text" name="comment" id="commentText"placeholder="Write a comment"><br><br>
+				<button type="submit" id="postButton">Post</button>
+				</form>
+			</div>
 			<div id="comment">
-			<h1 style="font-size: 20px;">Comment</h1>
-			<div class="comment-section">
-				<p>That is a good graph</p>
-				<p>That is a good graph</p>
-			</div>
-			</div>
-			<div id="post-comment">
-			<h1 style="font-size: 20px;">Post Comment</h1>
-			<form class="comment-form" action="#" method="POST">
-				<input type="text" name="comment" placeholder="Write a comment.." /><br />
-				<button type="submit" class="login">Post</button>
-			</form>
+				<ul>
+					{% for comment in comments %}
+						<p id="commentDate">{{ comment.commentDate }}</p>
+						<li id="text">{{ comment.commentText }}</li>
+					{% endfor %}
+				</ul>
 			</div>
 		</div>
     </main>
