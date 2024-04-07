@@ -19,12 +19,23 @@
 <body>
     <div id="header">
         <header>
-        <div>
-            <a href="dashboard" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-            <a href="dashboard" id="dash">Dashboard</a>
-            <a href="map" id="map">Map</a>
-            <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
-        </div>
+            <div>
+                <a href="dashboard" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
+                <a href="dashboard" id="dash">Dashboard</a>
+                <a href="map" id="map">Map</a>
+                <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
+            </div>
+            <div class="dropdown">
+                <a id="user" href="login">
+                    <img alt="Profile" src="../../static/images/defaultPic.png" height="50px">
+                </a>
+                <div class="dropdown-content">
+                    <a href="login">Login</a>
+                    <a href="newAccount">Create Account</a>
+                    <a href="accountSetting">Account Settings</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
         </header>
     </div>
     <h1 id="dbd">Air Quality on US Map</h1>
