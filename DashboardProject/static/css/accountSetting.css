@@ -1,4 +1,4 @@
-#title{
+#account-setting #title {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7,18 +7,22 @@
     margin-left: 13em;
     margin-top: 1em;
 }
-#logout{
+
+#account-setting #logout {
     color: #6BDBD2;
 }
-h1{
+
+#account-setting h1 {
     font-size: 3em;
 }
-#greeting{
+
+#account-setting #greeting {
     text-align: center;
     margin-top: 0.5em;
     padding-bottom: 40px;
 }
-#edit{
+
+#account-setting #edit {
     /* margin-left: 500px; */
     border: 1pt solid black;
     display: inline-block;
@@ -30,21 +34,25 @@ h1{
     border-radius: 5px;
     color: black;
 }
-#firstname,#newpass{
+
+#account-setting #firstname, #account-setting #newpass {
     margin-right: 10px;
 }
-#email-password{
+
+#account-setting #email-password {
     float: left;
     margin-left: 382px;
     padding-top: 3px;
     margin-top: 30px;
 }
-#curremail{
+
+#account-setting #curremail {
     margin-top: 0;
     margin-left: 0;
     margin-bottom: 40px;
 }
-#userPic{
+
+#account-setting #userPic {
     clear: left;
     margin-right: 350px;
     margin-top: 5px;
@@ -53,16 +61,19 @@ h1{
     border-radius: 50%;
     object-fit: cover;
 }
-input{
+
+#account-setting input {
     border: 1pt solid black;
     border-radius: 1em;
     padding: 1em;
     padding-right: 10em;
 }
-#form{
+
+#account-setting #form {
     text-align: center;
 }
-#save{
+
+#account-setting #save {
     border: 1px solid black;
     padding: 1em;
     margin: 1em;
@@ -75,7 +86,8 @@ input{
     margin-top: 2em;
     margin-bottom: 2em;
 } 
-#us{
+
+#account-setting #us {
     text-align: right;
     margin-right: 55px;
 } 
