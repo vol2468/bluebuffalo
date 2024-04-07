@@ -29,7 +29,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    #create_database(app)
+    create_database(app)
 
     return app
 
@@ -48,7 +48,7 @@ def insert_data_from_csv():
     """"""
     from .models import City, Pollutant
     # Read data from your CSV file (adjust the filename as needed)
-    csv_filename = r'/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv'
+    csv_filename = r'/Users/karen/Documents/GitHub/bluebuffalo/data/processed/pollution.csv'
 
     df = pd.read_csv(csv_filename)
 
@@ -57,7 +57,7 @@ def insert_data_from_csv():
     session = Session()
 
     try:
-        for row in df.iterrows():
+        for index, row in df.iterrows():
             # Create City record if it doesn't exist
             city = City.query.filter_by(cityName=row['City']).first()
             if not city:
@@ -69,7 +69,7 @@ def insert_data_from_csv():
                 session.commit()
             city_id = city.cityId
 
-            date_obj = datetime.strptime(row['Date'], '%Y-%m-%d')
+            date_obj = datetime.strptime(row['Date'], '%m/%d/%Y')
             # Create Pollutant record
             pollutant_record = Pollutant(
                 cityId=city_id,
