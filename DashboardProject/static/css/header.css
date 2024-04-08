@@ -24,6 +24,19 @@ header a {
     color: black;
 }
 
+#title {
+    padding-left: 2em;
+    text-align: center;
+    font-size: 3em;
+}
+
+#title span {
+    position: absolute;
+    top: 30px;
+    padding: 0 0 0 0.5em;
+    font-size: 20px;
+}
+
 #policy {
     color: black;
     padding-right: 10px;
