@@ -27,8 +27,7 @@
 #analysis-page #text {
     margin-left: 20px;
     padding: 20px;
-    border-bottom: solid 1pt black;
-    
+    border-bottom: solid 2pt #90BDE2;
 }
 
 #analysis-page #cityMap {
@@ -69,7 +68,7 @@
     position: absolute;
     display: inline-block;
     border-radius: 10px;
-    box-shadow: 10px 5px 5px #6bdbd2;
+    box-shadow: 10px 5px 5px #6BDBD2;
     width: 550px;
     top: 25px;
     right: 0px;
@@ -99,16 +98,23 @@
 #analysis-page #postButton {
     background-color: pink;
     border-radius: 5px;
-    padding: 7px;
-    margin-left: 300px;
-    
+    padding: 0.5em 2em 0.5em 2em;
+    margin-left: 255px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 #analysis-page #commentText {
-    border: 1pt solid black;
+    /* border: 1pt solid black; */
     border-radius: 5px;
     height: 100px;
     width: 250px;
-    
     margin-left: 100px;
+    padding-left: 1em;
+    box-shadow: 0 0 10px 0 #90BDE2;
+}
+
+#analysis-page #commentText::placeholder {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-left: 1em;
+    font-size: large;
 }
