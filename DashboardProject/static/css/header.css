@@ -24,7 +24,7 @@ header a {
     color: black;
 }
 
-#title {
+header #title {
     padding-left: 2em;
     text-align: center;
     font-size: 2.8em;
