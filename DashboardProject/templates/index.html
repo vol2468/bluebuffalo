@@ -4,198 +4,195 @@
 
 {% block content %}
     <main id="index-page">
-      <div id="dashboard">
-        <h1 id="dbd">Dashboard</h1>
-        <form id="calendar" action="dashboard" method="post">
-			<label for="cal">Start date:</label>
-			<input type="date" id="date" name="date" 
-				value=	{% if user_date %} 
-							{{ user_date }}
-						{% else %} "2020-01-01" 
-						{% endif %} 
-				min="2000-01-01" max="2021-10-31" />
-			<input type="submit" value="Select">
-        </form>
-        <div id="top10city">
-			<figure>
-				<canvas id="top10bar" width="400px" height="300px"></canvas>
-				<script>
-					const top10bar = document.getElementById('top10bar')
-				
-					// Obtain data from database
-    				var cityNames = [];
-					var totalAQIs = [];
-
-					// Iterate over top_cities
-					{% for city_id, city_name, total_aqi in top_cities %}
-						// Push city_name and total_aqi to their respective arrays
-						cityNames.push("{{ city_name }}");
-						totalAQIs.push({{ total_aqi }});
-					{% endfor %}
+		<div id="dashboard">
+			<h1 id="dbd">Dashboard</h1>
+			<form id="calendar" action="dashboard" method="post">
+				<label for="cal">Start date:</label>
+				<input type="date" id="date" name="date" 
+					value=	{% if user_date %} 
+								{{ user_date }}
+							{% else %} "2020-01-01" 
+							{% endif %} 
+					min="2000-01-01" max="2021-10-31" />
+				<input type="submit" value="Select">
+			</form>
+			<div id="top10city">
+				<figure>
+					<canvas id="top10bar" width="400px" height="300px"></canvas>
+					<script>
+						const top10bar = document.getElementById('top10bar')
 					
-					var chart = new Chart(top10bar, {
-						type: 'bar',
-						data: {
-						labels: cityNames,
-						datasets: [{
-							label: 'Top 10 Cleanest Cities',
-							data: totalAQIs,
-							borderWidth: 1,
-							backgroundColor: '#F4B947',
-							borderColor: '#F4B947'
-						}]
-						},
-						options: {
-						scales: {
-							y: {
-							beginAtZero: true
-							}
-						}
-						}
-					})
-				</script>
-				<figcaption>Figure 1: Top 10 Cleanest Cities</figcaption>
-			</figure>
-        </div>
-        <div id="least10city">
-			<figure>
-				<canvas id="least10bar" width="400px" height="300px"></canvas>
-				<script>
-					const least10bar = document.getElementById('least10bar')
-				
-					// Obtain data from database
-					var cityNames = [];
-					var totalAQIs = [];
+						// Obtain data from database
+						var cityNames = [];
+						var totalAQIs = [];
 
-					// Iterate over top_cities
-					{% for city_id, city_name, total_aqi in least_cities %}
-						// Push city_name and total_aqi to their respective arrays
-						cityNames.push("{{ city_name }}");
-						totalAQIs.push({{ total_aqi }});
-					{% endfor %}
-				
-					var chart = new Chart(least10bar, {
-						type: 'bar',
-						data: {
-						labels: cityNames,
-						datasets: [
-							{
-							label: 'Least 10 Cleanest Cities',
-							data: totalAQIs,
-							borderWidth: 1,
-							backgroundColor: '#3795AE',
-							borderColor: '#3795AE'
-							}
-						]
-						},
-						options: {
-						scales: {
-							y: {
-							beginAtZero: true
-							}
-						}
-						}
-					})
-				</script>
-				<figcaption>Figure 2: Least 10 Cleanest Cities</figcaption>
-			</figure>
-        </div>
-        <div id="aqi-population">
-			<figure>
-				<canvas id="scatter_AQI_pop" width="400px" height="300px"></canvas>
-				<script>
-					const ctx2 = document.getElementById('scatter_AQI_pop')
-					
-					var cityNames = [];
-					var cityPopulation = [];
-					var meanAQIs = [];
-
-					// Iterate over top_cities
-					{% for city_name, city_population, mean_aqi in aqi_population %}
-						// Push city_name, population and mean_aqi to their respective arrays
-						cityNames.push("{{ city_name }}");
-						{% if city_population is not none %}
-							cityPopulation.push({{ city_population.replace(',', '') }});
-						{% else %}
-							cityPopulation.push(0); // Or any default value you prefer
-						{% endif %}
-						meanAQIs.push({{ mean_aqi }});
-					{% endfor %}
-
-					var myChart = new Chart(ctx2, {
-						type: 'scatter',
-						data: {
-						labels: cityPopulation,
-						datasets: [
-							{
-							label: cityNames,
-							data: meanAQIs,
-							backgroundColor: '#F560AB',
-							pointBorderColor: '#F560AB',
-							radius: 5
-							}
-						]
-						},
-						options: {
-						scales: {
-							x: {
-							title: {
-								display: true,
-								text: 'Population at Location'
-							}
+						// Iterate over top_cities
+						{% for city_id, city_name, total_aqi in top_cities %}
+							// Push city_name and total_aqi to their respective arrays
+							cityNames.push("{{ city_name }}");
+							totalAQIs.push({{ total_aqi }});
+						{% endfor %}
+						
+						var chart = new Chart(top10bar, {
+							type: 'bar',
+							data: {
+							labels: cityNames,
+							datasets: [{
+								label: 'Top 10 Cleanest Cities',
+								data: totalAQIs,
+								borderWidth: 1,
+								backgroundColor: '#F4B947',
+								borderColor: '#F4B947'
+							}]
 							},
-							y: {
-							title: {
-								display: true,
-								text: 'Air Quality Index'
+							options: {
+							scales: {
+								y: {
+								beginAtZero: true
+								}
 							}
 							}
-						}
+						})
+					</script>
+					<figcaption>Figure 1: Top 10 Cleanest Cities</figcaption>
+				</figure>
+			</div>
+			<div id="least10city">
+				<figure>
+					<canvas id="least10bar" width="400px" height="300px"></canvas>
+					<script>
+						const least10bar = document.getElementById('least10bar')
+					
+						// Obtain data from database
+						var cityNames = [];
+						var totalAQIs = [];
+
+						// Iterate over top_cities
+						{% for city_id, city_name, total_aqi in least_cities %}
+							// Push city_name and total_aqi to their respective arrays
+							cityNames.push("{{ city_name }}");
+							totalAQIs.push({{ total_aqi }});
+						{% endfor %}
+					
+						var chart = new Chart(least10bar, {
+							type: 'bar',
+							data: {
+							labels: cityNames,
+							datasets: [
+								{
+								label: 'Least 10 Cleanest Cities',
+								data: totalAQIs,
+								borderWidth: 1,
+								backgroundColor: '#3795AE',
+								borderColor: '#3795AE'
+								}
+							]
+							},
+							options: {
+							scales: {
+								y: {
+								beginAtZero: true
+								}
+							}
+							}
+						})
+					</script>
+					<figcaption>Figure 2: Least 10 Cleanest Cities</figcaption>
+				</figure>
+			</div>
+			<div id="aqi-population">
+				<figure>
+					<canvas id="scatter_AQI_pop" width="400px" height="300px"></canvas>
+					<script>
+						const ctx2 = document.getElementById('scatter_AQI_pop')
+						
+						var cityNames = [];
+						var cityPopulation = [];
+						var meanAQIs = [];
+
+						// Iterate over top_cities
+						{% for city_name, city_population, mean_aqi in aqi_population %}
+							// Push city_name, population and mean_aqi to their respective arrays
+							cityNames.push("{{ city_name }}");
+							{% set city_population_no_commas = city_population|string|replace(',', '')|int %}
+							cityPopulation.push({{ city_population_no_commas }});
+							meanAQIs.push({{ mean_aqi }});
+						{% endfor %}
+
+						var myChart = new Chart(ctx2, {
+							type: 'scatter',
+							data: {
+							labels: cityPopulation,
+							datasets: [
+								{
+								label: cityNames,
+								data: meanAQIs,
+								backgroundColor: '#F560AB',
+								pointBorderColor: '#F560AB',
+								radius: 5
+								}
+							]
+							},
+							options: {
+							scales: {
+								x: {
+								title: {
+									display: true,
+									text: 'Population at Location'
+								}
+								},
+								y: {
+								title: {
+									display: true,
+									text: 'Air Quality Index'
+								}
+								}
+							}
+							}
+						})
+					</script>
+					<figcaption>Figure 3: Average AQI vs Population</figcaption>
+				</figure>
+			</div>
+			<div id="pollutantRatio">
+				<figure>
+					<canvas id="pie_pollutant_ratio" height="300px"></canvas>
+					<script>
+						var ctx = document.getElementById('pie_pollutant_ratio')
+
+						var pollutant_ratio = [];
+
+						// Iterate over pollutant
+						{% for ratio in pollutant %}
+							// Push ratio to pollutant ratio
+							pollutant_ratio.push({{ ratio }});
+						{% endfor %}
+
+						var myChart = new Chart(ctx, {
+							type: 'pie',
+							data: {
+							labels: ['O3', 'CO', 'SO2', 'NO2'],
+							datasets: [
+								{
+								data: pollutant_ratio,
+								backgroundColor: ['#FF4C28', '#F39000', '#F0F300', '#27B450']
+								}
+							]
 						}
 					})
-				</script>
-				<figcaption>Figure 3: Average AQI vs Population</figcaption>
-			</figure>
-        </div>
-		<div id="pollutantRatio">
-			<figure>
-				<canvas id="pie_pollutant_ratio" height="300px"></canvas>
-				<script>
-					var ctx = document.getElementById('pie_pollutant_ratio')
-
-					var pollutant_ratio = [];
-
-					// Iterate over pollutant
-					{% for ratio in pollutant %}
-						// Push ratio to pollutant ratio
-						pollutant_ratio.push({{ ratio }});
-					{% endfor %}
-
-					var myChart = new Chart(ctx, {
-						type: 'pie',
-						data: {
-						labels: ['O3', 'CO', 'SO2', 'NO2'],
-						datasets: [
-							{
-							data: pollutant_ratio,
-							backgroundColor: ['#FF4C28', '#F39000', '#F0F300', '#27B450']
-							}
-						]
-					}
-				})
-				</script>
-				<figcaption>Figure 4: Average Ratio of Pollutants</figcaption>
-			</figure>
-		</div>
+					</script>
+					<figcaption>Figure 4: Average Ratio of Pollutants</figcaption>
+				</figure>
+			</div>
 		</div>
 		<div id="right">
 			<div id="postComment">
 				<form class="comment-form" action="insertComment" method="POST">
-				<input type="hidden" name="city" value={{city}}>
-				<input type="hidden" name="pageType" value="index">
-				<input type="hidden" name="date" value={{user_date}}>
-				<input type="text" name="comment" id="commentText"placeholder="Write a comment"><br><br>
-				<button type="submit" id="postButton">Post</button>
+					<input type="hidden" name="city" value={{city}}>
+					<input type="hidden" name="pageType" value="index">
+					<input type="hidden" name="date" value={{user_date}}>
+					<input type="text" name="comment" id="commentText"placeholder="Write a comment"><br><br>
+					<button type="submit" id="postButton">Post</button>
 				</form>
 			</div>
 			<div id="comment">
