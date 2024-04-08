@@ -102,7 +102,7 @@ for (var i = 0; i < display_pins.length; i++) {
         .bindPopup(
             '<div id="pin_content"><b>' + cityName + '</b><br>AQI: ' + aqi + '<br>('
             + lat.toFixed(2) + ', ' + long.toFixed(2) + ')</div>'
-            + '<form action="analysis" method="post">'
+            + '<form action="analysis" method="get">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
             + '<input type="hidden" value="' + lat + '" name="latitude">'
             + '<input type="hidden" value="' + long + '" name="longitude">'
@@ -113,7 +113,7 @@ for (var i = 0; i < display_pins.length; i++) {
         .bindPopup(
             '<div id="pin_content"><b>' + cityName + '</b><br>AQI: ' + aqi + '<br>('
             + lat.toFixed(2) + ', ' + long.toFixed(2) + ')</div>'
-            + '<form action="analysis" method="post">'
+            + '<form action="analysis" method="get">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
             + '<input type="hidden" value="' + lat + '" name="latitude">'
             + '<input type="hidden" value="' + long + '" name="longitude">'
@@ -124,7 +124,7 @@ for (var i = 0; i < display_pins.length; i++) {
         .bindPopup(
             '<div id="pin_content"><b>' + cityName + '</b><br>AQI: ' + aqi + '<br>('
             + lat.toFixed(2)+ ', ' + long.toFixed(2) + ')</div>'
-            + '<form action="analysis" method="post">'
+            + '<form action="analysis" method="get">'
             + '<input type="hidden" value="' + cityName + '" name="city">'
             + '<input type="hidden" value="' + lat + '" name="latitude">'
             + '<input type="hidden" value="' + long + '" name="longitude">'

@@ -41,7 +41,7 @@
     height: 250px;
     width: 330px;
     top: 250px;
-    right: 110px;
+    right: 70px;
     font-size: 30px;
     overflow-y: auto;
 }
@@ -73,6 +73,7 @@
     margin-left: 20px;
     padding: 20px;
     border-bottom: solid 2pt #90BDE2;
+    width: 230px;
 }
 
 #index-page ul {

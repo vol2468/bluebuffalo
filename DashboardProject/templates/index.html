@@ -6,7 +6,7 @@
     <main id="index-page">
 		<div id="dashboard">
 			<h1 id="dbd">Dashboard</h1>
-			<form id="calendar" action="dashboard" method="post">
+			<form id="calendar" action="dashboard" method="get">
 				<label for="cal">Start date:</label>
 				<input type="date" id="date" name="date" 
 					value=	{% if user_date %} 
@@ -187,7 +187,7 @@
 		</div>
 		<div id="right">
 			<div id="postComment">
-				<form class="comment-form" action="insertComment" method="POST">
+				<form class="comment-form" action="insertComment" method="GET">
 					<input type="hidden" name="city" value={{city}}>
 					<input type="hidden" name="pageType" value="index">
 					<input type="hidden" name="date" value={{user_date}}>
