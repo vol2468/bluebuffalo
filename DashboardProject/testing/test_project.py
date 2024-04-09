@@ -12,11 +12,10 @@ def test_dashboard(client):
 
 def test_analysiscomment(client, app):
     """"""
-    response = client.post("/insertComment", data={"comment": "It is good.",\
-                                                    "city":"Phoenix"})
+    response = client.get("/insertComment", query_string={"comment": "It was good.", "city": "Phoenix", "pageType": "analysis"})
 
     with app.app_context():
-        assert Comment.query.count() == 0
+        assert Comment.query.count() == 1
         assert Comment.query.first().commentText == "It was good."
 
 def test_latitude(client):
