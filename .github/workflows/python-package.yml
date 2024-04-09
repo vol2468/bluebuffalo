@@ -28,6 +28,15 @@ jobs:
       run: |
         python -m pip3 install --upgrade pip
         python -m pip3 install flake8 pytest
+        python -m pip3 install flask
+        python -m pip3 install sqlite3
+        python -m pip3 install flask_login
+        python -m pip3 install flask_sqlalchemy
+        python -m pip3 install pandas
+        python -m pip3 install sqlalchemy
+        python -m pip3 install werkzeug
+        python -m pip3 install jinja2
+        python -m pip3 install unittest.mock
         if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
