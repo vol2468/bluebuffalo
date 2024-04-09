@@ -20,16 +20,29 @@
 
 #analysis-page #date {
     font-size: 20px;
+    padding-top: 0.5em;
 }
 
 #analysis-page ul {
     list-style-type: none;
 }
 
-#analysis-page #text {
-    margin-left: 20px;
-    padding: 20px;
+#totalComment {
+    display: flex;
+    justify-content: space-between;
+}
+
+#analysis-page #commentTable{
     border-bottom: solid 2pt #90BDE2;
+    width: 600px;
+}
+#analysis-page #deleteButton{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 #analysis-page #cityMap {
@@ -66,30 +79,38 @@
     margin-left: 30px;
     margin-top: 30px;
 }
-
+#analysis-page #totalComment{
+    position: relative;
+}
 #analysis-page #time {
     position: absolute;
     display: inline-block;
     border-radius: 10px;
     box-shadow: 10px 5px 5px #6BDBD2;
     width: 550px;
-    top: 25px;
+    top: 40px;
     right: 0px;
     font-size: 20px;
     background-color:whitesmoke;
 }
-
+#analysis-page #text{
+    font-size: 25px;
+    margin-left: 30px;
+}
+#analysis-page #textColumn{
+    width: 500px;
+}
 #analysis-page #comment {
-    position: absolute;
+    float: right;
+    /* position: absolute;
     display: inline-block;
-    /* border: 1pt solid black; */
+    border: 1pt solid black;
     height: 250px;
-    width: 450px;
+    width: 600px;
     top: 450px;
-    right: 100px;
+    right: 90px;
     font-size: 30px;
-    overflow-y: auto;
-    
+    overflow-y: auto; */
 }
 
 #analysis-page #title {
@@ -98,7 +119,9 @@
     margin-bottom: 50px;
     font-size: 20px;
 }
-
+/* #analysis-page #postComment{
+    width: 200px;
+}  */
 #analysis-page #postButton {
     background-color: pink;
     border-radius: 5px;

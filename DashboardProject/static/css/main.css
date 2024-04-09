@@ -33,6 +33,7 @@
 
 #index-page #commentDate{
     font-size: 20px;
+    padding: 1em 0 0 0;
 }
 
 #index-page #comment {
@@ -69,11 +70,18 @@
     font-size: large;
 }
 
-#index-page #text {
-    margin-left: 20px;
-    padding: 20px;
+#index-page #commentTable{
     border-bottom: solid 2pt #90BDE2;
-    width: 230px;
+    width: 300px;
+}
+#index-page #deleteButton{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    margin-left: 50px;
+    font-size: 20px;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 #index-page ul {
@@ -86,7 +94,10 @@
     padding-left: 70px;
     padding-top: 2em;
 }
-
+#index-page #text{
+    font-size: 25px;
+    margin-left: 30px;
+}
 #index-page #top10city, #index-page #least10city, #index-page #aqi-population {
     float: left;
     margin: 1em;
