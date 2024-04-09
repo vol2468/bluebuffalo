@@ -40,7 +40,7 @@ def test_get_top10_data(mock_db_session):
 
     # Assertions
     assert len(result) == 10  # Check if the result contains 10 items
-    assert result[0] == (11, 'Los Angeles', 670)
+    assert result[0] == (22, 'Los Angeles', 335)
     assert result[1] == (15, 'Rubidoux', 560)
     assert result[2] == (132, 'Salt Lake City', 476)
     assert result[3] == (16, 'Not in a city', 346)
@@ -84,7 +84,7 @@ def test_get_least10_data(mock_db_session):
 
     # Assertions
     assert len(result) == 10  # Check if the result contains 10 items
-    assert result[0] == (5, 'Bethel Island', 62)
+    assert result[0] == (9, 'Bethel Island', 31)
     assert result[1] == (96, 'Presque Isle', 64)
     assert result[2] == (82, 'Boston', 68)
     assert result[3] == (139, 'Londonderry', 68)
@@ -163,7 +163,7 @@ def test_get_aqi_population(mock_db_session):
     assert result[11] == ('Rubidoux', '29,180', 17.5)
     assert result[12] == ('Fontana', '128,929', 17.25)
     assert result[13] == ('Los Angeles', '3,694,820', 16.75)
-    assert result[14] == ('Essex', '39,078', 16.5)
+    assert result[14] == ('El Cajon', '94,869', 16.5)
     assert result[15] == ('Deer Park', '28,520', 16.5)
     assert result[16] == ('El Cajon', '94,869', 16.5)
     assert result[17] == ('Kansas City', '146,866', 16.25)

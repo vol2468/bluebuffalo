@@ -11,7 +11,7 @@ def test_analysiscomment(client, app):
                                                     "city":"Phoenix"})
 
     with app.app_context():
-        assert Comment.query.count() == 3
+        assert Comment.query.count() == 0
         assert Comment.query.first().commentText == "It was good."
 
 def test_latitude(client):
