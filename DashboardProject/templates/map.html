@@ -2,67 +2,27 @@
 
 {% block title %}Map{% endblock %}
 
-<body>
-    <div id="header">
-        <header>
-        <div>
-            <a href="dashboard" id="logo"><img src="../static/images/logo_blue.png" alt="UBC Forums" height="80px"></a>
-            <a href="dashboard" id="dash">Dashboard</a>
-            <a href="map" id="map">Map</a>
-            <a id='user' href="login"><img alt='Profile' src ='../static/images/defaultPic.png' height="50px"></a>
-        </div>
-        </header>
-    </div>
-    {% block content %}
+{% block content %}
     <main id="map-page">
-    <h1 id="dbd">Air Quality on US Map</h1>
-    <div id="legend">
-        <h2>Legend</h2><br><br>
-        <img src='../static/images/pin_high.png'>
-        <p>Good Air Quality</p>
-        <p>(AQI < 50)</p><br>
-        <img src='../static/images/pin_medium.png'>
-        <p>Moderate Air Quality</p>
-        <p>(51 < AQI < 100)</p><br>
-        <img src='../static/images/pin_low.png'>
-        <p>Unhealthy Air Quality</p>
-        <p>(100 < AQI)</p><br>
-    </div>
-    <div class="map" id="mapAK"></div>
-    <div class="map" id="mapHI"></div>
-    <div class="map" id="mapUS"></div>
-    <script>
-        const cityCoord = {{ cityList|safe }};
-    </script>
-    <script src="../static/js/map.js"></script>
-    <main>
-        {% endblock %}
-    <div id="footer">
-        <div id="wrapping">
-        <footer>
-            <div>
-                <p id="copy">Copyright &copy 2024 BlueBuffalo Inc. All right reserved.</p>
-                <nav id="navigate">
-                    <a href="#" id="policy">Privacy Policy</a> |
-                    <a href="#" id="cookies">Use of Cookies</a> |
-                    <a href="#" id="use">Term of Use</a> |
-                </nav>
-                <div id="info">
-                    <p><strong>Blue Buffalo Office</strong></p>
-                    <div id="address">
-                        <p>3333 University Way</p>
-                        <p>Kelowna, BC</p>
-                        <p>V1V 1V7</p>
-                    </div>
-                </div>
-                <div id="contact">
-                    <p><strong>Contact Us</strong></p>
-                    <p id="email">bluebuffalo@ubc.ca</p>
-                </div>
-            </div>
-        </footer>
+        <h1>Air Quality on US Map</h1>
+        <div id="legend">
+            <h2>Legend</h2><br><br>
+            <img src='../static/images/pin_high.png'>
+            <p>Good Air Quality</p>
+            <p>(AQI < 50)</p><br>
+            <img src='../static/images/pin_medium.png'>
+            <p>Moderate Air Quality</p>
+            <p>(51 < AQI < 100)</p><br>
+            <img src='../static/images/pin_low.png'>
+            <p>Unhealthy Air Quality</p>
+            <p>(AQI > 100)</p><br>
         </div>
-    </div>
-</body>
-
-</html>
+        <div class="map" id="mapAK"></div>
+        <div class="map" id="mapHI"></div>
+        <div class="map" id="mapUS"></div>
+        <script>
+            const cityCoord = {{ cityList|safe }};
+        </script>
+        <script src="../static/js/map.js"></script>
+    <main>
+{% endblock %}

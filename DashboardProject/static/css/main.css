@@ -1,6 +1,6 @@
 #index-page {
     margin: 1.5em;
-    height: 800px;
+    height: 900px;
 }
 
 #index-page h1 {
@@ -15,7 +15,7 @@
 }
 
 #index-page #calendar input {
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 #index-page #calendar input[type=submit] {
@@ -28,68 +28,90 @@
 
 #index-page #dbd {
     border-bottom: solid 3px black;
+    margin-bottom: 0.5em;
 }
 
 #index-page #commentDate{
     font-size: 20px;
+    padding: 1em 0 0 0;
 }
 
-#index-page #comment{
+#index-page #comment {
     position: absolute;
     display: inline-block;
     height: 250px;
     width: 330px;
     top: 250px;
-    right: 110px;
+    right: 70px;
     font-size: 30px;
     overflow-y: auto;
 }
+
 #index-page #postButton{
     background-color: pink;
     border-radius: 5px;
-    padding: 7px;
-    margin-left: 200px;
+    padding: 0.5em 2em 0.5em 2em;
+    margin-left: 155px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-#index-page #commentText{
-    border: 1pt solid black;
+
+#index-page #commentText {
     border-radius: 5px;
     height: 100px;
     width: 250px;
     margin-top: 450px;
+    padding-left: 1em;
+    box-shadow: 0 0 10px 0 #90BDE2;
 }
-#index-page #text{
-    margin-left: 20px;
-    padding: 20px;
-    border-bottom: solid 1pt black;
+
+#index-page #commentText::placeholder {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-left: 1em;
+    font-size: large;
 }
+
+#index-page #commentTable{
+    border-bottom: solid 2pt #90BDE2;
+    width: 300px;
+}
+#index-page #deleteButton{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    margin-left: 50px;
+    font-size: 20px;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 #index-page ul {
     list-style-type: none;
 }
+
 #index-page #dashboard {
     float: left;
     width: 950px;
     padding-left: 70px;
     padding-top: 2em;
 }
-
-#index-page #top10city {
-    float: left;
-    margin: 1em;
+#index-page #text{
+    font-size: 25px;
+    margin-left: 30px;
 }
-
-#index-page #least10city {
+#index-page #top10city, #index-page #least10city, #index-page #aqi-population {
     float: left;
     margin: 1em;
+    padding: 1em;
+    background-color: #FFFEF0;
+    box-shadow: 0 0 10px 0 #6BDBD2;
 }
 
 #index-page #pollutantRatio {
     float: left;
     margin: 1em;
-}
-
-#index-page #aqi-population {
-    float: left;
-    margin: 1em;
+    padding: 1em 115px 1em 1em;
+    background-color: #FFFEF0;
+    box-shadow: 0 0 10px 0 #6BDBD2;
 }
 
 #index-page #right {

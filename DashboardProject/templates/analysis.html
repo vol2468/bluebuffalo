@@ -58,7 +58,7 @@
                         gradientStroke.addColorStop(1.0, "#6bdbd2");
 
                         var datasets = [{
-                            label: 'Actual',
+                            label: 'Average AQI',
                             data: combined,
                             fill: false,
                             borderColor: gradientStroke,
@@ -96,10 +96,10 @@
                     </script>
                     ◾️Average AQI in each year<br>0 = No Data
                 </p>
-                <br><br>
-                <div>
+                <br>
+                <div id="totalComment">
                     <div id="postComment">
-                        <form class="comment-form" action="insertComment" method="POST">
+                        <form class="comment-form" action="insertComment" method="GET">
                         <input type="hidden" name="city" value={{city}}>
                         <input type="hidden" name="pageType" value="analysis">
                         <input type="text" name="comment" id="commentText"placeholder="Write a comment"><br><br>
@@ -110,10 +110,16 @@
                         <ul>
                             {% for comments in comment %}
                                 <p id="date">{{ comments.commentDate }}</p>
-                                <li id="text">{{ comments.commentText }}</li>
+                                <table id="commentTable">
+                                    <tr>
+                                    <td id="textColumn"><li id="text">{{ comments.commentText }}</li></td>
+                                    <td><button type="submit" id="deleteButton">Delete</button></td>
+                                    </tr>
+                                </table> 
                             {% endfor %}
                         </ul>
                     </div>
+                    
                 </div>
             </div>
         </div>

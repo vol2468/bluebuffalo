@@ -13,28 +13,18 @@ auth = Blueprint('auth', __name__)
 def hello_world():  # put application's code here
     """"""
     return 'Hello World!'
+
 @auth.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    if request.method == 'POST':
-        user_date = request.form['date']
-        top_cities = get_top10_data(user_date)
-        least_cities = get_least10_data(user_date)
-        pollutant = get_pollutant_data(user_date)
-        aqi_population = get_aqi_population(user_date)
-        comment = display_comment_index(user_date)
-        return render_template('index.html', top_cities=top_cities, \
-                               least_cities=least_cities, aqi_population=aqi_population,\
-                                  pollutant=pollutant, user_date=user_date, comments=comment)
-    else:
-        user_date = "2020-01-01"
-        top_cities = get_top10_data(user_date)
-        least_cities = get_least10_data(user_date)
-        pollutant = get_pollutant_data(user_date)
-        aqi_population = get_aqi_population(user_date)
-        comment = display_comment_index(user_date)
-        return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
-                                aqi_population=aqi_population, pollutant=pollutant,\
-                                  user_date=user_date, comments=comment)
+    user_date = request.args.get('date', '2020-01-01')
+    top_cities = get_top10_data(user_date)
+    least_cities = get_least10_data(user_date)
+    pollutant = get_pollutant_data(user_date)
+    aqi_population = get_aqi_population(user_date)
+    comment = display_comment_index(user_date)
+    return render_template('index.html', top_cities=top_cities, least_cities=least_cities,\
+                            aqi_population=aqi_population, pollutant=pollutant,\
+                                user_date=user_date, comments=comment)
 
 @auth.route('/header')
 def header():
@@ -105,12 +95,16 @@ def test():
     return render_template('test.html')
 
 @auth.route('/insertComment', methods=['GET', 'POST'])
-def insertComment():
-    result = insert_comment()
-    return redirect(url_for('auth.dashboard'))
+def insertComment_analysis():
+    type, result = insert_comment()
+    if type == "analysis":
+        return redirect(url_for('auth.analysis', city=result))
+    else:
+        return redirect(url_for('auth.dashboard', date=result))
+
 
 @auth.route('/analysis', methods=['GET', 'POST'])
 def analysis():
-    cityName = request.form.get('city')
+    cityName = request.args.get('city')
     result = perform_analysis(cityName)
     return result
