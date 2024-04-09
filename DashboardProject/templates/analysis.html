@@ -100,10 +100,15 @@
                 <div id="totalComment">
                     <div id="postComment">
                         <form class="comment-form" action="insertComment" method="GET">
-                        <input type="hidden" name="city" value={{city}}>
-                        <input type="hidden" name="pageType" value="analysis">
-                        <input type="text" name="comment" id="commentText"placeholder="Write a comment"><br><br>
-                        <button type="submit" id="postButton">Post</button>
+                            <input type="hidden" name="city" value={{city}} id="cityInput">
+                            <input type="hidden" name="pageType" value="analysis">
+                            <input type="text" name="comment" id="commentText"placeholder="Write a comment"><br><br>
+                            <button type="submit" id="postButton">Post</button>
+                            <script>
+                                var cityName = "{{city}}";
+                                cityName = cityName.replace(/ /g, " "); // Replace spaces with %20
+                                document.getElementById("cityInput").value = cityName;
+                            </script>
                         </form>
                     </div>
                     <div id="comment">
