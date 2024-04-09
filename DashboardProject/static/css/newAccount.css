@@ -1,15 +1,16 @@
-.wrapper{
+#new-account .wrapper {
     flex-direction: column;
     min-height: 85vh;
     position: relative;
 }
-h1{
+
+#new-account h1 {
     text-align: center;
     font-size: 50px;
     margin-top: 50px;
 }
 
-#fname{
+#new-account #fname {
     margin-top: 3em;
     border: 1px solid black;
     padding: 1em;
@@ -19,7 +20,7 @@ h1{
     width: 197px;
 }
 
-#lname {
+#new-account #lname {
     margin-top: 3em;
     border: 1px solid black;
     padding: 1em;
@@ -29,7 +30,7 @@ h1{
     width: 197px;
 }
 
-#regEmail, #pass1, #pass2 {
+#new-account #regEmail, #new-account #pass1, #new-account #pass2 {
     border: 1px solid black;
     padding: 1em;
     margin: 1em;
@@ -38,7 +39,7 @@ h1{
     width: 450px;
 }
 
-.sign-up {
+#new-account .sign-up {
     border: 1px solid black;
     padding: 1em;
     margin: 1em;
@@ -49,18 +50,19 @@ h1{
     margin-left: 180px;
     background-color: #6BDBD2;
 }
-.fields, #login{
+
+#new-account .fields, #new-account #login{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 1em;
 }
 
-#login {
+#new-account #login {
     margin-bottom: 3em;
 }
 
-#login a{
+#new-account #login a {
     color: #6BDBD2;
     text-decoration: none;
 }
