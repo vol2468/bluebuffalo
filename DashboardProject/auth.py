@@ -5,6 +5,8 @@ from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.displayIndexComment import display_comment_index
 from DashboardProject.login import check_login
+from DashboardProject.logout import check_logout
+from DashboardProject.newAccount import check_newAccount
 from . import db
 from .models import Comment, User
 from DashboardProject.message import email_alert
@@ -17,6 +19,7 @@ def hello_world():  # put application's code here
     return 'Hello World!'
 
 @auth.route('/dashboard', methods=['GET', 'POST'])
+@login_required
 def dashboard():
     user_date = request.args.get('date', '2020-01-01')
     top_cities = get_top10_data(user_date)
@@ -33,13 +36,27 @@ def header():
     return render_template("header.html")
 
 @auth.route('/login', methods=['GET', 'POST'])
-def login():
+def login_post():
     result = check_login()
     return result
+@auth.route('/login')
+def login():
+    return render_template('login.html')
 
 @auth.route('/newAccount')
 def newAccount():
     return render_template("newAccount.html")
+
+@auth.route('/newAccount', method=['GET', 'POST'])
+def newAccount_post():
+    result = check_newAccount()
+    return result
+
+@auth.route('/logout')
+@login_required
+def logout():
+    result = check_logout()
+    return result
 
 @auth.route('/accountSetting')
 def accountSetting():
