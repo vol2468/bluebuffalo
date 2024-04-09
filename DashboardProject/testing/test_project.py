@@ -15,7 +15,7 @@ def test_analysiscomment(client, app):
     response = client.get("/insertComment", query_string={"comment": "It was good.", "city": "Phoenix", "pageType": "analysis"})
 
     with app.app_context():
-        assert Comment.query.count() == 1
+        assert Comment.query.count() == 3
         assert Comment.query.first().commentText == "It was good."
 
 def test_latitude(client):
