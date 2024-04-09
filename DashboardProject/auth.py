@@ -118,3 +118,15 @@ def delete_comment():
         db.session.delete(comment)
         db.session.commit()
     return redirect(url_for('auth.dashboard'))
+
+
+@auth.route('/delete_comment_analysis', methods=['POST'])
+def delete_comment_analysis():
+    comment_id = request.form.get('commentId')
+    city = request.form.get('city')
+    comment = Comment.query.get(comment_id)
+    if comment:
+        db.session.delete(comment)
+        db.session.commit()
+    return redirect(url_for('auth.analysis', city=city))
+
