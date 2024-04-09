@@ -6,5 +6,5 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 def check_logout():
     logout_user()
-    # flash("logout sucessfully!", category='success')
-    return render_template("login.html")
+    flash("logout sucessfully!", category='success')
+    return redirect(url_for("/login"))

@@ -12,8 +12,9 @@ def check_login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
+                login_user(user)
                 flash('Logged in successfully!', category='success')
-                return redirect(url_for('auth.dashboard'))
+                return redirect(url_for("auth.dashboard"))
             else:
                 flash('Incorrect password, try again.', category='error')
                 return render_template("login.html")
