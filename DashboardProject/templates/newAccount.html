@@ -6,12 +6,19 @@
 <main id="new-account">
     <h1>Create Your BlueBuffalo Account!</h1>
     <div class="fields">
-        <form action="accountSetting" id='register-form' method="POST">
-            <input type="text" id="fname" placeholder="First Name">
-            <input type="text" id="lname" placeholder="Last Name"><br>
-            <input type="email" id="regEmail" placeholder="Email Address"><br>
-            <input type="password" id="pass1" placeholder="Password"><br>
-            <input type="password" id="pass2" placeholder="Confirm Password"><br>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <form action="/newAccount" id='register-form' method="POST">
+            <input type="text" id="fname" name="fname" placeholder="First Name">
+            <input type="text" id="lname" name="lname" placeholder="Last Name"><br>
+            <input type="email" id="regEmail" name="email" placeholder="Email Address"><br>
+            <input type="password" id="pass1" name="pass1" placeholder="Password"><br>
+            <input type="password" id="pass2" name="pass2" placeholder="Confirm Password"><br>
             <button type="submit" class="sign-up">Sign Up</button>
         </form>
     </div>

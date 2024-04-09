@@ -28,13 +28,25 @@
 			</div>
 			<div class="dropdown">
 				<a id="user" href="#">
-					<img alt="Profile" src="../../static/images/defaultPic.png" height="50px">
+					{% if current_user.is_authenticated %}
+						<img alt="Profile" src="../../static/images/defaultPic.png" height="30px">
+						<div style="padding-right:0.5em, font-size:12pt" class="username">
+							{{current_user.firstName}}
+						</div>
+    				{% endif %}
+					{% if not current_user.is_authenticated %}
+						<img alt="Profile" src="../../static/images/defaultPic.png" height="50px">
+    				{% endif %}
 				</a>
 				<div class="dropdown-content">
+					{% if not current_user.is_authenticated %}
 					<a href="login">Login</a>
+					{% endif %}
 					<a href="newAccount">Create Account</a>
 					<a href="accountSetting">Account Settings</a>
-					<a href="#">Logout</a>
+					{% if current_user.is_authenticated %}
+					<a href="logout">Logout</a>
+					{% endif %}
 				</div>
 			</div>
 		</header>

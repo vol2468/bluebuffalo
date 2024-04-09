@@ -12,12 +12,14 @@ def check_login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
-                login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+                login_user(user)
+                # flash('Logged in successfully!', category='success')
+                return redirect(url_for("auth.dashboard"))
             else:
                 flash('Incorrect password, try again.', category='error')
+                return render_template("login.html")
         else:
             flash('Email does not exist.', category='error')
+            return render_template("login.html")
 
-    return render_template("login.html", user=current_user)
+    return render_template("login.html")
