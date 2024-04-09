@@ -64,6 +64,7 @@ def accountSetting():
     return render_template("accountSetting.html")
 
 @auth.route('/map', methods=['GET', 'POST'])
+@login_required
 def map():
     result = perform_map()
     return result
