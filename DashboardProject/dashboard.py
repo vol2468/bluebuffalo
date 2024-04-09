@@ -3,26 +3,26 @@ from DashboardProject.models import Pollutant, City
 from sqlalchemy import func
 
 def get_top10_data(user_date):
-    # Retrieve top 10 cities by total AQI for the given date.
-    # Query to join pollutant and city tables, calculate total AQI, and group by city
-    query = db.session.query(City.cityId, City.cityName, func.sum(Pollutant.O3AQI + Pollutant.COAQI + Pollutant.SO2AQI + Pollutant.NO2AQI).label('totalAQI'))\
-                        .join(Pollutant, City.cityId == Pollutant.cityId)\
-                        .filter(Pollutant.date == user_date)\
-                        .group_by(City.cityId, City.cityName)\
-                        .order_by(func.sum(Pollutant.O3AQI + Pollutant.COAQI + Pollutant.SO2AQI + Pollutant.NO2AQI).desc())\
-                        .limit(10)\
-                        .all()
-    return query
-
-
-def get_least10_data(user_date):
-    # Retrieve least 10 cities by total AQI for the given date.
+    """ Retrieve top 10 cities by total AQI for the given date. (Lower the AQI = Better the Air Quality) """
     # Query to join pollutant and city tables, calculate total AQI, and group by city
     query = db.session.query(City.cityId, City.cityName, func.sum(Pollutant.O3AQI + Pollutant.COAQI + Pollutant.SO2AQI + Pollutant.NO2AQI).label('totalAQI'))\
                         .join(Pollutant, City.cityId == Pollutant.cityId)\
                         .filter(Pollutant.date == user_date)\
                         .group_by(City.cityId, City.cityName)\
                         .order_by(func.sum(Pollutant.O3AQI + Pollutant.COAQI + Pollutant.SO2AQI + Pollutant.NO2AQI).asc())\
+                        .limit(10)\
+                        .all()
+    return query
+
+
+def get_least10_data(user_date):
+    """ Retrieve least 10 cities by total AQI for the given date. (Higher the AQI = Worse the Air Quality) """
+    # Query to join pollutant and city tables, calculate total AQI, and group by city
+    query = db.session.query(City.cityId, City.cityName, func.sum(Pollutant.O3AQI + Pollutant.COAQI + Pollutant.SO2AQI + Pollutant.NO2AQI).label('totalAQI'))\
+                        .join(Pollutant, City.cityId == Pollutant.cityId)\
+                        .filter(Pollutant.date == user_date)\
+                        .group_by(City.cityId, City.cityName)\
+                        .order_by(func.sum(Pollutant.O3AQI + Pollutant.COAQI + Pollutant.SO2AQI + Pollutant.NO2AQI).desc())\
                         .limit(10)\
                         .all()
     return query

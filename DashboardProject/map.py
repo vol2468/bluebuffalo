@@ -1,19 +1,22 @@
-from flask import Flask, render_template, request, json
-import jinja2
-import pandas as pd
+from flask import Flask, render_template, json, jsonify
 import sqlite3
 
-# Connection to database
-# conn = sqlite3.connect('../../instance/database.db', check_same_thread=False)     # for testing
-conn = sqlite3.connect('instance/database.db', check_same_thread=False)
-cursor = conn.cursor()
 map = Flask(__name__)
+
 @map.route('/')
 def perform_map():
-    cityList = get_coordinate()
-    return render_template('map.html', cityList=json.dumps(cityList))
+    conn = sqlite3.connect('instance/database.db', check_same_thread=False)
+    cursor = conn.cursor()
+    try:
+        cityList = get_coordinate(cursor)
+        return render_template('map.html', cityList=json.dumps(cityList))
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
 
-def get_coordinate():
+def get_coordinate(cursor):
     cursor.execute("SELECT cityId, cityName, latitude, longitude FROM city")
     row = cursor.fetchall()
     cityList = []
@@ -21,11 +24,11 @@ def get_coordinate():
         for y in range(4):
             cityList.append(row[x][y])
         cityId = row[x][0]
-        cityAQI = getAQI(cityId)
+        cityAQI = getAQI(cityId, cursor)
         cityList.append(cityAQI)
     return cityList
 
-def getAQI(cityId):
+def getAQI(cityId, cursor):
     cursor.execute("SELECT AVG(O3AQI) as O3AQI, AVG(COAQI) as COAQI, AVG(SO2AQI) as SO2AQI, AVG(NO2AQI) as NO2AQI FROM pollutant WHERE cityId =? GROUP BY cityId", (cityId,))
     row = cursor.fetchone()
     if row:

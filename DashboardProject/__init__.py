@@ -1,20 +1,16 @@
 from datetime import datetime
-from os import path
-import sqlite3
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from os import path
 import pandas as pd
-from sqlalchemy.orm import sessionmaker
-from .views import views
-from .auth import auth
-from sqlalchemy.exc import SQLAlchemyError
-
+import sqlite3
+from sqlalchemy.orm import sessionmaker, relationship
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 
 def create_app():
-    """"""
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'r'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
@@ -27,16 +23,16 @@ def create_app():
         with app.app_context():
             db.create_all()
 
-
+    from .views import views
+    from .auth import auth
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    #create_database(app)
+    # create_database(app)
 
     return app
 
 def create_database(app):
-    """"""
     if not path.exists('bluebuffalo/DashboardProject/' + DB_NAME):
         with app.app_context():
             db.create_all()
@@ -44,21 +40,21 @@ def create_database(app):
             insert_data_from_csv()
         print("Created Database!")
         # Call the method to execute the script
-        delete_duplicates_and_reset_ids()
+        delete_duplicates()
 
 def insert_data_from_csv():
-    """"""
+    from .models import City, Pollutant
     # Read data from your CSV file (adjust the filename as needed)
-    csv_filename = r'/Users/joy/Desktop/COSC310/bluebuffalo/data/processed/pollution.csv'
+    csv_filename = r'/Users/karen/Documents/GitHub/bluebuffalo/data/processed/pollution.csv'
 
     df = pd.read_csv(csv_filename)
 
     # Create SQLAlchemy session
-    session_maker = sessionmaker(bind=db.engine)
-    session = session_maker()
+    Session = sessionmaker(bind=db.engine)
+    session = Session()
 
     try:
-        for row in df.iterrows():
+        for index, row in df.iterrows():
             # Create City record if it doesn't exist
             city = City.query.filter_by(cityName=row['City']).first()
             if not city:
@@ -70,7 +66,7 @@ def insert_data_from_csv():
                 session.commit()
             city_id = city.cityId
 
-            date_obj = datetime.strptime(row['Date'], '%Y-%m-%d')
+            date_obj = datetime.strptime(row['Date'], '%m/%d/%Y')
             # Create Pollutant record
             pollutant_record = Pollutant(
                 cityId=city_id,
@@ -87,13 +83,13 @@ def insert_data_from_csv():
             session.add(pollutant_record)
         session.commit()
         print("Data inserted successfully!")
-    except SQLAlchemyError as e:
+    except Exception as e:
         session.rollback()
         print(f"Error inserting data: {str(e)}")
     finally:
         session.close()
-def delete_duplicates_and_reset_ids():
-    """"""
+        
+def delete_duplicates():
     # Establish connection to the database
     conn = sqlite3.connect('instance/database.db')
     cursor = conn.cursor()
@@ -122,10 +118,12 @@ def delete_duplicates_and_reset_ids():
         # Commit changes
         conn.commit()
         print("Duplicate cities deleted and cityId reset successfully.")
+        
     except sqlite3.Error as e:
         # Rollback changes if there's an error
         conn.rollback()
         print("Error:", e)
+        
     finally:
         # Close cursor and connection
         cursor.close()
