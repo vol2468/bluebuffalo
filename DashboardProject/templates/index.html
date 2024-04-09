@@ -196,17 +196,22 @@
 				</form>
 			</div>
 			<div id="comment">
-				<ul>
-					{% for comment in comments %}
-						<p id="commentDate">{{ comment.commentDate }}</p>
+    			<ul>
+			        {% for comment in comments %}
+            			<p id="commentDate">{{ comment.commentDate }}</p>
 						<table id="commentTable">
-                            <tr>
-                            <td><li id="text">{{ comment.commentText }}</li></td>
-                            <td><button type="submit" id="deleteButton">Delete</button></td>
-                            </tr>
-                        </table> 
-					{% endfor %}
-				</ul>
+               				 <tr>
+								 <td><li id="text">{{ comment.commentText }}</li></td>
+                   				 <td>
+                        			<form action="/delete_comment" method="post">
+                        			    <input type="hidden" name="commentId" value="{{ comment.commentId }}">
+                            			<button type="submit" id="deleteButton">Delete</button>
+                        			</form>
+                    			</td>
+							 </tr>
+            			</table>
+        			{% endfor %}
+    			</ul>
 			</div>
 		</div>
     </main>
