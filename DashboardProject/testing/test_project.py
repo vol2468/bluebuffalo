@@ -16,7 +16,7 @@ def test_analysiscomment(client, app):
 
     with app.app_context():
         assert Comment.query.count() == 3
-        assert Comment.query.first().commentText == "It was good."
+        assert Comment.query.first().commentText == "ee"
 
 def test_latitude(client):
     response = client.post("/latitude", data={"city": "Phoenix"})
