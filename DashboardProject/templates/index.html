@@ -203,10 +203,12 @@
                				 <tr>
 								 <td><li id="text">{{ comment.commentText }}</li></td>
                    				 <td>
+									 {% if current_user.userId <= 5 %}
                         			<form action="/delete_comment" method="post">
                         			    <input type="hidden" name="commentId" value="{{ comment.commentId }}">
                             			<button type="submit" id="deleteButton">Delete</button>
                         			</form>
+									 {% endif %}
                     			</td>
 							 </tr>
             			</table>
