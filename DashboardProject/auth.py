@@ -128,5 +128,5 @@ def delete_comment_analysis():
     if comment:
         db.session.delete(comment)
         db.session.commit()
-    return redirect(url_for('analysis', city=city))
+    return redirect(url_for('auth.analysis', city=city))
 
