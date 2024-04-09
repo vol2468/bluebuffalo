@@ -8,6 +8,7 @@ import sqlite3
 from sqlalchemy.orm import sessionmaker, relationship
 from flask_login import LoginManager
 
+
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 

@@ -6,7 +6,7 @@
     <main id="account-setting">
         <div id="title">
             <h1>Account</h1>
-            <a href="#" id="logout">Logout</a>
+            <a href="/logout" id="logout">Logout</a>
         </div>
         {% if current_user.is_authenticated %}
             <h1 id="greeting">Hi {{current_user.firstName}},</h1>
@@ -14,7 +14,7 @@
         {% if not current_user.is_authenticated %}
             <h1 style="text-align:center"> Please log in</h1>
         {% endif %}
-        <form id="form" action="#" method="POST">
+        <form id="form" action="/newAccount" method="POST">
             <input type="text" name="firstname" placeholder="First Name" id="firstname">
             <input type="text" name="lastname" placeholder="Last Name" id="lastname"><br>
             <div id="email-password">
