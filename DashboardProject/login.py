@@ -13,7 +13,7 @@ def check_login():
         if user:
             if check_password_hash(user.password, password):
                 login_user(user)
-                flash('Logged in successfully!', category='success')
+                # flash('Logged in successfully!', category='success')
                 return redirect(url_for("auth.dashboard"))
             else:
                 flash('Incorrect password, try again.', category='error')
