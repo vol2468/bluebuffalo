@@ -8,7 +8,12 @@
             <h1>Account</h1>
             <a href="#" id="logout">Logout</a>
         </div>
-        <h1 id="greeting">Hi _________,</h1>
+        {% if current_user.is_authenticated %}
+            <h1 id="greeting">Hi {{current_user.firstName}},</h1>
+        {% endif %}
+        {% if not current_user.is_authenticated %}
+            <h1 style="text-align:center"> Please log in</h1>
+        {% endif %}
         <form id="form" action="#" method="POST">
             <input type="text" name="firstname" placeholder="First Name" id="firstname">
             <input type="text" name="lastname" placeholder="Last Name" id="lastname"><br>

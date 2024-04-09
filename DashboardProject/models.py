@@ -39,6 +39,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200))
 
+    def get_id(self):
+        return (self.userId)
+
 
 class Comment(db.Model):
     __tablename__ = 'comment'

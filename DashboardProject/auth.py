@@ -8,6 +8,7 @@ from DashboardProject.login import check_login
 from . import db
 from .models import Comment, User
 from DashboardProject.message import email_alert
+from flask_login import login_user, login_required, logout_user
 
 auth = Blueprint('auth', __name__)
 @auth.route('/')
