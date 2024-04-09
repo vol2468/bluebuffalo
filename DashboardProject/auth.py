@@ -5,7 +5,8 @@ from DashboardProject.map import perform_map
 from DashboardProject.insertComment import insert_comment
 from DashboardProject.displayIndexComment import display_comment_index
 from DashboardProject.login import check_login
-
+from . import db
+from .models import Comment, User
 from DashboardProject.message import email_alert
 
 auth = Blueprint('auth', __name__)
@@ -95,7 +96,7 @@ def test():
     return render_template('test.html')
 
 @auth.route('/insertComment', methods=['GET', 'POST'])
-def insertComment_analysis():
+def insertComment():
     type, result = insert_comment()
     if type == "analysis":
         return redirect(url_for('auth.analysis', city=result))
@@ -108,3 +109,12 @@ def analysis():
     cityName = request.args.get('city')
     result = perform_analysis(cityName)
     return result
+
+@auth.route('/delete_comment', methods=['POST'])
+def delete_comment():
+    comment_id = request.form.get('commentId')
+    comment = Comment.query.get(comment_id)
+    if comment:
+        db.session.delete(comment)
+        db.session.commit()
+    return redirect(url_for('auth.dashboard'))
