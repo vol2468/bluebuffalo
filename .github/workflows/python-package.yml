@@ -28,6 +28,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
+        python -m pip install flask
+        python -m pip install flask_login
+        python -m pip install flask_sqlalchemy
+        python -m pip install pandas
+        python -m pip install sqlalchemy
+        python -m pip install werkzeug
+        python -m pip install jinja2
+        python -mpip install scikit-learn
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
