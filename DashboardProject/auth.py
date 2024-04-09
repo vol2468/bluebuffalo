@@ -96,7 +96,7 @@ def test():
     return render_template('test.html')
 
 @auth.route('/insertComment', methods=['GET', 'POST'])
-def insertComment_analysis():
+def insertComment():
     type, result = insert_comment()
     if type == "analysis":
         return redirect(url_for('auth.analysis', city=result))
