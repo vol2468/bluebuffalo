@@ -114,13 +114,14 @@
                                     <tr>
                                         <td id="textColumn"><li id="text">{{ comments.commentText }}</li></td>
                                         <td>
-                                            {% if current_user.userId <= 5 %}
+
                                             <form action="/delete_comment_analysis" method="post">
                                                 <input type="hidden" name="commentId" value="{{ comments.commentId }}">
                                                 <input type="hidden" name="city" value="{{ city }}">
+                                                {% if current_user.userId <= 5 %}
                                                 <button type="submit" id="deleteButton">Delete</button>
+                                                {% endif %}
                                             </form>
-                                            {% endif %}
                                         </td>
                                     </tr>
                                 </table>
