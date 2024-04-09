@@ -39,6 +39,7 @@ def header():
 def login_post():
     result = check_login()
     return result
+
 @auth.route('/login')
 def login():
     return render_template('login.html')
@@ -47,7 +48,7 @@ def login():
 def newAccount():
     return render_template("newAccount.html")
 
-@auth.route('/newAccount', method=['GET', 'POST'])
+@auth.route('/newAccount', methods=['GET', 'POST'])
 def newAccount_post():
     result = check_newAccount()
     return result

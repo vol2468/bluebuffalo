@@ -10,10 +10,9 @@ def check_newAccount():
     lastname = request.form.get('lname')
     email = request.form.get('email')
     pass1 = request.form.get('pass1')
-    pass2 = request.form.get('pass1')
+    pass2 = request.form.get('pass2')
 
     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
-
 
     if pass1 != pass2:
         flash('Password and confirm password need to be exact same', category='error')
