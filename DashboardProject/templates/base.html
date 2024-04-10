@@ -43,7 +43,9 @@
 					<a href="login">Login</a>
 					{% endif %}
 					<a href="newAccount">Create Account</a>
+					{% if current_user.is_authenticated %}
 					<a href="accountSetting">Account Settings</a>
+					{% endif %}
 					{% if current_user.is_authenticated %}
 					<a href="logout">Logout</a>
 					{% endif %}
