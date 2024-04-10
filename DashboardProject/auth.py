@@ -70,8 +70,8 @@ def logout():
     result = check_logout()
     return result
 
-
-@auth.route('/accountSetting', methods=['GET', 'POST'])
+@auth.route('/accountSetting')
+@login_required
 def accountSetting():
     if request.method == 'POST':
         firstname = request.form.get('firstname')
