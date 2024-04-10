@@ -50,8 +50,10 @@ def newAccount():
 
 @auth.route('/newAccount', methods=['GET', 'POST'])
 def newAccount_post():
-    result = check_newAccount()
-    return result
+    email = check_newAccount()
+    if email:
+        send_notification = email_alert("Account Confirmation", "Thank you for creating an account! We're happy to have you here! Enjoy learning about Air Quality!", email)
+    return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
 @login_required
