@@ -62,6 +62,7 @@ def logout():
     return result
 
 @auth.route('/accountSetting')
+@login_required
 def accountSetting():
     return render_template("accountSetting.html")
 
