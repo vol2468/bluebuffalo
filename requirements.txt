@@ -1,0 +1,9 @@
+pytest
+flask
+flask-Login
+flask-SQLAlchemy
+pandas
+sQLAlchemy
+werkzeug
+jinja2
+scikit-learn

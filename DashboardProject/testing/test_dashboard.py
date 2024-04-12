@@ -78,7 +78,7 @@ def test_get_least10_data(mock_db_session):
                         .order_by.return_value\
                         .limit.return_value\
                         .all.return_value = mock_query_result
-
+ 
         # Call the function with the mock session
         result = get_least10_data('2020-01-01')
 

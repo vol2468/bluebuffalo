@@ -2,7 +2,6 @@ from flask import request
 from DashboardProject.models import Comment, City
 from DashboardProject import db
 from datetime import datetime
-from datetime import datetime
 
 """"""
 def insert_comment():
