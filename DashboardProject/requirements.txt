@@ -1,11 +1,9 @@
---upgrade pip
-flake8
 pytest
-Flask
-Flask-Login
-Flask-SQLAlchemy
+flask
+flask-Login
+flask-SQLAlchemy
 pandas
-SQLAlchemy
-Werkzeug
-Jinja2
+sQLAlchemy
+werkzeug
+jinja2
 scikit-learn
