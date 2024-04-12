@@ -1,5 +1,5 @@
 from sqlalchemy.orm import relationship
-
+from werkzeug.security import check_password_hash
 from . import db  # Make sure you have this import
 from flask_login import UserMixin
 
@@ -38,6 +38,9 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(50))
     email = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200))
+    
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
     def get_id(self):
         return (self.userId)

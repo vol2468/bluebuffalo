@@ -91,3 +91,13 @@
     text-align: right;
     margin-right: 55px;
 } 
+
+.flashes {
+    display: flex;
+    justify-content: center;
+}
+
+#account-setting .flash-message {
+    margin-bottom: 3em;
+    padding: 8px;
+}
