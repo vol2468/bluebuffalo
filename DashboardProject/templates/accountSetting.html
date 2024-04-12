@@ -14,23 +14,31 @@
         {% if not current_user.is_authenticated %}
             <h1 style="text-align:center"> Please log in</h1>
         {% endif %}
-        <form id="form" action="/newAccount" method="POST">
+        <form id="form" action="/accountSetting" method="POST">
             <input type="text" name="firstname" placeholder="First Name" id="firstname">
             <input type="text" name="lastname" placeholder="Last Name" id="lastname"><br>
-            <div id="email-password">
-                <input type="email" name="curremail" placeholder="Email Address" id="curremail"><br>
+            
+            <div id="password">
                 <input type="password" name="currpass" placeholder="Your Password" id="currpass">
             </div>
             
             <img src="../static/images/logo_blue.png" id="userPic">
-            <a href="#"><p id="edit">✏︎Edit</p></a>
 
             <div id="newPassword">
-                <input type="password" name="firstname" placeholder="New Password" id="newpass">
-                <input type="password" name="firstname" placeholder="Confirm Password" id="confirmpass">
+                <input type="password" name="newpass" placeholder="New Password" id="newpass">
+                <input type="password" name="confirmpass" placeholder="Confirm Password" id="confirmpass">
             </div>
 
             <input type="submit" name="submit" value="Save Change" id="save">
         </form>
+        <div class="flashes">
+            {% with messages = get_flashed_messages() %}
+  			    {% if messages %}
+      				{% for message in messages %}
+        				<div class="flash-message">{{ message }}</div>
+      				{% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
     </main>
 {% endblock %}
