@@ -36,21 +36,30 @@
 						var chart = new Chart(top10bar, {
 							type: 'bar',
 							data: {
-							labels: cityNames,
-							datasets: [{
-								label: 'Top 10 Cleanest Cities',
-								data: totalAQIs,
-								borderWidth: 1,
-								backgroundColor: '#F4B947',
-								borderColor: '#F4B947'
-							}]
+								labels: cityNames,
+								datasets: [{
+									label: 'Top 10 Cleanest Cities',
+									data: totalAQIs,
+									borderWidth: 1,
+									backgroundColor: '#F4B947',
+									borderColor: '#F4B947'
+								}]
 							},
 							options: {
-							scales: {
-								y: {
-								beginAtZero: true
+								scales: {
+									x: {
+										title: {
+											display: true,
+											text: 'Top 10 Cleanest Cities'
+										}
+									},
+									y: {
+										title: {
+											display: true,
+											text: 'Air Quality Index'
+										}
+									}
 								}
-							}
 							}
 						})
 					</script>
@@ -77,23 +86,30 @@
 						var chart = new Chart(least10bar, {
 							type: 'bar',
 							data: {
-							labels: cityNames,
-							datasets: [
-								{
-								label: 'Least 10 Cleanest Cities',
-								data: totalAQIs,
-								borderWidth: 1,
-								backgroundColor: '#3795AE',
-								borderColor: '#3795AE'
-								}
-							]
+								labels: cityNames,
+								datasets: [{
+										label: 'Least 10 Cleanest Cities',
+										data: totalAQIs,
+										borderWidth: 1,
+										backgroundColor: '#3795AE',
+										borderColor: '#3795AE'
+								}]
 							},
 							options: {
-							scales: {
-								y: {
-								beginAtZero: true
+								scales: {
+									x: {
+										title: {
+											display: true,
+											text: 'Least 10 Cleanest Cities'
+										}
+									},
+									y: {
+										title: {
+											display: true,
+											text: 'Air Quality Index'
+										}
+									}
 								}
-							}
 							}
 						})
 					</script>
@@ -122,32 +138,30 @@
 						var myChart = new Chart(ctx2, {
 							type: 'scatter',
 							data: {
-							labels: cityPopulation,
-							datasets: [
-								{
-								label: cityNames,
-								data: meanAQIs,
-								backgroundColor: '#F560AB',
-								pointBorderColor: '#F560AB',
-								radius: 5
-								}
-							]
+								labels: cityPopulation,
+								datasets: [{
+									label: cityNames,
+									data: meanAQIs,
+									backgroundColor: '#F560AB',
+									pointBorderColor: '#F560AB',
+									radius: 5
+								}]
 							},
 							options: {
-							scales: {
-								x: {
-								title: {
-									display: true,
-									text: 'Population at Location'
+								scales: {
+									x: {
+										title: {
+											display: true,
+											text: 'Population at Location'
+										}
+									},
+										y: {
+										title: {
+											display: true,
+											text: 'Air Quality Index'
+										}
+									}
 								}
-								},
-								y: {
-								title: {
-									display: true,
-									text: 'Air Quality Index'
-								}
-								}
-							}
 							}
 						})
 					</script>
@@ -172,12 +186,10 @@
 							type: 'pie',
 							data: {
 							labels: ['O3', 'CO', 'SO2', 'NO2'],
-							datasets: [
-								{
+							datasets: [{
 								data: pollutant_ratio,
 								backgroundColor: ['#FF4C28', '#F39000', '#F0F300', '#27B450']
-								}
-							]
+							}]
 						}
 					})
 					</script>
