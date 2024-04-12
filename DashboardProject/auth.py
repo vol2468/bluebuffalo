@@ -133,17 +133,17 @@ def analysis():
     result = perform_analysis(cityName)
     return result
 
-@auth.route('/delete_comment', methods=['POST'])
+@auth.route('/delete_comment', methods=['GET', 'POST'])
 def delete_comment():
     comment_id = request.form.get('commentId')
-    comment = Comment.query.get(comment_id)
+    comment = Comment.query.filter_by(commentId=comment_id).first()
     if comment:
         db.session.delete(comment)
         db.session.commit()
     return redirect(url_for('auth.dashboard'))
 
 
-@auth.route('/delete_comment_analysis', methods=['POST'])
+@auth.route('/delete_comment_analysis', methods=['GET', 'POST'])
 def delete_comment_analysis():
     comment_id = request.form.get('commentId')
     city = request.form.get('city')
